@@ -177,7 +177,7 @@ public class Options {
 		return debug == Bool.ON;
 	}
 
-	@Option(name = "-t", aliases = "-type", usage = "use fond translate", help = true, groups = { "TRANSLATE" })
+	@Option(name = "-t", aliases = "-type", usage = "use fond translate (Example: -t <domain_file> <problem_file>)", help = true, groups = { "TRANSLATE" })
 	Type type;
 
 	public Type getType() {
@@ -594,7 +594,11 @@ public class Options {
 	 * are ignored.
 	 */
 	void printHelp() {
-		System.err.println("Usage: java [java_options] paladinus.PaladinusPlanner [paladinus_options] <sas_file>");
+		System.err.println(
+				  "- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas \n"
+				+ "- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/pb1.pddl \n" 
+				+ "- Example (2): java -jar paladinus.jar -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-sas/blocksworld_p1.sas \n"
+				+ "- Example (3): java -jar paladinus.jar -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/pb1.pddl");
 		System.err.println();
 		if (hiddenOptions) {
 			System.err.println("Hidden options:");
@@ -624,7 +628,10 @@ public class Options {
 		}
 		System.err.println();
 		System.err.println(
-				"Example: java -ea -Xmx4g paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF ../data/benchmarks-fond/blocksworld_p1.sas");
+				  "- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas \n"
+				+ "- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/pb1.pddl \n" 
+				+ "- Example (2): java -jar paladinus.jar -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-sas/blocksworld_p1.sas \n"
+				+ "- Example (3): java -jar paladinus.jar -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/pb1.pddl");
 
 		if (debug()) {
 			System.out.println();

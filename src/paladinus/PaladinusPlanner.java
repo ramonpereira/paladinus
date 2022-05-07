@@ -103,17 +103,26 @@ public class PaladinusPlanner {
 	 * @throws FileNotFoundException
 	 */
 	public static void main(String[] args) throws IOException, FileNotFoundException {
-		Locale.setDefault(Locale.US);
-		Result result = new PaladinusPlanner(args).runProblem();
-		assert (result != null);
+		if(args == null || args.length == 0) {
+			System.err.println("Error: Invalid or empty arguments!");
+			System.err.println(
+					  "- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas \n"
+					+ "- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/pb1.pddl \n" 
+					+ "- Example (2): java -jar paladinus.jar -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-sas/blocksworld_p1.sas \n"
+					+ "- Example (3): java -jar paladinus.jar -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/pb1.pddl");
+		} else {
+			Locale.setDefault(Locale.US);
+			Result result = new PaladinusPlanner(args).runProblem();
+			assert (result != null);
 
-		switch (result) {
-		case PROVEN:
-			ExitCode.EXIT_PROVEN.exit();
-		case DISPROVEN:
-			ExitCode.EXIT_DISPROVEN.exit();
-		default:
-			ExitCode.EXIT_UNPROVEN.exit();
+			switch (result) {
+			case PROVEN:
+				ExitCode.EXIT_PROVEN.exit();
+			case DISPROVEN:
+				ExitCode.EXIT_DISPROVEN.exit();
+			default:
+				ExitCode.EXIT_UNPROVEN.exit();
+			}			
 		}
 	}
 
@@ -163,7 +172,7 @@ public class PaladinusPlanner {
 	}
 
 	/**
-	 * Initialize myND by parsing planning options and the SAS-file.
+	 * Initialize Paladinus by parsing planning options and the SAS-file.
 	 * 
 	 * @param args
 	 * @throws IOException

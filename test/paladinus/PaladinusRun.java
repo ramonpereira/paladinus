@@ -17,7 +17,7 @@ public class PaladinusRun {
 //				"-heuristic", "PDBS",
 //				"-heuristic", "FF",
 //				"-heuristic", "HMAX",
-				"-heuristic", "HADD",
+				"-heuristic", "xHADD",
 //				"-heuristic", "LMCUT",
 //				"-heuristic", "BLIND_DEADEND",
 //				"-heuristic", "BLIND",
