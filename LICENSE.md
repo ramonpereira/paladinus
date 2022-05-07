@@ -53,12 +53,3 @@ We use Python 2.7.16 for [translator-fond](translator-fond/).
 ### Commons-IO
 
 We use [lib/commons-io-2.11.0.jar](lib/commons-io-2.11.0.jar).
-
-## License
-
-This software is released under the GNU Lesser General Public License version 3 or later.
-
-## Acknowledgements
-
-This work has been partially funded by the [ERC Advanced Grant "WhiteMech"](whitemech.github.io/)
-(No. 834228) and by the [TAILOR research network](https://tailor-network.eu/) (No. 952215).
