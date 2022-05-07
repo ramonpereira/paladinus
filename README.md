@@ -32,3 +32,21 @@ Action Selection and Evaluation Function Criteria:
 Translate:
  -t (-type) [FOND]                      : use fond translate (Example: -t <domain_file> <problem_file>)
 ```
+
+## Usage Iterative DFS
+
+## Usage Iterative DFS with Pruning
+
+## Requirements
+
+### Java JDK
+
+We use the Java JDK 1.6.
+
+### Python
+
+We use Python 2.7.16 for [translator-fond](translator-fond/).
+
+### Commons-IO
+
+We use [lib/commons-io-2.11.0.jar](lib/commons-io-2.11.0.jar).
