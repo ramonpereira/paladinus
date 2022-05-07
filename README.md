@@ -20,20 +20,15 @@ Paladinus options:
  -timeout N                             : set timeout in seconds
 
 Search algorithms:
- -s (-search) [ITERATIVE_DFS |          : set search algorithm [default:
- ITERATIVE_DFS_PRUNING | DFS]             ITERATIVE_DFS]
+ -s (-search) [ITERATIVE_DFS | ITERATIVE_DFS_PRUNING | DFS]  : set search algorithm [default: ITERATIVE_DFS]
 
 Heuristics:
- -heuristic [HMAX | HADD | FF | PDBS |  : set heuristic [default: FF]
- LMCUT | BLIND | BLIND_DEADEND]            
+ -heuristic [HMAX | HADD | FF | PDBS | LMCUT | BLIND | BLIND_DEADEND] : set heuristic [default: FF]            
 
 Action Selection and Evaluation Function Criteria:
- -as (-actionSelectionCriterion) VAL    : set actionSelectionCriterion
-                                          [default: MIN_MAX_H]
- -ef (-evaluationFunctionCriterion) VAL : set evaluationFunctionCriterion
-                                          [default: MAX]
+ -as (-actionSelectionCriterion) VAL    : set actionSelectionCriterion [default: MIN_MAX_H]
+ -ef (-evaluationFunctionCriterion) VAL : set evaluationFunctionCriterion [default: MAX]
 
 Translate:
- -t (-type) [FOND]                      : use fond translate (Example: -t
-                                          <domain_file> <problem_file>)
+ -t (-type) [FOND]                      : use fond translate (Example: -t <domain_file> <problem_file>)
 ```
