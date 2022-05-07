@@ -58,6 +58,12 @@ We use [lib/commons-io-2.11.0.jar](lib/commons-io-2.11.0.jar).
 
 This software is released under the GNU Lesser General Public License version 3 or later.
 
+## Contributors
+
+- Ramon Fraga Pereira
+- Frederico Messa
+- André Grahl Pereira
+
 ## Acknowledgements
 
 This work has been partially funded by the [ERC Advanced Grant "WhiteMech"](whitemech.github.io/)
