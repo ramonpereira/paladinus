@@ -5,10 +5,10 @@ Paladinus: An Iterative Depth-First Search FOND Planner.
 ## Usage
 
 ```bash
-- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas 
-- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/pb1.pddl 
-- Example (2): java -jar paladinus.jar -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-sas/blocksworld_p1.sas 
-- Example (3): java -jar paladinus.jar -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/pb1.pddl
+- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy
+- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy
+- Example (2): java -jar [java_options] paladinus0.1.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy
+- Example (3): java -jar [java_options] paladinus0.1.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy
 
 Help:
  -h (-help)                             : print this message
@@ -26,11 +26,8 @@ Heuristics:
  -heuristic [HMAX | HADD | FF | PDBS | LMCUT | BLIND | BLIND_DEADEND] : set heuristic [default: FF]            
 
 Action Selection and Evaluation Function Criteria:
- -as (-actionSelectionCriterion) VAL    : set actionSelectionCriterion [default: MIN_MAX_H]
- -ef (-evaluationFunctionCriterion) VAL : set evaluationFunctionCriterion [default: MAX]
-
-Translate:
- -t (-type) [FOND]                      : use fond translate (Example: -t <domain_file> <problem_file>)
+ -as (-actionSelectionCriterion) [MIN_H | MIN_MAX_H | MEAN_H | MIN_SUM_H]  : set actionSelectionCriterion [default: MIN_MAX_H]
+ -ef (-evaluationFunctionCriterion) [MAX | MIN]                            : set evaluationFunctionCriterion [default: MAX]
 ```
 
 ## Usage Iterative DFS

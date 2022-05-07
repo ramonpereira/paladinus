@@ -40,9 +40,9 @@ public class PaladinusRun {
 				
 //				"-validatePolicyPRP", "ON",
 				
-				"-t", 
-				"FOND",
-				"-policytype", "STRONG_CYCLIC",
+//				"-t", 
+//				"FOND",
+//				"-policytype", "STRONG_CYCLIC",
 
 //				"benchmarks/acrobatics/domain.pddl",
 //				"benchmarks/acrobatics/p8.pddl",

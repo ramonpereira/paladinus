@@ -106,10 +106,10 @@ public class PaladinusPlanner {
 		if(args == null || args.length == 0) {
 			System.err.println("Error: Invalid or empty arguments!");
 			System.err.println(
-					  "- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas \n"
-					+ "- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/pb1.pddl \n" 
-					+ "- Example (2): java -jar paladinus.jar -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-sas/blocksworld_p1.sas \n"
-					+ "- Example (3): java -jar paladinus.jar -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/pb1.pddl");
+					  "- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n"
+					+ "- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy\n" 
+					+ "- Example (2): java -jar [java_options] paladinus.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n"
+					+ "- Example (3): java -jar [java_options] paladinus.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy");
 		} else {
 			Locale.setDefault(Locale.US);
 			Result result = new PaladinusPlanner(args).runProblem();
@@ -266,8 +266,8 @@ public class PaladinusPlanner {
 				PlanSimulator.savePlanAsDot(problem, search.getPolicy(), Global.options.exportDotFilename);
 			}
 			/* Extract and dump policy. */
-			System.out.println("\n# Strong Cyclic Policy: \n");
 			if (Global.options.dumpPolicy) {
+				System.out.println("\n# Strong Cyclic Policy: \n");
 				search.dumpPolicy();
 			}
 		}

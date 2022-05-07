@@ -177,8 +177,8 @@ public class Options {
 		return debug == Bool.ON;
 	}
 
-	@Option(name = "-t", aliases = "-type", usage = "use fond translate (Example: -t <domain_file> <problem_file>)", help = true, groups = { "TRANSLATE" })
-	Type type;
+	@Option(name = "-t", aliases = "-type", usage = "use fond translate (Example: -t FOND <domain_file> <problem_file>)", help = true, groups = { "TRANSLATE" })
+	Type type = Type.FOND;
 
 	public Type getType() {
 		return type;
@@ -374,7 +374,7 @@ public class Options {
 	}
 	
 	@Option(name = "-policytype", aliases = "-policytype", usage = "set policytype", groups = {"GENERAL" })
-	String policyType = null;
+	String policyType = "STRONG_CYCLIC";
 	
 	public String getPolicyType() {
 		return policyType;
@@ -594,12 +594,6 @@ public class Options {
 	 * are ignored.
 	 */
 	void printHelp() {
-		System.err.println(
-				  "- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas \n"
-				+ "- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/pb1.pddl \n" 
-				+ "- Example (2): java -jar paladinus.jar -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-sas/blocksworld_p1.sas \n"
-				+ "- Example (3): java -jar paladinus.jar -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/pb1.pddl");
-		System.err.println();
 		if (hiddenOptions) {
 			System.err.println("Hidden options:");
 			parser.printUsage(System.err, OptionHandlerFilter.HIDDEN);
@@ -620,18 +614,19 @@ public class Options {
 			System.err.println("Action Selection and Evaluation Function Criteria:");
 			parser.printUsage(System.err, new GroupFilter(Group.CRITERIA));
 			System.err.println();
-			System.err.println("Translate:");
-			parser.printUsage(System.err, new GroupFilter(Group.TRANSLATE));
+//			System.err.println("Translate:");
+//			parser.printUsage(System.err, new GroupFilter(Group.TRANSLATE));
 			//System.err.println();
 			//System.err.println("PDB Heuristic Options:");
 			//parser.printUsage(System.err, new GroupFilter(Group.PDB));
 		}
 		System.err.println();
+		System.err.println("#> Usage:");
 		System.err.println(
-				  "- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas \n"
-				+ "- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/pb1.pddl \n" 
-				+ "- Example (2): java -jar paladinus.jar -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-sas/blocksworld_p1.sas \n"
-				+ "- Example (3): java -jar paladinus.jar -search ITERATIVE_DFS -heuristic FF -t benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/pb1.pddl");
+				  "- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n"
+				+ "- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy\n" 
+				+ "- Example (2): java -jar [java_options] paladinus.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n"
+				+ "- Example (3): java -jar [java_options] paladinus.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy");
 
 		if (debug()) {
 			System.out.println();
