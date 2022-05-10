@@ -63,6 +63,7 @@ This software is released under the GNU Lesser General Public License version 3 
 - Ramon Fraga Pereira
 - Frederico Messa
 - André Grahl Pereira
+- Giuseppe De Giacomo
 
 ## Acknowledgements
 
