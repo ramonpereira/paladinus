@@ -34,13 +34,13 @@ import paladinus.simulator.PlanSimulator;
 
 /**
  * Paladinus is a FOND planner based myND planner.
- * 
+ *
  * Paladinus takes as input a description of a FOND planning task and tries to solve it using an appropriate heuristic.
  *
  * Original authors (myND):
  * @author Robert Mattmueller
  * @author Manuela Ortlieb
- * 
+ *
  * @author Ramon Fraga Pereira
  */
 public class PaladinusPlanner {
@@ -92,7 +92,7 @@ public class PaladinusPlanner {
 		new Global().initialize();
 		initialize(args);
 	}
-	
+
 	public PaladinusPlanner() {}
 
 	/**
@@ -107,7 +107,7 @@ public class PaladinusPlanner {
 			System.err.println("Error: Invalid or empty arguments!");
 			System.err.println(
 					  "- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n"
-					+ "- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy\n" 
+					+ "- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy\n"
 					+ "- Example (2): java -jar [java_options] paladinus.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n"
 					+ "- Example (3): java -jar [java_options] paladinus.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy");
 		} else {
@@ -122,7 +122,7 @@ public class PaladinusPlanner {
 				ExitCode.EXIT_DISPROVEN.exit();
 			default:
 				ExitCode.EXIT_UNPROVEN.exit();
-			}			
+			}
 		}
 	}
 
@@ -157,7 +157,8 @@ public class PaladinusPlanner {
 			return;
 		}
 		try {
-			Process translate_p = new ProcessBuilder(translator, domain, instance).start();
+			// Process translate_p = new ProcessBuilder(translator, domain, instance).start();
+			Process translate_p = new ProcessBuilder("cmd.exe", "/c", "python", translator, domain, instance).start();
 			InputStream is = translate_p.getInputStream();
 			InputStreamReader isr = new InputStreamReader(is);
 			BufferedReader br = new BufferedReader(isr);
@@ -173,7 +174,7 @@ public class PaladinusPlanner {
 
 	/**
 	 * Initialize Paladinus by parsing planning options and the SAS-file.
-	 * 
+	 *
 	 * @param args
 	 * @throws IOException
 	 * @throws FileNotFoundException
@@ -209,7 +210,7 @@ public class PaladinusPlanner {
 
 		/* Do operator preprocessing respectively initialization of BDDs. */
 		problem.finishInitializationAndPreprocessing();
-		if (DEBUG) 
+		if (DEBUG)
 			problem.dump();
 	}
 
@@ -240,7 +241,7 @@ public class PaladinusPlanner {
 			System.out.println("\nResult: No policy found due to time-out.");
 		} else if (planFound == Result.OUT_OF_MEMORY) {
 			System.out.println("INITIAL IS UNPROVEN!");
-			System.out.println("\nResult: No policy could be found due to out-of-memory.");			
+			System.out.println("\nResult: No policy could be found due to out-of-memory.");
 		} else if (planFound == Result.UNDECIDED) {
 			System.out.println("INITIAL IS UNPROVEN!");
 			System.out.println("\nResult: No policy found. Undecided.");
@@ -260,7 +261,7 @@ public class PaladinusPlanner {
 			System.out.println();
 			if (Global.options.exportPolicyFilename != null)
 				search.printPolicy(Global.options.exportPolicyFilename);
-			
+
 			if (Global.options.exportDotFilename != null) {
 				System.out.println("@> Dot file: " + Global.options.exportDotFilename);
 				PlanSimulator.savePlanAsDot(problem, search.getPolicy(), Global.options.exportDotFilename);
@@ -283,12 +284,12 @@ public class PaladinusPlanner {
 		startTime = System.currentTimeMillis();
 
 		Result planFound = Result.UNDECIDED;
-		
+
 		Heuristic heuristic = null;
 		boolean heuristicConstructed = false;
 		heuristic = HeuristicGenerator.getHeuristic(problem, Global.options.heuristic.toString());
 		heuristicConstructed = true;
-		
+
 		if (!heuristicConstructed) {
 			/* Unsolvable problem detected during heuristic construction. */
 			planFound = Result.DISPROVEN;
@@ -299,26 +300,26 @@ public class PaladinusPlanner {
 			System.gc();
 			if (DEBUG)
 				System.out.println(String.format("Done, took %.2f s.", (System.currentTimeMillis() - gc_start) / 1000.0) + "\n");
-			
+
 			switch (Global.options.searchAlgorithm) {
 				case DFS:
 					System.out.println("Algorithm: Depth-First Search for FOND Planning");
 					if(heuristic != null)
 						search = new DepthFirstSearch(problem, heuristic, Global.options.actionSelectionCriterion, Global.options.evaluationFunctionCriterion);
 					break;
-					
+
 				case ITERATIVE_DFS:
 					System.out.println("Algorithm: Iterative Depth-First Search for FOND Planning");
 					if(heuristic != null)
 						search = new IterativeDepthFirstSearch(problem, heuristic, Global.options.actionSelectionCriterion, Global.options.evaluationFunctionCriterion);
 					break;
-					
+
 				case ITERATIVE_DFS_PRUNING:
 					System.out.println("Algorithm: Iterative Depth-First Search Pruning for FOND Planning");
 					if(heuristic != null)
 						search = new IterativeDepthFirstSearchPruning(problem, heuristic, Global.options.actionSelectionCriterion, Global.options.evaluationFunctionCriterion, Global.options.checkSolvedStates);
 					break;
-					
+
 				default:
 					new Exception("Unknown Search Algorithm.").printStackTrace();
 					Global.ExitCode.EXIT_CRITICAL_ERROR.exit();
@@ -334,7 +335,7 @@ public class PaladinusPlanner {
 				Global.ExitCode.EXIT_UNPROVEN.exit();
 			}
 			search.setTimeout(Global.options.timeout - timeUsedForPreprocessing);
-			
+
 			ExecutorService service = Executors.newFixedThreadPool(1);
 		    Future<Result> futureResult = service.submit(search);
 		    try{
