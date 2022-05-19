@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import paladinus.util.TranslateFONDUtils;
+
 public class PaladinusRun {
 
 	@Test
@@ -98,14 +100,12 @@ public class PaladinusRun {
 				"-exportPolicy", "policy.txt", "-exportDot", "policy.dot", "-printPolicy"
 		};
 		try {
-			Runtime run = Runtime.getRuntime();
-			// Process pr = run.exec("rm -rf output.sas");
-			// pr.waitFor();
+			TranslateFONDUtils.removeSASFile();
 
 			PaladinusPlanner paladinus = new PaladinusPlanner(args);
 			paladinus.runProblem();
 
-		} catch (IOException e) {
+		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
 	}

@@ -31,6 +31,7 @@ import paladinus.search.dfs.DepthFirstSearch;
 import paladinus.search.dfs.iterative.IterativeDepthFirstSearch;
 import paladinus.search.dfs.iterative.IterativeDepthFirstSearchPruning;
 import paladinus.simulator.PlanSimulator;
+import paladinus.util.OsUtils;
 
 /**
  * Paladinus is a FOND planner based myND planner.
@@ -157,8 +158,10 @@ public class PaladinusPlanner {
 			return;
 		}
 		try {
-			// Process translate_p = new ProcessBuilder(translator, domain, instance).start();
-			Process translate_p = new ProcessBuilder("cmd.exe", "/c", "python", translator, domain, instance).start();
+			Process translate_p;
+			if(OsUtils.isWindows())
+				translate_p = new ProcessBuilder("cmd.exe", "/c", "python", translator, domain, instance).start();
+			else translate_p = new ProcessBuilder(translator, domain, instance).start();
 			InputStream is = translate_p.getInputStream();
 			InputStreamReader isr = new InputStreamReader(is);
 			BufferedReader br = new BufferedReader(isr);
