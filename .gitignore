@@ -1,2 +1,5 @@
 *.class
 *.pyc
+output.sas
+policy.dot
+policy.txt
