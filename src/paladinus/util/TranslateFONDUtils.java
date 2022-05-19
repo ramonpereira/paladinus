@@ -15,7 +15,7 @@ public class TranslateFONDUtils {
 		Process p = Runtime.getRuntime().exec(cmd);
 		p.waitFor();
 	}
-	
+
 	public static void removeSASFile() throws IOException, InterruptedException {
 		 Runtime run = Runtime.getRuntime();
 		 Process pr;
@@ -23,8 +23,8 @@ public class TranslateFONDUtils {
 			 pr = run.exec("rm -rf output.sas");
 			 pr.waitFor();
 		 } else {
-			 pr = run.exec("del output.sas");
-			 pr.waitFor();			 
+			 pr = run.exec("cmd.exe /c del output.sas");
+			 pr.waitFor();
 		 }
 	}
 }
