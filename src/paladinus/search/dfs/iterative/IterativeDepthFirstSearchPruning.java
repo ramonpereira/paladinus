@@ -53,7 +53,7 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 		System.out.println("\n# Closed-Non-Promising Nodes = " + this.closedDeadEndsNodes.size());
 		
 		if (DEBUG)
-			dumpStateSpace();
+			dumpStateSpace(this.NUMBER_ITERATIONS);
 
 		if(timeout())
 			return Result.TIMEOUT;
@@ -83,6 +83,7 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 			System.out.println("> Bound: " + this.POLICY_BOUND);
 			this.POLICY_SIZE = 0d;
 			
+			this.dumpingCounterStateSpace = 0;
 			this.NUMBER_ITERATIONS++;
 
 			Set<SearchNode> closedSolved = new HashSet<>();
@@ -104,7 +105,7 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 	
 	protected Pair<SearchFlag, Set<SearchNode>> doIterativeSearch(SearchNode node, Set<SearchNode> closedSolved, double policySize, double policyBound) {
 		if (DEBUG)
-			dumpStateSpace();
+			dumpStateSpace(this.NUMBER_ITERATIONS);
 		
 		if(RECURSION_COUNTER >= Integer.MAX_VALUE)
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.DEAD_END, closedSolved);

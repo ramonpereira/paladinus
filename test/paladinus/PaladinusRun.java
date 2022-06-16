@@ -13,8 +13,8 @@ public class PaladinusRun {
 		String[] args = new String[] {
 
 //				"-search", "DFS",
-//				"-search", "ITERATIVE_DFS",
-				"-search", "ITERATIVE_DFS_PRUNING",
+				"-search", "ITERATIVE_DFS",
+//				"-search", "ITERATIVE_DFS_PRUNING",
 
 //				"-heuristic", "PDBS",
 //				"-heuristic", "FF",
@@ -36,7 +36,7 @@ public class PaladinusRun {
 //				"-actionSelectionCriterion", "MEAN_H",
 //				"-actionSelectionCriterion", "MAX_AVG_H_VALUE",
 
-//				"-debug", "ON",
+				"-debug", "ON",
 
 				"-timeout", "300",
 

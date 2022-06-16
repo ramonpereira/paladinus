@@ -62,7 +62,16 @@ public abstract class HeuristicSearch extends AbstractSearch {
 	public abstract void doIteration();
 	
 	public void dumpStateSpace() {
-		File plan = new File("statespace_" + dumpingCounterStateSpace + ".dot");
+		this.dumpStateSpace("");
+	}
+	
+	public void dumpStateSpace(Integer iteration) {
+		String iterationString = "iteration_" + iteration + "-";
+		this.dumpStateSpace(iterationString);
+	}
+	
+	private void dumpStateSpace(String iteration) {
+		File plan = new File(iteration + "statespace_" + dumpingCounterStateSpace + ".dot");
 		dumpingCounterStateSpace++;
 		try {
 			FileWriter writer = new FileWriter(plan);

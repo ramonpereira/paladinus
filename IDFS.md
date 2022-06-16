@@ -2,10 +2,6 @@
 
 Paladinus: An Iterative Depth-First Search FOND Planner.
 
-We have two iterative depth-first search (IDFS) algorithms for FOND Planning:
-- IDFS (Iterative Depth-First Search);
-- IDFS Pruning (Iterative Depth-First Search with Pruning);
-
 ## Usage
 
 ```bash
@@ -33,45 +29,23 @@ Action Selection and Evaluation Function Criteria:
 ## Usage Examples
 
 ```bash
-Examples of usage by calling the class:
+Examples of usage:
 - Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy
 - Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy
-
-Examples of usage by calling the .JAR file:
-- Example (0): java -jar [java_options] paladinus1.0.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy
-- Example (1): java -jar [java_options] paladinus1.0.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy
+- Example (2): java -jar [java_options] paladinus0.2.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy
+- Example (3): java -jar [java_options] paladinus0.2.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy
 ```
 
-## IDFS Usage
+## Usage Iterative DFS
 
 ```bash
-- Example (0): java -jar [java_options] paladinus1.0.jar -search ITERATIVE_DFS -heuristic HMAX benchmarks/blocksworld-sas/blocksworld_p2.sas -printPolicy
-- Example (1): java -jar [java_options] paladinus1.0.jar -search ITERATIVE_DFS -heuristic HMAX benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p2.pddl -printPolicy
 ```
 
-## IDFS Pruning Usage
+## Usage Iterative DFS with Pruning
 ```bash
-- Example (0): java -jar [java_options] paladinus1.0.jar -search ITERATIVE_DFS_PRUNING -heuristic HADD benchmarks/blocksworld-sas/blocksworld_p3.sas -printPolicy
-- Example (1): java -jar [java_options] paladinus1.0.jar -search ITERATIVE_DFS_PRUNING -heuristic HADD benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p3.pddl -printPolicy
 ```
 
-## Policy Output and Visualization
-
-Paladinus outputs a policy when one exists for FOND planning task.
-We provide two types of outputs: 
-- A text file (policy.txt), containing the output policy that maps states into actions; and 
-- A graph visualization for the output policy (policy.dot);
-
-Our policy visualization outputs a DOT file that corresponds to a graph of the solution policy.
-
-For more details, have a look at [POLICY.md](POLICY.md).
-
-## Debug
-
-Paladinus provides a state-space debugger that shows the expanded states for every iteration of our algorithms.
-Our state-space debugger outputs a DOT file for every state expansion during the search.
-
-For more details, have a look at [DEBUG.md](DEBUG.md).
+## Policy Output (Visualization) and Debug 
 
 ## Requirements
 
@@ -86,10 +60,6 @@ We use Python 2.7.16 for [translator-fond](translator-fond/).
 ### Commons-IO
 
 We use [lib/commons-io-2.11.0.jar](lib/commons-io-2.11.0.jar).
-
-### GraphViz
-
-We use [GraphViz](https://graphviz.readthedocs.io/) for visualizing the state-space and the output policy.
 
 ## License
 
