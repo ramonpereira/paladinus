@@ -46,8 +46,8 @@ public class PaladinusRun {
 //				"FOND",
 //				"-policytype", "STRONG_CYCLIC",
 
-				"benchmarks/acrobatics/domain.pddl",
-				"benchmarks/acrobatics/p1.pddl",
+//				"benchmarks/acrobatics/domain.pddl",
+//				"benchmarks/acrobatics/p1.pddl",
 
 //				"benchmarks/beam-walk/domain.pddl",
 //				"benchmarks/beam-walk/p8.pddl",
@@ -58,8 +58,8 @@ public class PaladinusRun {
 //				"benchmarks/blocksworld-new/domain.pddl",
 //				"benchmarks/blocksworld-new/p8.pddl",
 
-//				"benchmarks/blocksworld-original/domain.pddl",
-//				"benchmarks/blocksworld-original/p19.pddl",
+				"benchmarks/blocksworld-original/domain.pddl",
+				"benchmarks/blocksworld-original/p10.pddl",
 
 //				"benchmarks/chain-of-rooms/domain.pddl",
 //				"benchmarks/chain-of-rooms/p3.pddl",
