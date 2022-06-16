@@ -46,8 +46,8 @@ public class PaladinusRun {
 //				"FOND",
 //				"-policytype", "STRONG_CYCLIC",
 
-//				"benchmarks/acrobatics/domain.pddl",
-//				"benchmarks/acrobatics/p8.pddl",
+				"benchmarks/acrobatics/domain.pddl",
+				"benchmarks/acrobatics/p1.pddl",
 
 //				"benchmarks/beam-walk/domain.pddl",
 //				"benchmarks/beam-walk/p8.pddl",
@@ -88,8 +88,8 @@ public class PaladinusRun {
 //				"benchmarks/tireworld-spiky/domain.pddl",
 //				"benchmarks/tireworld-spiky/p3.pddl",
 
-				"benchmarks/tireworld-truck/domain.pddl",
-				"benchmarks/tireworld-truck/p19.pddl",
+//				"benchmarks/tireworld-truck/domain.pddl",
+//				"benchmarks/tireworld-truck/p19.pddl",
 
 //				"benchmarks/triangle-tireworld/domain.pddl",
 //				"benchmarks/triangle-tireworld/p3.pddl",

@@ -185,6 +185,7 @@ public class PaladinusPlanner {
 	private void initialize(String[] args) throws FileNotFoundException, IOException {
 		/* Create either a partially observable or a fully observable problem. */
 		assert problem == null;
+		System.out.println("Paladinus: An Iterative Depth-First Search FOND Planner\n");
 		CmdLineParser parser = new CmdLineParser(Global.options, ParserProperties.defaults().withOptionSorter(null));
 		Global.options.setParser(parser);
 		try {
