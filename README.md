@@ -1,4 +1,4 @@
-# PaladinusPlanner
+# Paladinus
 
 Paladinus: An Iterative Depth-First Search FOND Planner.
 
