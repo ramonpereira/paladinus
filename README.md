@@ -1,15 +1,10 @@
-# PaladinusPlanner
+# Paladinus
 
 Paladinus: An Iterative Depth-First Search FOND Planner.
 
 ## Usage
 
 ```bash
-Examples of usage:
-- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy
-- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy
-- Example (2): java -jar [java_options] paladinus0.1.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy
-- Example (3): java -jar [java_options] paladinus0.1.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy
 
 Help:
  -h (-help)                             : print this message
@@ -31,6 +26,16 @@ Action Selection and Evaluation Function Criteria:
  -ef (-evaluationFunctionCriterion) [MAX | MIN]                            : set evaluationFunctionCriterion [default: MAX]
 ```
 
+## Usage Examples
+
+```bash
+Examples of usage:
+- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy
+- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy
+- Example (2): java -jar [java_options] paladinus0.2.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy
+- Example (3): java -jar [java_options] paladinus0.2.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy
+```
+
 ## Usage Iterative DFS
 
 ```bash
@@ -39,6 +44,8 @@ Action Selection and Evaluation Function Criteria:
 ## Usage Iterative DFS with Pruning
 ```bash
 ```
+
+## Policy Output (Visualization) and Debug 
 
 ## Requirements
 
@@ -64,6 +71,13 @@ This software is released under the GNU Lesser General Public License version 3 
 - Frederico Messa
 - André Grahl Pereira
 - Giuseppe De Giacomo
+
+## Reference and Citation
+
+Please, use the following reference when citing Paladinus.
+
+- [_Iterative Depth-First Search for FOND Planning_](https://ojs.aaai.org/index.php/ICAPS/article/view/19789/19548), Ramon Fraga Pereira, André Grahl Pereira, Frederico Messa, and Giuseppe De Giacomo. [International Conference on Automated Planning and Scheduling (ICAPS), 2022](http://icaps22.icaps-conference.org). 
+  - You can find the BibTex [here](idfs-paladinus-icaps22.bib)!
 
 ## Acknowledgements
 
