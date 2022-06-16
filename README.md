@@ -2,7 +2,7 @@
 
 Paladinus: An Iterative Depth-First Search FOND Planner.
 
-We have two iterative depth-first search (IDFS) algorithms for FOND Planning:
+Paladinus has two iterative depth-first search (IDFS) algorithms for FOND Planning:
 - IDFS (Iterative Depth-First Search);
 - IDFS Pruning (Iterative Depth-First Search with Pruning);
 
