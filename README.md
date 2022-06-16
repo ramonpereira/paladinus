@@ -70,6 +70,12 @@ This software is released under the GNU Lesser General Public License version 3 
 - André Grahl Pereira
 - Giuseppe De Giacomo
 
+## Reference and Citation
+
+Please, use the following reference when citing Paladinus.
+
+- [_Iterative Depth-First Search for FOND Planning_](https://ojs.aaai.org/index.php/ICAPS/article/view/19789/19548), Ramon Fraga Pereira, André Grahl Pereira, Frederico Messa, and Giuseppe De Giacomo. International Conference on Automated Planning and Scheduling (ICAPS), 2022.
+
 ## Acknowledgements
 
 This work has been partially funded by the [ERC Advanced Grant "WhiteMech"](whitemech.github.io/)
