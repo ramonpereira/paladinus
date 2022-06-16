@@ -45,6 +45,8 @@ Examples of usage:
 ```bash
 ```
 
+## Policy Output (Visualization) and Debug 
+
 ## Requirements
 
 ### Java JDK
