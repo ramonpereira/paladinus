@@ -170,7 +170,7 @@ public class Options {
 		}
 	}
 	
-	@Option(name = "-debug", hidden = true, usage = "use debug option.", groups = {"GENERAL"})
+	@Option(name = "-debug", usage = "use debug option", showDefault = true, groups = {"GENERAL"})
 	Bool debug = Bool.OFF;
 	
 	public boolean debug() {
@@ -248,7 +248,7 @@ public class Options {
 	/**
 	 * Export the .dot output from the PlanSimulator to this file.
 	 */
-	@Option(name = "-exportDot", usage = "export polity as DOT graph (GraphViz)", groups = { "MAIN" }, metaVar = "FILENAME")
+	@Option(name = "-exportDot", usage = "export policy as DOT graph (GraphViz)", groups = { "MAIN" }, metaVar = "FILENAME")
 	String exportDotFilename = null;
 	
 	public String getExportDotFilename() {
@@ -373,7 +373,7 @@ public class Options {
 		return useMaxHeuristicAndAvgConnectors2SelectBestActions == Bool.ON;
 	}
 	
-	@Option(name = "-policytype", aliases = "-policytype", usage = "set policytype", groups = {"GENERAL" })
+	@Option(name = "-policytype", aliases = "-policytype", usage = "set policytype", groups = {"NO_GROUP" })
 	String policyType = "STRONG_CYCLIC";
 	
 	public String getPolicyType() {
@@ -601,6 +601,9 @@ public class Options {
 		} else {
 			System.err.println("Help:");
 			parser.printUsage(System.err, new GroupFilter(Group.HELP));
+			System.err.println();
+			System.err.println("Debug:");
+			parser.printUsage(System.err, new GroupFilter(Group.GENERAL));
 			System.err.println();
 			System.err.println("Paladinus options:");
 			parser.printUsage(System.err, new GroupFilter(Group.MAIN));
