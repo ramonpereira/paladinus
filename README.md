@@ -10,11 +10,14 @@ Paladinus has two iterative depth-first search (IDFS) algorithms for FOND Planni
 
 Help:
  -h (-help)                             : print this message
+ 
+Debug:
+ -debug [ON | OFF]                      : use debug option [default: OFF]
 
 Paladinus options:
  -printPolicy                           : print policy to stdout
  -exportPolicy FILENAME                 : export policy to file
- -exportDot FILENAME                    : export polity as DOT graph (GraphViz)
+ -exportDot FILENAME                    : export policy as DOT graph (GraphViz)
  -timeout N                             : set timeout in seconds
 
 Search algorithms:
@@ -61,6 +64,21 @@ We provide two types of outputs:
 - A graph visualization for the output policy (policy.dot);
 
 Our policy visualization outputs a DOT file that corresponds to a graph of the solution policy.
+
+For printing the policy use: 
+```bash
+-printPolicy
+```
+
+To export the policy to (.txt) file use: 
+```bash
+-exportPolicy FILENAME
+```
+
+For exporting the graph visualization file (DOT graph using GraphViz) of the policy use: 
+```bash
+-exportDot FILENAME
+```
 
 For more details, have a look at [POLICY.md](POLICY.md).
 
