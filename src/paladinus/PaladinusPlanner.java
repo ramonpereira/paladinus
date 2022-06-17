@@ -232,14 +232,14 @@ public class PaladinusPlanner {
 			if(Global.options.validatePolicyPRP() || Global.options.validatePolicy()) {
 				search.validatePolicy();
 				if(search.getPolicy().isValid())
-					System.out.println("Result: Strong cyclic policy found.");
-				else System.out.println("Result: No strong cyclic policy found.");
+					System.out.println("Result: Policy successfully found.");
+				else System.out.println("Result: No policy could be found.");
 			} else {
-				System.out.println("\nResult: Strong cyclic policy found.");
+				System.out.println("\nResult: Policy successfully found.");
 			}
 		} else if (planFound == Result.DISPROVEN) {
 			System.out.println("INITIAL IS DISPROVEN!");
-			System.out.println("\nResult: No strong cyclic policy found.");
+			System.out.println("\nResult: No policy could be found.");
 		} else if (planFound == Result.TIMEOUT) {
 			System.out.println("INITIAL IS UNPROVEN!");
 			System.out.println("\nResult: No policy found due to time-out.");
@@ -272,7 +272,7 @@ public class PaladinusPlanner {
 			}
 			/* Extract and dump policy. */
 			if (Global.options.dumpPolicy) {
-				System.out.println("\n# Strong Cyclic Policy: \n");
+				System.out.println("\n# Policy: \n");
 				search.dumpPolicy();
 			}
 		}

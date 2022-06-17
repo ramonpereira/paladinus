@@ -36,7 +36,7 @@ public class PaladinusRun {
 //				"-actionSelectionCriterion", "MEAN_H",
 //				"-actionSelectionCriterion", "MAX_AVG_H_VALUE",
 
-				"-debug", "ON",
+//				"-debug", "ON",
 
 				"-timeout", "300",
 

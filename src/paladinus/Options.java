@@ -373,7 +373,7 @@ public class Options {
 		return useMaxHeuristicAndAvgConnectors2SelectBestActions == Bool.ON;
 	}
 	
-	@Option(name = "-policytype", aliases = "-policytype", usage = "set policytype", groups = {"NO_GROUP" })
+	@Option(name = "-policytype", aliases = "-policytype", usage = "set policytype")
 	String policyType = "STRONG_CYCLIC";
 	
 	public String getPolicyType() {
@@ -674,8 +674,6 @@ public class Options {
 		for (OptionHandler<?> h : parser.getOptions()) {
 			for (Set<String> groups : h.option.getGroups()) {
 				for (String g : groups) {
-					if(g.equals("POND"))
-						System.out.println(g);
 					assert (groupNames.contains(g));
 				}
 			}
