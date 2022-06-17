@@ -93,7 +93,7 @@ For more details, have a look at [DEBUG.md](DEBUG.md).
 
 ### Java JDK
 
-We use the Java JDK 1.6.
+We use the Java JDK 16.0.1
 
 ### Python
 
