@@ -122,7 +122,7 @@ This software is released under the GNU Lesser General Public License version 3 
 
 Please, use the following reference when citing Paladinus.
 
-- [_Iterative Depth-First Search for FOND Planning_](https://ojs.aaai.org/index.php/ICAPS/article/view/19789/19548), Ramon Fraga Pereira, André Grahl Pereira, Frederico Messa, and Giuseppe De Giacomo. [International Conference on Automated Planning and Scheduling (ICAPS), 2022](http://icaps22.icaps-conference.org). 
+- [Iterative Depth-First Search for FOND Planning](https://ojs.aaai.org/index.php/ICAPS/article/view/19789/19548), Ramon Fraga Pereira, André Grahl Pereira, Frederico Messa, and Giuseppe De Giacomo. [The 32nd International Conference on Automated Planning and Scheduling (ICAPS), 2022](http://icaps22.icaps-conference.org). 
   - You can find the BibTex [here](idfs-paladinus-icaps22.bib)!
 
 ## Acknowledgements
