@@ -4,9 +4,28 @@ Paladinus has two iterative depth-first search (IDFS) algorithms for FOND Planni
 - IDFS (Iterative Depth-First Search);
 - IDFS Pruning (Iterative Depth-First Search with Pruning);
 
-## Usage
+# Build
 
-```bash
+This repo has set up the planner as a Maven project. To build it without tests:
+
+```shell
+$ mvn clean package -Dmaven.test.skip.exec
+```
+
+This will generate a jar file under `target/` and all classes under `target/classes`.
+
+To compile manually into `bin/`:
+
+```shell
+$ javac -cp lib/commons-io-2.11.0.jar:lib/junit-4.12.jar -d bin/ `find src/ -name '*.java'`
+```
+
+## Usage: Help
+
+Using the developers JAR file provided:
+
+```shell
+$ java -jar paladinus1.0.jar paladinus.PaladinusPlanner -h
 
 Help:
  -h (-help)                             : print this message
@@ -24,7 +43,7 @@ Search algorithms:
  -s (-search) [ITERATIVE_DFS | ITERATIVE_DFS_PRUNING | DFS]  : set search algorithm [default: ITERATIVE_DFS]
 
 Heuristics:
- -heuristic [HMAX | HADD | FF | PDBS | LMCUT | BLIND | BLIND_DEADEND] : set heuristic [default: FF]            
+ -heuristic [HMAX | HADD | FF | PDBS | LMCUT | BLIND | BLIND_DEADEND] : set heuristic [default: FF]
 
 Action Selection and Evaluation Function Criteria:
  -as (-actionSelectionCriterion) [MIN_H | MIN_MAX_H | MEAN_H | MIN_SUM_H]  : set actionSelectionCriterion [default: MIN_MAX_H]
@@ -33,9 +52,18 @@ Action Selection and Evaluation Function Criteria:
 
 ## Usage Examples
 
-```bash
+Using the Maven JAR artifact:
+
+```shell
+$ java -cp ./target/paladinus-1.0-SNAPSHOT.jar paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic HMAX benchmarks/blocksworld-sas/blocksworld_p2.sas -printPolicy
+
+$ java -cp ./target/paladinus-1.0-SNAPSHOT.jar paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic HMAX benchmarks/blocksworld-original/domain.pddl benchmarks/blocksworld-original/p10.pddl -printPolicy
+```
+
 Examples of usage by calling the class:
-- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy
+
+```shell
+$ java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy
 - Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy
 
 Examples of usage by calling the .JAR file:
