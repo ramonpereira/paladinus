@@ -1,5 +1,6 @@
 package paladinus;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -221,6 +222,7 @@ public class Options {
 		return sas;
 	}
 
+
 	// //////////////// Planner options //////////////////
 
 	//@Option(name = "-computeCosts", usage = "compute and print expected costs of the plan", groups = { "MAIN" })
@@ -260,6 +262,24 @@ public class Options {
 			testFilename(exportDotFilename, "-exportDot");
 		}
 	}
+
+	/**
+	 * Provide path to translator from PDDL to SAS
+	 */
+	@Option(name = "-translatorPath", usage = "path to SAS translator script", groups = { "MAIN" }, metaVar = "DIRNAME")
+	String translatorPath = "translator-fond/translate.py";
+
+	public String getTranslatorPath() {
+		return translatorPath;
+	}
+	private void checkTranslatorPath() throws CmdLineException {
+		if (translatorPath != null) {
+			File f = new File(translatorPath);
+			if (!f.exists())
+				throw new CmdLineException(parser, new Exception("Cannot find translator script"));
+		}
+	}
+
 
 	/**
 	 * Timeout for the planner. The user gives the timeout in seconds. Internally we

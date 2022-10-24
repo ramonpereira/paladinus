@@ -152,7 +152,7 @@ public class PaladinusPlanner {
 		String instance = new File(Global.options.getInstanceFilename()).getAbsolutePath();
 		String translator;
 		if (Global.options.type == Options.Type.FOND) {
-			translator = new File("translator-fond/translate.py").getAbsolutePath();
+			translator = new File(Global.options.getTranslatorPath()).getAbsolutePath();
 		} else {
 			System.err.println("Translate type not specified");
 			return;
