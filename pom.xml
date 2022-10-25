@@ -46,13 +46,6 @@
 
 
     <build>
-        <directory>
-            ${project.basedir}/target
-        </directory>
-        <!-- <outputDirectory>
-            ${project.build.directory}/classes
-        </outputDirectory> -->
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
