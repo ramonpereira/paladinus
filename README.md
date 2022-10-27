@@ -1,143 +1,137 @@
-# Paladinus: An Iterative Depth-First Search FOND Planner
+# Paladinus: An Iterative DFS FOND Planner
 
-Paladinus has two iterative depth-first search (IDFS) algorithms for FOND Planning:
-- IDFS (Iterative Depth-First Search);
-- IDFS Pruning (Iterative Depth-First Search with Pruning);
+**Paladinus** is an Iterative Depth-First Search FOND planner written in Java. It has two iterative depth-first search (IDFS) algorithms for FOND Planning:
 
-# Build
+1. IDFS (Iterative Depth-First Search).
+2. IDFS Pruning (Iterative Depth-First Search with Pruning).
 
-This repo has set up the planner as a Maven project. To build it without tests:
+## Requirements
+
+* Java JDK 16.0.1+
+* Python 3.6+ for [translator-fond](/translator-fond/) tool to translate FOND PDDL files to SAS.
+* [Commons-IO](https://commons.apache.org/proper/commons-io/) 2.11.  Obtained via Maven but also available under `lib/` (for manual compile).
+* [junit 4](https://junit.org/junit4/). Obtained via Maven but also available under `lib/` (for manual compile).
+* [GraphViz](https://graphviz.readthedocs.io/) for visualizing the state-space and the output policy.
+
+**NOTE:** Currently, the system includes a version of [args4j](https://args4j.kohsuke.org/), but this could be eventually factored out as a Maven dependency using [args4j Maven repo](https://mvnrepository.com/artifact/args4j/args4j).
+
+# Build (and test)
+
+The planner is set-up as a Java Maven project.  To build it without tests:
 
 ```shell
 $ mvn clean package -Dmaven.test.skip.exec
 ```
 
-This will generate a jar file under `target/` and all classes under `target/classes`.
-
-To compile manually into `bin/`:
+This will generate a JAR files (with and without dependencies) under `target/` and all classes under `target/classes`. We can test it by getting the help with `-h` (or `-help`):
 
 ```shell
-$ javac -cp lib/commons-io-2.11.0.jar:lib/junit-4.12.jar -d bin/ `find src/ -name '*.java'`
+$ java -jar target/paladinus-1.1.jar -h
 ```
 
-## Usage: Help
+This will work in the machine where it was compiled, as all dependencies would have been obtained by Maven. If executed elsewhere, use the full package with dependencies included `paladinus-1.1-SNAPSHOT-jar-with-dependencies.jar`.
 
-Using the developers JAR file provided:
+To run it from directly from the classes:
 
 ```shell
-$ java -jar paladinus1.0.jar paladinus.PaladinusPlanner -h
-
-Help:
- -h (-help)                             : print this message
- 
-Debug:
- -debug [ON | OFF]                      : use debug option [default: OFF]
-
-Paladinus options:
- -printPolicy                           : print policy to stdout
- -exportPolicy FILENAME                 : export policy to file
- -exportDot FILENAME                    : export policy as DOT graph (GraphViz)
- -timeout N                             : set timeout in seconds
-
-Search algorithms:
- -s (-search) [ITERATIVE_DFS | ITERATIVE_DFS_PRUNING | DFS]  : set search algorithm [default: ITERATIVE_DFS]
-
-Heuristics:
- -heuristic [HMAX | HADD | FF | PDBS | LMCUT | BLIND | BLIND_DEADEND] : set heuristic [default: FF]
-
-Action Selection and Evaluation Function Criteria:
- -as (-actionSelectionCriterion) [MIN_H | MIN_MAX_H | MEAN_H | MIN_SUM_H]  : set actionSelectionCriterion [default: MIN_MAX_H]
- -ef (-evaluationFunctionCriterion) [MAX | MIN]                            : set evaluationFunctionCriterion [default: MAX]
+$ java -cp  target/classes/:lib/commons-io-2.11.0.jar paladinus.PaladinusPlanner -help
 ```
 
-## Usage Examples
+## Usage Patterns
 
-Using the Maven JAR artifact:
+Paladinus accepts either SAS files or domain and problem PDDL files: as input, with the following patterns:
 
 ```shell
-$ java -cp ./target/paladinus-1.0-SNAPSHOT.jar paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic HMAX benchmarks/blocksworld-sas/blocksworld_p2.sas -printPolicy
+$ java [java_options] -jar ./target/paladinus-1.1.jar [planner_options] <problem.sas>
 
-$ java -cp ./target/paladinus-1.0-SNAPSHOT.jar paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic HMAX benchmarks/blocksworld-original/domain.pddl benchmarks/blocksworld-original/p10.pddl -printPolicy
+or
+
+$ java [java_options] -jar ./target/paladinus-1.1.jar [planner_options] <domain.pddl> <problem.pddl>
 ```
 
-Examples of usage by calling the class:
+Useful Java Options are:
+
+ * `-Xmx4g`: to set the maximum heap space to 4 GB.
+ * `-ea`: to enable assertions.
+
+The main class in the JAR file is `paladinus.PaladinusPlanner` so we can also run it as follows as well:
 
 ```shell
-$ java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy
-- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy
+$ java [java_options] -cp ./target/paladinus-1.1.jar \
+    paladinus.PaladinusPlanner [planner_options] <problem.sas>
 
-Examples of usage by calling the .JAR file:
-- Example (0): java -jar [java_options] paladinus1.0.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy
-- Example (1): java -jar [java_options] paladinus1.0.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy
+or
+
+$ java [java_options] -cp ./target/classes/:lib/commons-io-2.11.0.jar  \
+    paladinus.PaladinusPlanner [planner_options] <domain.pddl> <problem.pddl>
 ```
 
-## IDFS Usage
+The last call using the compiled classes rather than the JAR file is useful when developing, as the IDE (e.g., VSCode) will compile automatically those classes.
 
-```bash
-- Example (0): java -jar [java_options] paladinus1.0.jar -search ITERATIVE_DFS -heuristic HMAX benchmarks/blocksworld-sas/blocksworld_p2.sas -printPolicy
-- Example (1): java -jar [java_options] paladinus1.0.jar -search ITERATIVE_DFS -heuristic HMAX benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p2.pddl -printPolicy
+## Examples
+
+To run plain Iterative DFS:
+
+```shell
+$ # Using SAS inputs
+$ java -jar ./target/paladinus-1.1.jar \
+    -search ITERATIVE_DFS -heuristic HMAX -printPolicy \
+    benchmarks/blocksworld-sas/blocksworld_p2.sas
+
+$ # Using PDDL inputs (and calling the main class explicitly)
+$ java -cp ./target/paladinus-1.1.jar paladinus.PaladinusPlanner \
+    -search ITERATIVE_DFS -heuristic HMAX -printPolicy \
+    benchmarks/blocksworld-original/domain.pddl \
+    benchmarks/blocksworld-original/p10.pddl
+
+
+$ # Using PDDL inputs and using the compiled classes
+$ java -cp ./target/classes::lib/commons-io-2.11.0.jar paladinus.PaladinusPlanner \
+    -search ITERATIVE_DFS -heuristic HMAX -printPolicy \
+    benchmarks/blocksworld-original/domain.pddl \
+    benchmarks/blocksworld-original/p10.pddl
 ```
 
-## IDFS Pruning Usage
-```bash
-- Example (0): java -jar [java_options] paladinus1.0.jar -search ITERATIVE_DFS_PRUNING -heuristic HADD benchmarks/blocksworld-sas/blocksworld_p3.sas -printPolicy
-- Example (1): java -jar [java_options] paladinus1.0.jar -search ITERATIVE_DFS_PRUNING -heuristic HADD benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p3.pddl -printPolicy
+Note `-printPolicy` to print the policy in standard output.
+
+To run IDFS Pruning, use `-search ITERATIVE_DFS_PRUNING` and `-heuristic HADD`:
+
+```shell
+$ java -cp ./target/paladinus-1.1.jar paladinus.PaladinusPlanner \
+    -search ITERATIVE_DFS_PRUNING -heuristic HADD -printPolicy \
+    benchmarks/blocksworld-original/domain.pddl \
+    benchmarks/blocksworld-original/p10.pddl
 ```
 
 ## Policy Output and Visualization
 
 Paladinus outputs a policy when one exists for FOND planning task.
-We provide two types of outputs: 
-- A text file (policy.txt), containing the output policy that maps states into actions; and 
-- A graph visualization for the output policy (policy.dot);
+We provide two types of outputs:
 
-Our policy visualization outputs a DOT file that corresponds to a graph of the solution policy.
+- A text file (`policy.txt`), containing the output policy that maps states into actions; and
+- A graph visualization for the output policy (`policy.dot`);
 
-For printing the policy use: 
-```bash
--printPolicy
+Our policy visualization outputs a [DOT file](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) that corresponds to a graph of the solution policy.
+
+To report the policy solution, one can use the following options:
+
+* `-printPolicy`: prints the policy to standard output.
+* `-exportPolicy FILENAME`: exports the policy to a `.txt` file.
+* `-exportDot FILENAME`: exports the graph visualization file (DOT graph using GraphViz) of the policy.
+
+For more details, check [POLICY.md](POLICY.md).
+
+## Developing and Debugging
+
+When developing in a Maven aware IDE (e.g., VSCODE) it may be convenient to run the planner from `target/classes` (instead of the JAR file) since
+these will be automatically re-generated by the IDE when there is a change in source code, so
+
+```
+$ java [java_options] -cp ./target/classes/:lib/commons-io-2.11.0.jar  \
+    paladinus.PaladinusPlanner [planner_options] <domain.pddl> <problem.pddl>
 ```
 
-To export the policy to (.txt) file use: 
-```bash
--exportPolicy FILENAME
-```
-
-For exporting the graph visualization file (DOT graph using GraphViz) of the policy use: 
-```bash
--exportDot FILENAME
-```
-
-For more details, have a look at [POLICY.md](POLICY.md).
-
-## Debug
-
-Paladinus provides a state-space debugger that shows the expanded states for every iteration of our algorithms.
-Our state-space debugger outputs a DOT file for every state expansion during the search.
-
-For more details, have a look at [DEBUG.md](DEBUG.md).
-
-## Requirements
-
-### Java JDK
-
-We use the Java JDK 16.0.1
-
-### Python
-
-We use Python 2.7.16 for [translator-fond](translator-fond/).
-
-### Commons-IO
-
-We use [lib/commons-io-2.11.0.jar](lib/commons-io-2.11.0.jar).
-
-### GraphViz
-
-We use [GraphViz](https://graphviz.readthedocs.io/) for visualizing the state-space and the output policy.
-
-## License
-
-This software is released under the GNU Lesser General Public License version 3 or later.
+Paladinus provides a **state-space debugger** that shows the expanded states for every iteration of our algorithms. The state-space debugger outputs a [DOT file](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) for every state expansion during the search. For more details, have a look at [DEBUG.md](DEBUG.md).
 
 ## Contributors
 
@@ -157,3 +151,8 @@ Please, use the following reference when citing Paladinus.
 
 This work has been partially funded by the [ERC Advanced Grant "WhiteMech"](whitemech.github.io/)
 (No. 834228) and by the [TAILOR research network](https://tailor-network.eu/) (No. 952215).
+
+## License
+
+This software is released under the GNU Lesser General Public License version 3 or later.
+
