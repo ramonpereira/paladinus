@@ -162,6 +162,13 @@ public class PaladinusPlanner {
 			System.out.println(String.format("Set FOND Translator Path: %s", translator));
 			System.out.println(String.format("Domain to translate: %s", domain));
 			System.out.println(String.format("Problem to translate: %s", instance));
+
+			// Before generating new output.sas, delete any previous version if any
+			File output_sas = new File("output.sas");
+			if (output_sas.delete()) {
+			  System.out.println("Deleted existing file: " + output_sas.getName());
+			}
+
 			if(OsUtils.isWindows())
 				translate_p = new ProcessBuilder("cmd.exe", "/c", "python", translator, domain, instance).start();
 			else
@@ -204,6 +211,7 @@ public class PaladinusPlanner {
 			Global.options.setDefaults();
 			Global.options.parseArgs();	// SS: added args as otherwise it will be null!
 			if (Global.options.getDomainFilename() != null && Global.options.getInstanceFilename() != null) {
+				
 				executeTranslator();
 			}
 			Global.options.checkOptions();
