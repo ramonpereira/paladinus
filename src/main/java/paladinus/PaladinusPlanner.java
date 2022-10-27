@@ -197,7 +197,7 @@ public class PaladinusPlanner {
 		try {
 			parser.parseArgument(args);
 
-			if (Global.options.help) {	// if help was asked, print help 	and exit
+			if (Global.options.help) {
 				Global.options.printHelp(parser);
 				Global.ExitCode.EXIT_INPUT_ERROR.exit();
 			}
