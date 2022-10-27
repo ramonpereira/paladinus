@@ -18,9 +18,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 
-import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.ParserProperties;
+import org.kohsuke.args4j.CmdLineException;
 
 
 import paladinus.Global.ExitCode;
@@ -97,7 +97,7 @@ public class PaladinusPlanner {
 		initialize(args);
 	}
 
-	public PaladinusPlanner() {}
+	// public PaladinusPlanner() {}
 
 	/**
 	 * Main method expecting a single command line argument, the name of the input SAS file.
@@ -110,7 +110,7 @@ public class PaladinusPlanner {
 		if(args == null || args.length == 0) {
 			System.err.println("Error: Invalid or empty arguments!");
 			System.err.println(
-					  "Check help: java target/paladinus-1.1.jar --help");
+					  "Check help: java -jar target/paladinus-1.1-jar-with-dependencies.jar --help");
 		} else {
 			Locale.setDefault(Locale.US);
 			Result result = new PaladinusPlanner(args).runProblem();
@@ -194,6 +194,7 @@ public class PaladinusPlanner {
 
 		CmdLineParser parser = new CmdLineParser(Global.options, ParserProperties.defaults().withOptionSorter(null));
 		Global.options.setParser(parser);
+		System.out.print(Global.options.help);
 		try {
 			parser.parseArgument(args);
 			Global.options.setDefaults();

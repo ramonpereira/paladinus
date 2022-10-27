@@ -189,8 +189,8 @@ public class Options {
 	}
 
 	/**
-	 * Arguments given by user. If no help option is used, then the SAS+ file is
-	 * required or domain and instance pddl
+	 * Arguments given by user. If no help option (-h or --help) is used, then 
+	 * either a SAS+ file or domain and instance pddl files are required
 	 */
 
 	private String domain;
@@ -200,10 +200,10 @@ public class Options {
 	@Argument(required = false)
 	String[] args;
 
-	public void parseArgs() {
+	public void parseArgs() {	// parse sas or (domain,problem) args
 		assert args.length <= 2;
 		assert args.length >= 1;
-		if (args.length == 1) {
+		if (args.length == 1) { // the
 			sas = args[0];
 		} else {
 			domain = args[0];
