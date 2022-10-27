@@ -20,6 +20,8 @@ import java.util.concurrent.TimeoutException;
 import args4j.CmdLineException;
 import args4j.CmdLineParser;
 import args4j.ParserProperties;
+
+
 import paladinus.Global.ExitCode;
 import paladinus.heuristic.Heuristic;
 import paladinus.heuristic.HeuristicGenerator;
@@ -156,9 +158,14 @@ public class PaladinusPlanner {
 		}
 		try {
 			Process translate_p;
+			System.out.println(String.format("Set FOND Translator Path: %s", translator));
+			System.out.println(String.format("Domain to translate: %s", domain));
+			System.out.println(String.format("Problem to translate: %s", instance));
 			if(OsUtils.isWindows())
 				translate_p = new ProcessBuilder("cmd.exe", "/c", "python", translator, domain, instance).start();
-			else translate_p = new ProcessBuilder(translator, domain, instance).start();
+			else
+				translate_p = new ProcessBuilder(translator, domain, instance).start();
+
 			InputStream is = translate_p.getInputStream();
 			InputStreamReader isr = new InputStreamReader(is);
 			BufferedReader br = new BufferedReader(isr);
@@ -189,7 +196,7 @@ public class PaladinusPlanner {
 		try {
 			parser.parseArgument(args);
 			Global.options.setDefaults();
-			Global.options.parseArgs(args);	// SS: added args as otherwise it will be null!
+			Global.options.parseArgs();	// SS: added args as otherwise it will be null!
 			if (Global.options.getDomainFilename() != null && Global.options.getInstanceFilename() != null) {
 				executeTranslator();
 			}

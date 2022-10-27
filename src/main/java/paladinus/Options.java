@@ -197,7 +197,7 @@ public class Options {
 	@Argument(required = false)
 	String[] args;
 
-	public void parseArgs(final String... args) {
+	public void parseArgs() {
 		assert args.length <= 2;
 		assert args.length >= 1;
 		if (args.length == 1) {
