@@ -35,7 +35,6 @@ To run it from directly from the classes:
 ```shell
 $ java -cp  target/classes/:lib/commons-io-2.11.0.jar:lib/args4j-2.33.jar paladinus.PaladinusPlanner -help
 ```
-
 ## Usage Patterns
 
 Paladinus accepts either SAS files or domain and problem PDDL files: as input, with the following patterns:
@@ -66,6 +65,16 @@ $ java [java_options] -cp ./target/classes/:lib/commons-io-2.11.0.jar: lib/args4
 ```
 
 The last call using the compiled classes rather than the JAR file is useful when developing, as the IDE (e.g., VSCode) will compile automatically those classes.
+
+### Running from anywhere
+
+The above commands assume we are executing the planner from its root folder so that the FOND translator is in `./translator-fond` folder. If executing from elsewhere, we can use `-translatorPath` to point to the `translate.py` script. For example:
+
+```shell
+-translatorPath $HOME/planners/paladinus.git/translator-fond/translate.py
+```
+
+This will allow Paladinus to find the translator to use when PDDL files are provided.
 
 ## Examples
 
@@ -104,6 +113,17 @@ $ java -cp ./target/paladinus-1.1-jar-with-dependencies.jar \
     benchmarks/blocksworld-original/domain.pddl \
     benchmarks/blocksworld-original/p10.pddl
 ```
+
+To run it from a directory different than that from the planner (see use of `-translatorPath`):
+
+```shell
+java -cp <path/to/paladinus>/target/paladinus-1.1-jar-with-dependencies.jar \
+    -search ITERATIVE_DFS -heuristic HMAX -printPolicy \
+    -translatorPath paladinus.git/translator-fond/translate.py \
+    paladinus.git/benchmarks/blocksworld-original/domain.pddl  \
+    paladinus.git/benchmarks/blocksworld-original/p10.pddl
+```
+
 
 ## Policy Output and Visualization
 
