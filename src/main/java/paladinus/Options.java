@@ -197,7 +197,7 @@ public class Options {
 	@Argument(required = false)
 	String[] args;
 
-	public void parseArgs() {
+	public void parseArgs(final String... args) {
 		assert args.length <= 2;
 		assert args.length >= 1;
 		if (args.length == 1) {
@@ -614,6 +614,16 @@ public class Options {
 	 * are ignored.
 	 */
 	void printHelp() {
+
+		System.err.println();
+		System.err.println("Usage:");
+		System.err.println(
+				"\t - Using SAS: java [java_options] -jar target/paladinus-1.1.jar [planner_options] [sas_file]\n" +
+				"\t - Using PDDL: java [java_options] -jar target/paladinus-1.1.jar [planner_options] [pddl_domain] [pddl_problem]");
+
+		System.err.println();
+		System.err.println("JAR will run main class paladinus.PaladinusPlanner\n");
+
 		if (hiddenOptions) {
 			System.err.println("Hidden options:");
 			parser.printUsage(System.err, OptionHandlerFilter.HIDDEN);
@@ -637,19 +647,18 @@ public class Options {
 			System.err.println("Action Selection and Evaluation Function Criteria:");
 			parser.printUsage(System.err, new GroupFilter(Group.CRITERIA));
 			System.err.println();
-//			System.err.println("Translate:");
+//			System.err.println("Translate:");1
 //			parser.printUsage(System.err, new GroupFilter(Group.TRANSLATE));
 			//System.err.println();
 			//System.err.println("PDB Heuristic Options:");
 			//parser.printUsage(System.err, new GroupFilter(Group.PDB));
 		}
-		System.err.println();
-		System.err.println("#> Usage:");
+
+		System.err.println("Examples:");
 		System.err.println(
-				  "- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n"
-				+ "- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy\n" 
-				+ "- Example (2): java -jar [java_options] paladinus.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n"
-				+ "- Example (3): java -jar [java_options] paladinus.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy");
+				"\t- Example (PDDL): java -jar target/paladinus-1.1.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy\n" +
+				"\t- Example (SAS): java -jar target/paladinus-1.1.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n" +
+				"\t- Example (using the main class): java -cp target/paladinus.jar paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n");
 
 		if (debug()) {
 			System.out.println();

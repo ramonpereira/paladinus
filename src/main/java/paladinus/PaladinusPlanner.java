@@ -107,10 +107,7 @@ public class PaladinusPlanner {
 		if(args == null || args.length == 0) {
 			System.err.println("Error: Invalid or empty arguments!");
 			System.err.println(
-					  "- Example (0): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n"
-					+ "- Example (1): java [java_options] paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy\n"
-					+ "- Example (2): java -jar [java_options] paladinus.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n"
-					+ "- Example (3): java -jar [java_options] paladinus.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy");
+					  "Check help: java target/paladinus-1.1.jar --help");
 		} else {
 			Locale.setDefault(Locale.US);
 			Result result = new PaladinusPlanner(args).runProblem();
@@ -186,12 +183,13 @@ public class PaladinusPlanner {
 		/* Create either a partially observable or a fully observable problem. */
 		assert problem == null;
 		System.out.println("Paladinus: An Iterative Depth-First Search FOND Planner\n");
+
 		CmdLineParser parser = new CmdLineParser(Global.options, ParserProperties.defaults().withOptionSorter(null));
 		Global.options.setParser(parser);
 		try {
 			parser.parseArgument(args);
 			Global.options.setDefaults();
-			Global.options.parseArgs();
+			Global.options.parseArgs(args);	// SS: added args as otherwise it will be null!
 			if (Global.options.getDomainFilename() != null && Global.options.getInstanceFilename() != null) {
 				executeTranslator();
 			}

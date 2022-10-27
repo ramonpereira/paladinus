@@ -569,27 +569,30 @@ public class CmdLineParser {
 	public void parseArgument(final String... args) throws CmdLineException {
 
 		checkNonNull(args, "args");
-
+		
 		String expandedArgs[] = expandAtFiles(args);
 		CmdLineImpl cmdLine = new CmdLineImpl(expandedArgs);
 
 		Set<OptionHandler> present = new HashSet<OptionHandler>();
 		int argIndex = 0;
 
+		// System.out.println(String.format(" ===========> Checking args: %s", expandedArgs));
 		while (cmdLine.hasMore()) {
 			String arg = cmdLine.getCurrentToken();
+
 			if (isOption(arg)) {
 				// '=' is for historical compatibility fallback
 				boolean isKeyValuePair = arg.contains(parserProperties.getOptionValueDelimiter())
 						|| arg.indexOf('=') != -1;
 
-				// parse this as an option.
+				// parse this as an optargion.
 				currentOptionHandler = isKeyValuePair ? findOptionHandler(arg) : findOptionByName(arg);
 
 				if (currentOptionHandler == null) {
 					// TODO: insert dynamic handler processing
 					throw new CmdLineException(this, Messages.UNDEFINED_OPTION, arg);
 				}
+
 				// myND adaption.
 				optionsSetByUser.add(findOptionHandler(arg));
 				// known option; skip its name
@@ -627,7 +630,6 @@ public class CmdLineParser {
 				helpSet = true;
 			}
 		}
-
 		if (!helpSet) {
 			checkRequiredOptionsAndArguments(present);
 		}
@@ -761,7 +763,9 @@ public class CmdLineParser {
 	private OptionHandler findOptionByName(String name) {
 		for (OptionHandler h : options) {
 			NamedOptionDef option = (NamedOptionDef) h.option;
+
 			if (name.equals(option.name())) {
+				// System.out.println(String.format("Option recognized: %s", option.name()));
 				return h;
 			}
 			for (String alias : option.aliases()) {
