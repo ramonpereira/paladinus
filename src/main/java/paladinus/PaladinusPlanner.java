@@ -194,9 +194,13 @@ public class PaladinusPlanner {
 
 		CmdLineParser parser = new CmdLineParser(Global.options, ParserProperties.defaults().withOptionSorter(null));
 		Global.options.setParser(parser);
-		System.out.print(Global.options.help);
 		try {
 			parser.parseArgument(args);
+
+			if (Global.options.help) {	// if help was asked, print help 	and exit
+				Global.options.printHelp(parser);
+				Global.ExitCode.EXIT_INPUT_ERROR.exit();
+			}
 			Global.options.setDefaults();
 			Global.options.parseArgs();	// SS: added args as otherwise it will be null!
 			if (Global.options.getDomainFilename() != null && Global.options.getInstanceFilename() != null) {
@@ -206,17 +210,15 @@ public class PaladinusPlanner {
 		} catch (CmdLineException e) {
 			/* Handling of wrong arguments. */
 			System.err.println(e.getMessage() + "\n");
-			Global.options.help = true;
-		}
-		if (Global.options.help) {
 			Global.options.printHelp(parser);
 			Global.ExitCode.EXIT_INPUT_ERROR.exit();
-		} else {
-			/* Create either a partially observable or a fully observable problem. */
-			if (DEBUG)
-				System.err.println("Start parsing given planning task.");
-			problem = new SasParser().parse(new FileInputStream(Global.options.getSASFilename()));
-		}
+	}
+
+
+		/* Create either a partially observable or a fully observable problem. */
+		if (DEBUG)
+			System.err.println("Start parsing given planning task.");
+		problem = new SasParser().parse(new FileInputStream(Global.options.getSASFilename()));
 		assert problem != null;
 
 		/* Do operator preprocessing respectively initialization of BDDs. */
