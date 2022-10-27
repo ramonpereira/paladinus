@@ -17,9 +17,10 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import args4j.CmdLineException;
-import args4j.CmdLineParser;
-import args4j.ParserProperties;
+
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
+import org.kohsuke.args4j.ParserProperties;
 
 
 import paladinus.Global.ExitCode;
@@ -207,7 +208,7 @@ public class PaladinusPlanner {
 			Global.options.help = true;
 		}
 		if (Global.options.help) {
-			Global.options.printHelp();
+			Global.options.printHelp(parser);
 			Global.ExitCode.EXIT_INPUT_ERROR.exit();
 		} else {
 			/* Create either a partially observable or a fully observable problem. */

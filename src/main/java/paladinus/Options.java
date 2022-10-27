@@ -8,12 +8,16 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import args4j.Argument;
-import args4j.CmdLineException;
-import args4j.CmdLineParser;
-import args4j.Option;
-import args4j.OptionHandlerFilter;
-import args4j.spi.OptionHandler;
+import org.kohsuke.args4j.Argument;
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
+import org.kohsuke.args4j.Option;
+import org.kohsuke.args4j.OptionHandlerFilter;
+import org.kohsuke.args4j.spi.OptionHandler;
+
+
+
+
 import paladinus.heuristic.HeuristicEstimator;
 import paladinus.heuristic.pdb.PDB;
 import paladinus.heuristic.pdb.PatternCollectionSearch.PatternSearch;
@@ -55,107 +59,107 @@ public class Options {
 	 */
 	Type planningTask = Type.FOND;
 
-	/**
-	 * The defined groups are used for a proper arranged usage print and for
-	 * checking dependencies between options. For example, if an option is in the
-	 * group AO, the search algorithm has to be AO* search.
-	 */
-	enum Group {
-		HELP {
-			@Override
-			public String getException() {
-				return null;
-			}
-		},
-		MAIN {
-			@Override
-			public String getException() {
-				return null;
-			}
-		},
-		SEARCH {
-			@Override
-			public String getException() {
-				return null;
-			}
-		},
-		USEMAX {
-			@Override
-			public String getException() {
-				return null;
-			}
-		},		
-		CRITERIA {
-			@Override
-			public String getException() {
-				return null;
-			}
-		},
-		HEURISTICS {
-			@Override
-			public String getException() {
-				return null;
-			}
-		},
-		TRANSLATE {
-			@Override
-			public String getException() {
-				return null;
-			}
-		},
-		HEURISTIC {
-			@Override
-			public String getException() {
-				return null;
-			}
-		},
-		GENERAL {
-			@Override
-			public String getException() {
-				return null;
-			}
-		},
-		UTILS {
-			@Override
-			public String getException() {
-				return null;
-			}
-		},
-		FOND {
-			@Override
-			public boolean check() {
-				return Global.options.planningTask == Type.FOND;
-			}
+	// /**
+	//  * The defined groups are used for a proper arranged usage print and for
+	//  * checking dependencies between options. For example, if an option is in the
+	//  * group AO, the search algorithm has to be AO* search.
+	//  */
+	// enum Group {
+	// 	HELP {
+	// 		@Override
+	// 		public String getException() {
+	// 			return null;
+	// 		}
+	// 	},
+	// 	MAIN {
+	// 		@Override
+	// 		public String getException() {
+	// 			return null;
+	// 		}
+	// 	},
+	// 	SEARCH {
+	// 		@Override
+	// 		public String getException() {
+	// 			return null;
+	// 		}
+	// 	},
+	// 	USEMAX {
+	// 		@Override
+	// 		public String getException() {
+	// 			return null;
+	// 		}
+	// 	},		
+	// 	CRITERIA {
+	// 		@Override
+	// 		public String getException() {
+	// 			return null;
+	// 		}
+	// 	},
+	// 	HEURISTICS {
+	// 		@Override
+	// 		public String getException() {
+	// 			return null;
+	// 		}
+	// 	},
+	// 	TRANSLATE {
+	// 		@Override
+	// 		public String getException() {
+	// 			return null;
+	// 		}
+	// 	},
+	// 	HEURISTIC {
+	// 		@Override
+	// 		public String getException() {
+	// 			return null;
+	// 		}
+	// 	},
+	// 	GENERAL {
+	// 		@Override
+	// 		public String getException() {
+	// 			return null;
+	// 		}
+	// 	},
+	// 	UTILS {
+	// 		@Override
+	// 		public String getException() {
+	// 			return null;
+	// 		}
+	// 	},
+	// 	FOND {
+	// 		@Override
+	// 		public boolean check() {
+	// 			return Global.options.planningTask == Type.FOND;
+	// 		}
 
-			@Override
-			public String getException() {
-				return "a FOND planning task";
-			}
-		},
-		PDB {
-			@Override
-			public boolean check() {
-				return Global.options.heuristic == HeuristicEstimator.PDBS;
-			}
+	// 		@Override
+	// 		public String getException() {
+	// 			return "a FOND planning task";
+	// 		}
+	// 	},
+	// 	PDB {
+	// 		@Override
+	// 		public boolean check() {
+	// 			return Global.options.heuristic == HeuristicEstimator.PDBS;
+	// 		}
 
-			@Override
-			public String getException() {
-				return "PDB heuristic";
-			}
-		};
+	// 		@Override
+	// 		public String getException() {
+	// 			return "PDB heuristic";
+	// 		}
+	// 	};
 
-		public boolean check() {
-			return true;
-		}
+	// 	public boolean check() {
+	// 		return true;
+	// 	}
 
-		public abstract String getException();
+	// 	public abstract String getException();
 
-	};
+	// };
 
 	/**
 	 * Denotes if Paladinus prints the help message and finishes after that.
 	 */
-	@Option(name = "-h", aliases = { "-help" }, usage = "print this message", groups = { "HELP" }, help = true)
+	@Option(name = "-h", aliases ="--help", usage = "print this message", help = true)
 	boolean help = false;
 
 	/**
@@ -164,21 +168,20 @@ public class Options {
 	 */
 	@Option(name = "-hidden", usage = "print hidden options", hidden = true, help = true)
 	boolean hiddenOptions = false;
-
 	private void checkHiddenOptions() {
 		if (hiddenOptions) {
 			help = true;
 		}
 	}
-	
-	@Option(name = "-debug", usage = "use debug option", showDefault = true, groups = {"GENERAL"})
+
+	@Option(name = "-debug", usage = "use debug option")
 	Bool debug = Bool.OFF;
-	
+
 	public boolean debug() {
 		return debug == Bool.ON;
 	}
 
-	@Option(name = "-t", aliases = "-type", usage = "use fond translate (Example: -t FOND <domain_file> <problem_file>)", help = true, groups = { "TRANSLATE" })
+	@Option(name = "-t", aliases = "-type", usage = "use fond translate (Example: -t FOND <domain_file> <problem_file>)", help = true)
 	Type type = Type.FOND;
 
 	public Type getType() {
@@ -228,7 +231,7 @@ public class Options {
 	//@Option(name = "-computeCosts", usage = "compute and print expected costs of the plan", groups = { "MAIN" })
 	public boolean computeCosts = false;
 
-	@Option(name = "-printPolicy", usage = "print policy to stdout", groups = { "MAIN" })
+	@Option(name = "-printPolicy", usage = "print policy to stdout")
 	public boolean dumpPolicy = false;
 
 	private void testFilename(String filename, String option) throws CmdLineException {
@@ -238,7 +241,7 @@ public class Options {
 		}
 	}
 
-	@Option(name = "-exportPolicy", usage = "export policy to file", groups = { "MAIN" }, metaVar = "FILENAME")
+	@Option(name = "-exportPolicy", usage = "export policy to file", metaVar = "FILENAME")
 	String exportPolicyFilename = null;
 
 	private void checkExportPlanFilename() throws CmdLineException {
@@ -250,7 +253,7 @@ public class Options {
 	/**
 	 * Export the .dot output from the PlanSimulator to this file.
 	 */
-	@Option(name = "-exportDot", usage = "export policy as DOT graph (GraphViz)", groups = { "MAIN" }, metaVar = "FILENAME")
+	@Option(name = "-exportDot", usage = "export policy as DOT graph (GraphViz)", metaVar = "FILENAME")
 	String exportDotFilename = null;
 	
 	public String getExportDotFilename() {
@@ -266,7 +269,7 @@ public class Options {
 	/**
 	 * Provide path to translator from PDDL to SAS
 	 */
-	@Option(name = "-translatorPath", usage = "path to SAS translator script", groups = { "MAIN" }, metaVar = "DIRNAME")
+	@Option(name = "-translatorPath", usage = "path to SAS translator script", metaVar = "DIRNAME")
 	String translatorPath = "translator-fond/translate.py";
 
 	public String getTranslatorPath() {
@@ -285,7 +288,7 @@ public class Options {
 	 * Timeout for the planner. The user gives the timeout in seconds. Internally we
 	 * use milliseconds.
 	 */
-	@Option(name = "-timeout", usage = "set timeout in seconds", groups = { "MAIN" })
+	@Option(name = "-timeout", usage = "set timeout in seconds")
 	Long timeout = null;
 
 	private void checkPlannerTimeout() throws CmdLineException {
@@ -300,45 +303,45 @@ public class Options {
 		}
 	}
 
-	@Option(name = "-as", aliases = "-actionSelectionCriterion", usage = "set actionSelectionCriterion", groups = { "CRITERIA" }, showDefault = true)
+	@Option(name = "-as", aliases = "-actionSelectionCriterion", usage = "set actionSelectionCriterion")
 	String actionSelectionCriterion = "MIN_MAX_H";
 
 	public String getActionSelectionCriterion() {
 		return actionSelectionCriterion;
 	}
 	
-	@Option(name = "-ef", aliases = "-evaluationFunctionCriterion", usage = "set evaluationFunctionCriterion", groups = { "CRITERIA" }, showDefault = true)
+	@Option(name = "-ef", aliases = "-evaluationFunctionCriterion", usage = "set evaluationFunctionCriterion")
 	String evaluationFunctionCriterion = "MAX";
 
 	public String getEvaluationFunctionCriterion() {
 		return evaluationFunctionCriterion;
 	}
 	
-	@Option(name = "-cs", aliases = "-checkSolvedStates", usage = "set checkSolvedStates", groups = { "UTILS" }, showDefault = true)
+	@Option(name = "-cs", aliases = "-checkSolvedStates", usage = "set checkSolvedStates")
 	String checkSolvedStates = null;
 
 	public String getCheckSolvedStates() {
 		return checkSolvedStates;
 	}
 	
-	@Option(name = "-pr", aliases = "-pruning", usage = "set pruning", groups = { "UTILS" }, showDefault = true)
+	@Option(name = "-pr", aliases = "-pruning", usage = "set pruning")
 	String pruning = null;
 
 	public String getPruning() {
 		return this.pruning;
 	}
 
-	@Option(name = "-hs", aliases = "-heuristics", usage = "set heuristics", groups = {"HEURISTICS" }, showDefault = true)
+	@Option(name = "-hs", aliases = "-heuristics", usage = "set heuristics")
 	String heuristics = null;
 	
-	@Option(name = "-heuristic", usage = "set heuristic", groups = { "HEURISTIC", "FOND" }, showDefault = true)
+	@Option(name = "-heuristic", usage = "set heuristic")
 	HeuristicEstimator heuristic = HeuristicEstimator.FF;
 
 	public String getHeuristics() {
 		return heuristics;
 	}
 
-	@Option(name = "-s", aliases = "-search", usage = "set search algorithm", groups = { "SEARCH", "FOND" }, showDefault = true)
+	@Option(name = "-s", aliases = "-search", usage = "set search algorithm")
 	SearchAlgorithm searchAlgorithm = SearchAlgorithm.ITERATIVE_DFS;
 	
 	/**
@@ -350,21 +353,21 @@ public class Options {
 		return searchAlgorithm;
 	}
 
-	@Option(name = "-validatePolicy", hidden = true, usage = "validate policy using our validator.", groups = {"GENERAL"})
+	@Option(name = "-validatePolicy", hidden = true, usage = "validate policy using our validator.")
 	Bool validatePolicy = Bool.OFF;
 	
 	public boolean validatePolicy() {
 		return validatePolicy == Bool.ON;
 	}
 	
-	@Option(name = "-validatePolicyPRP", hidden = true, usage = "validate policy using PRP validator.", groups = {"GENERAL"})
+	@Option(name = "-validatePolicyPRP", hidden = true, usage = "validate policy using PRP validator.")
 	Bool validatePolicyPRP = Bool.OFF;
 	
 	public boolean validatePolicyPRP() {
 		return validatePolicyPRP == Bool.ON;
 	}
 	
-	@Option(name = "-useClosedVistedNodes", hidden = true, usage = "use the closed-set of visited nodes when estimating the policy size.", groups = {"GENERAL"})
+	@Option(name = "-useClosedVistedNodes", hidden = true, usage = "use the closed-set of visited nodes when estimating the policy size.")
 	Bool useClosedVistedNodes = Bool.OFF;
 	
 	public boolean useClosedVistedNodes() {
@@ -375,7 +378,7 @@ public class Options {
 		this.useClosedVistedNodes = (value ? Bool.ON : Bool.OFF);
 	}
 	
-	@Option(name = "-useMaxChildNodesToMarkBestActions", hidden = true, usage = "use the cost estimate among the child nodes when perfoming Value Iteration. The default setting is using the average cost estimate for the child nodes.", groups = {"GENERAL"})
+	@Option(name = "-useMaxChildNodesToMarkBestActions", hidden = true, usage = "use the cost estimate among the child nodes when perfoming Value Iteration. The default setting is using the average cost estimate for the child nodes.")
 	Bool useMaxChildNodes = Bool.OFF;
 	
 	public boolean useMaxChildNodes() {
@@ -386,7 +389,7 @@ public class Options {
 		this.useMaxChildNodes = (value ? Bool.ON : Bool.OFF);
 	}
 	
-	@Option(name = "-useMaxHeuristicAndAvgConnectors2SelectBestActions", hidden = true, usage = "use the max value between H and the average of the connectors to select the best actions.", groups = {"GENERAL"})
+	@Option(name = "-useMaxHeuristicAndAvgConnectors2SelectBestActions", hidden = true, usage = "use the max value between H and the average of the connectors to select the best actions.")
 	Bool useMaxHeuristicAndAvgConnectors2SelectBestActions = Bool.OFF;
 	
 	public boolean useMaxHeuristicAndAvgConnectors2SelectBestActions() {
@@ -406,7 +409,7 @@ public class Options {
 	
 	// //////////////// PDB options //////////////////
 
-	@Option(name = "-patternSearch", usage = "set type of pattern search", showDefault = true, groups = { "FOND", "PDB" })
+	@Option(name = "-patternSearch", usage = "set type of pattern search")
 	PatternSearch patternSearch = PatternSearch.FO;
 
 	private void checkPatternSearch() throws CmdLineException {
@@ -435,8 +438,7 @@ public class Options {
 		return patternSearch;
 	}
 
-	@Option(name = "-steps", usage = "set maximal number of hill climbing iterations in pattern search", groups = {
-			"PDB", "FOND" }, showDefault = true)
+	@Option(name = "-steps", usage = "set maximal number of hill climbing iterations in pattern search")
 	int hillClimbingSteps = Integer.MAX_VALUE;
 
 	private void checkSteps() throws CmdLineException {
@@ -457,8 +459,7 @@ public class Options {
 	 * Timeout for the pattern collection search. The user gives the timeout in
 	 * seconds. Internally we use milliseconds.
 	 */
-	@Option(name = "-pdbTimeout", usage = "set timeout in seconds for the pattern search", groups = { "PDB",
-			"FOND" }, showDefault = true)
+	@Option(name = "-pdbTimeout", usage = "set timeout in seconds for the pattern search")
 	private int pdbTimeout = 600;
 
 	private void checkPDBTimeout() throws CmdLineException {
@@ -477,14 +478,13 @@ public class Options {
 		return pdbTimeout * 1000;
 	}
 
-	@Option(name = "-pdbMaxSize", usage = "set maximal number of abstract states induced by a single pattern", groups = {
-			"PDB", "FOND" }, showDefault = true)
+	@Option(name = "-pdbMaxSize", usage = "set maximal number of abstract states induced by a single pattern")
 	int pdbMaxSize = -1;
 
 	private void setDefaultPDBMaxSize() {
 		if (pdbMaxSize == -1) {
 			pdbMaxSize = 50000;
-			setDefaultTextToOption("50000", "pdbMaxSize");
+			//setDefaultTextToOption("50000", "pdbMaxSize");
 		}
 	}
 
@@ -498,7 +498,7 @@ public class Options {
 		return pdbMaxSize;
 	}
 
-	@Option(name = "-pdbsMaxSize", usage = "set maximal number of abstract states of all patterns", groups = { "FOND", "PDB" }, showDefault = true)
+	@Option(name = "-pdbsMaxSize", usage = "set maximal number of abstract states of all patterns")
 	int pdbsOverallMaxSize = -1;
 
 	private void setDefaultPDBsMaxSize() {
@@ -506,7 +506,7 @@ public class Options {
 		if (pdbsOverallMaxSize == -1) {
 			pdbsOverallMaxSize = 10 * pdbMaxSize;
 		}
-		setDefaultTextToOption("10 * pdbMaxSize", "pdbsMaxSize");
+		//setDefaultTextToOption("10 * pdbMaxSize", "pdbsMaxSize");
 	}
 
 	private void checkPDBsMaxSize() throws CmdLineException {
@@ -520,15 +520,14 @@ public class Options {
 		return pdbsOverallMaxSize;
 	}
 
-	@Option(name = "-minImprovement", usage = "set fraction of required improvers to continue pattern search", groups = {
-			"PDB", "FOND" }, showDefault = true, metaVar = "X")
+	@Option(name = "-minImprovement", usage = "set fraction of required improvers to continue pattern search", metaVar = "X")
 	double minImprovement = 0.1;
 
 	public double getMinImprovementFraction() {
 		return minImprovement;
 	}
 
-	@Option(name = "-greedyImprovement", usage = "set faction for required improvers to take the pattern immediately", hidden = true, groups = { "FOND", "PDB" }, showDefault = true)
+	@Option(name = "-greedyImprovement", usage = "set faction for required improvers to take the pattern immediately", hidden = true)
 	double greedyImprovement = 1.0;
 
 	private void checkMinImprovementAndGreedyImprovement() throws CmdLineException {
@@ -550,14 +549,14 @@ public class Options {
 		return greedyImprovement;
 	}
 
-	@Option(name = "-cachePDBs", usage = "set caching of PDBs on/off", groups = { "PDB", "FOND" }, showDefault = true)
+	@Option(name = "-cachePDBs", usage = "set caching of PDBs on/off")
 	Bool cachePDBs = Bool.ON;
 
 	public boolean cachePDBs() {
 		return cachePDBs == Bool.ON;
 	}
 
-	@Option(name = "-randomWalkSamples", usage = "set number of samples that are collected during random walks", groups = { "PDB", "FOND" }, showDefault = true)
+	@Option(name = "-randomWalkSamples", usage = "set number of samples that are collected during random walks")
 	int randomWalkSamples = 1000;
 
 	private void checkRandomWalkSamples() throws CmdLineException {
@@ -575,7 +574,7 @@ public class Options {
 	 * states even for problem solving. Only for PDB heuristic, because in FF we
 	 * assume full observability automatically and for ZERO it does not make sense.
 	 */
-	@Option(name = "-assumeFO", usage = "assume full observability for PDB heuristic and search", groups = {"PDB" }, showDefault = true)
+	@Option(name = "-assumeFO", usage = "assume full observability for PDB heuristic and search")
 	boolean assumeFOforPDBs = false;
 
 	private void checkAssumeFOForPDBs() throws CmdLineException {
@@ -588,7 +587,7 @@ public class Options {
 		return assumeFOforPDBs;
 	}
 
-	@Option(name = "-useDependencyGraph", usage = "use dependency graph for preconditions of sensing actions (POND only)", groups = {"PDB" }, showDefault = true)
+	@Option(name = "-useDependencyGraph", usage = "use dependency graph for preconditions of sensing actions (POND only)")
 	Bool useDependencyGraph = Bool.ON;
 
 	public boolean useDependencyGraph() {
@@ -613,58 +612,61 @@ public class Options {
 	 * Prints the usage text to stderr. Note: Options without "usage" description
 	 * are ignored.
 	 */
-	void printHelp() {
+	void printHelp(CmdLineParser parser) {
 
-		System.err.println();
-		System.err.println("Usage:");
-		System.err.println(
-				"\t - Using SAS: java [java_options] -jar target/paladinus-1.1.jar [planner_options] [sas_file]\n" +
-				"\t - Using PDDL: java [java_options] -jar target/paladinus-1.1.jar [planner_options] [pddl_domain] [pddl_problem]");
+		parser.printUsage(java.lang.System.out);  
+		System.exit(-1);
 
-		System.err.println();
-		System.err.println("JAR will run main class paladinus.PaladinusPlanner\n");
+		// System.err.println();
+		// System.err.println("Usage:");
+		// System.err.println(
+		// 		"\t - Using SAS: java [java_options] -jar target/paladinus-1.1.jar [planner_options] [sas_file]\n" +
+		// 		"\t - Using PDDL: java [java_options] -jar target/paladinus-1.1.jar [planner_options] [pddl_domain] [pddl_problem]");
 
-		if (hiddenOptions) {
-			System.err.println("Hidden options:");
-			parser.printUsage(System.err, OptionHandlerFilter.HIDDEN);
-			System.err.println();
-		} else {
-			System.err.println("Help:");
-			parser.printUsage(System.err, new GroupFilter(Group.HELP));
-			System.err.println();
-			System.err.println("Debug:");
-			parser.printUsage(System.err, new GroupFilter(Group.GENERAL));
-			System.err.println();
-			System.err.println("Paladinus options:");
-			parser.printUsage(System.err, new GroupFilter(Group.MAIN));
-			System.err.println();
-			System.err.println("Search algorithms:");
-			parser.printUsage(System.err, new GroupFilter(Group.SEARCH));
-			System.err.println();
-			System.err.println("Heuristics:");
-			parser.printUsage(System.err, new GroupFilter(Group.HEURISTIC));
-			System.err.println();
-			System.err.println("Action Selection and Evaluation Function Criteria:");
-			parser.printUsage(System.err, new GroupFilter(Group.CRITERIA));
-			System.err.println();
+		// System.err.println();
+		// System.err.println("JAR will run main class paladinus.PaladinusPlanner\n");
+
+		// if (hiddenOptions) {
+		// 	System.err.println("Hidden options:");
+		// 	parser.printUsage(System.err, OptionHandlerFilter.HIDDEN);
+		// 	System.err.println();
+		// } else {
+		// 	System.err.println("Help:");
+		// 	parser.printUsage(System.err, new GroupFilter(Group.HELP));
+		// 	System.err.println();
+		// 	System.err.println("Debug:");
+		// 	parser.printUsage(System.err, new GroupFilter(Group.GENERAL));
+		// 	System.err.println();
+		// 	System.err.println("Paladinus options:");
+		// 	parser.printUsage(System.err, new GroupFilter(Group.MAIN));
+		// 	System.err.println();
+		// 	System.err.println("Search algorithms:");
+		// 	parser.printUsage(System.err, new GroupFilter(Group.SEARCH));
+		// 	System.err.println();
+		// 	System.err.println("Heuristics:");
+		// 	parser.printUsage(System.err, new GroupFilter(Group.HEURISTIC));
+		// 	System.err.println();
+		// 	System.err.println("Action Selection and Evaluation Function Criteria:");
+		// 	parser.printUsage(System.err, new GroupFilter(Group.CRITERIA));
+		// 	System.err.println();
 //			System.err.println("Translate:");1
 //			parser.printUsage(System.err, new GroupFilter(Group.TRANSLATE));
 			//System.err.println();
 			//System.err.println("PDB Heuristic Options:");
 			//parser.printUsage(System.err, new GroupFilter(Group.PDB));
-		}
+		
 
-		System.err.println("Examples:");
-		System.err.println(
-				"\t- Example (PDDL): java -jar target/paladinus-1.1.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy\n" +
-				"\t- Example (SAS): java -jar target/paladinus-1.1.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n" +
-				"\t- Example (using the main class): java -cp target/paladinus.jar paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n");
+		// System.err.println("Examples:");
+		// System.err.println(
+		// 		"\t- Example (PDDL): java -jar target/paladinus-1.1.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-new/domain.pddl benchmarks/blocksworld-new/p1.pddl -printPolicy\n" +
+		// 		"\t- Example (SAS): java -jar target/paladinus-1.1.jar -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n" +
+		// 		"\t- Example (using the main class): java -cp target/paladinus.jar paladinus.PaladinusPlanner -search ITERATIVE_DFS -heuristic FF benchmarks/blocksworld-sas/blocksworld_p1.sas -printPolicy\n");
 
-		if (debug()) {
-			System.out.println();
-			System.out.println("ALL OPTIONS:");
-			parser.printUsage(System.out, OptionHandlerFilter.ALL);
-		}
+		// if (debug()) {
+		// 	System.out.println();
+		// 	System.out.println("ALL OPTIONS:");
+		// 	parser.printUsage(System.out, OptionHandlerFilter.ALL);
+		// }
 	}
 
 	void setDefaults() {
@@ -673,13 +675,13 @@ public class Options {
 	}
 
 	void checkOptions() throws CmdLineException, FileNotFoundException, IOException {
-		checkGroups();
+		// checkGroups();
 		checkHiddenOptions();
 		if (!help) {
 			checkExportPlanFilename();
 			checkExportDot();
 			checkSASFile();
-			checkDependencies();
+			// checkDependencies();
 			checkPlannerTimeout();
 			checkMinImprovementAndGreedyImprovement();
 			checkPDBTimeout();
@@ -692,39 +694,7 @@ public class Options {
 		}
 	}
 
-	/**
-	 * Check if the assigned groups exists.
-	 */
-	private void checkGroups() {
-		Set<String> groupNames = new HashSet<String>();
-		for (Group v : Group.values()) {
-			groupNames.add(v.name());
-		}
-		for (OptionHandler<?> h : parser.getOptions()) {
-			for (Set<String> groups : h.option.getGroups()) {
-				for (String g : groups) {
-					assert (groupNames.contains(g));
-				}
-			}
-		}
-	}
-
-	private void checkDependencies() throws CmdLineException {
-		for (OptionHandler<?> h : parser.getOptionsSetByUser()) {
-			for (Set<String> groupSet : h.option.getGroups()) {
-				boolean valid = false;
-				String message = "Option " + h.option + " requires ";
-				for (String name : groupSet) {
-					valid |= Group.valueOf(name).check();
-					message += Group.valueOf(name).getException() + " or ";
-				}
-				if (!valid) {
-					throw new CmdLineException(parser, new Exception(message.substring(0, message.length() - 3)));
-				}
-			}
-		}
-	}
-
+	
 	private void checkSASFile() throws CmdLineException, FileNotFoundException, IOException {
 		if (args == null) {
 			throw new CmdLineException(parser, new Exception("No SAS+ file or " + "PDDL files given."));
@@ -739,50 +709,15 @@ public class Options {
 		
 	}
 
-	private void setDefaultTextToOption(String defaultText, String option) {
-		for (OptionHandler<?> handler : parser.getOptions()) {
-			if (handler.option.toString().contains(option)) {
-				handler.option.setDefault(defaultText);
-				return;
-			}
-		}
-		assert false : "option " + option + " not found";
-	}
+	// private void setDefaultTextToOption(String defaultText, String option) {
+	// 	for (OptionHandler<?> handler : parser.getOptions()) {
+	// 		if (handler.option.toString().contains(option)) {
+	// 			handler.option.setDefault(defaultText);
+	// 			return;
+	// 		}
+	// 	}
+	// 	assert false : "option " + option + " not found";
+	// }
 
-	public class GroupFilter implements OptionHandlerFilter {
 
-		/**
-		 * Filters options which are not in all of this groups.
-		 */
-		private final Set<Group> groups;
-
-		public GroupFilter(Set<Group> groups) {
-			this.groups = groups;
-		}
-
-		public GroupFilter(Group singleGroup) {
-			this(new HashSet<Options.Group>(Arrays.asList(singleGroup)));
-		}
-
-		@Override
-		public boolean select(OptionHandler<?> o) {
-			if (o.option.hidden()) {
-				return false;
-			}
-			for (Group g : groups) {
-				boolean found = false;
-				for (Set<String> groupSet : o.option.getGroups()) {
-					if (groupSet.contains(g.name())) {
-						found = true;
-						break;
-					}
-				}
-				if (!found) {
-					return false;
-				}
-			}
-			return true;
-		}
-
-	}
 }

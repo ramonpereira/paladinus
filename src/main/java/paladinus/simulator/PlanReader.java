@@ -14,10 +14,11 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import args4j.Argument;
-import args4j.CmdLineException;
-import args4j.CmdLineParser;
-import args4j.Option;
+import org.kohsuke.args4j.Argument;
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
+import org.kohsuke.args4j.Option;
+
 import paladinus.Global.ExitCode;
 import paladinus.explicit.ExplicitAxiomEvaluator;
 import paladinus.explicit.ExplicitState;
