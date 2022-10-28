@@ -7,123 +7,92 @@
 
 ## Requirements
 
-* Java JDK 16.0.1+
+* Java JDK 16.0.1+ with the following libraries (all obtained via Maven):
+  * [Commons-IO](https://commons.apache.org/proper/commons-io/) 2.11.  Obtained via Maven but also available under `lib/` (for manual compile).
+  * [junit 4](https://junit.org/junit4/). Obtained via Maven but also available under `lib/` (for manual compile).
+  * [args4j](https://args4j.kohsuke.org/). Obtained via Maven but also available under `lib/` (for manual compile).
 * Python 3.6+ for [translator-fond](/translator-fond/) tool to translate FOND PDDL files to SAS.
-* [Commons-IO](https://commons.apache.org/proper/commons-io/) 2.11.  Obtained via Maven but also available under `lib/` (for manual compile).
-* [junit 4](https://junit.org/junit4/). Obtained via Maven but also available under `lib/` (for manual compile).
-* [args4j](https://args4j.kohsuke.org/). Obtained via Maven but also available under `lib/` (for manual compile).
 * [GraphViz](https://graphviz.readthedocs.io/) for visualizing the state-space and the output policy.
+* [Maven](https://maven.apache.org/) for building the system (and further development, if needed).
 
-# Build (and test)
+## Build (and test)
 
-The planner is set-up as a Java Maven project.  To build it without tests:
+The planner is set-up as a Java Maven project. So, the easiest way to build and test is as follows:
 
 ```shell
 $ mvn clean package -Dmaven.test.skip.exec
 ```
 
-This will generate a JAR files (with and without dependencies) under `target/` and all classes under `target/classes`. We can test it by getting the help with `-h` (or `-help`):
+This will generate a JAR files (with and without dependencies) under `target/` and all classes under `target/classes`.
+
+We can test it by getting the help with `-h` (or `-help`) using the provided script or directly via Java (using the generated packaged JAR file or complied classes):
 
 ```shell
-$ java -jar target/paladinus-1.1-jar-with-dependencies.jar -h
+$ # using the provided bash script
+$ ./paladinus -h
+
+Paladinus: An Iterative Depth-First Search FOND Planner
+
+ -h (--help)                            : print this message (default: true)
+ -debug [ON | OFF]                      : use debug option (default: OFF)
+ -t (-type) [FOND]                      : use fond translate (Example: -t FOND
+                                          <domain_file> <problem_file>)
+                                          (default: FOND)
+ -printPolicy                           : print policy to stdout (default:
+                                          false)
+...
+...
+...
+ -useDependencyGraph [ON | OFF]         : use dependency graph for
+                                          preconditions of sensing actions
+                                          (POND only) (default: ON)
 ```
 
-This will work in the machine where it was compiled, as all dependencies would have been obtained by Maven. If executed elsewhere, use the full package with dependencies included `paladinus-1.1-SNAPSHOT-jar-with-dependencies.jar`.
+Check below for running the system directly via the JAR file or compiled classes (mostly when developing further the system).
 
-To run it from directly from the classes:
-
-```shell
-$ java -cp  target/classes/:lib/commons-io-2.11.0.jar:lib/args4j-2.33.jar paladinus.PaladinusPlanner -help
-```
-## Usage Patterns
+## Usage
 
 Paladinus accepts either SAS files or domain and problem PDDL files: as input, with the following patterns:
 
 ```shell
-$ java [java_options] -jar ./target/paladinus-1.1-jar-with-dependencies.jar [planner_options] <problem.sas>
+$ # SAS file as input
+$ /path/to/paladinus/paladinus [planner_options] <problem.sas>
 
-or
+or 
 
-$ java [java_options] -jar ./target/paladinus-1.1-jar-with-dependencies.jar [planner_options] <domain.pddl> <problem.pddl>
+$ # PDDL files as input
+$ /path/to/paladinus/paladinus [planner_options] <domain.pddl> <problem.pddl>
 ```
 
-Useful Java Options are:
+There are two main planner options:
 
- * `-Xmx4g`: to set the maximum heap space to 4 GB.
- * `-ea`: to enable assertions.
+* `-search`: algorithm to use (default is `ITERATIVE_DFS`).
+* `-heuristic`: heuristic to use (default is `FF`).
 
-The main class in the JAR file is `paladinus.PaladinusPlanner` so we can also run it as follows as well:
+Other options, including those for reporting the policy solution, can be found via help option `-h`.
 
-```shell
-$ java [java_options] -cp ./target/paladinus-1.1-jar-with-dependencies.jar \
-    paladinus.PaladinusPlanner [planner_options] <problem.sas>
-
-or
-
-$ java [java_options] -cp ./target/classes/:lib/commons-io-2.11.0.jar: lib/args4j-2.33.jar  \
-    paladinus.PaladinusPlanner [planner_options] <domain.pddl> <problem.pddl>
-```
-
-The last call using the compiled classes rather than the JAR file is useful when developing, as the IDE (e.g., VSCode) will compile automatically those classes.
-
-### Running from anywhere
-
-The above commands assume we are executing the planner from its root folder so that the FOND translator is in `./translator-fond` folder. If executing from elsewhere, we can use `-translatorPath` to point to the `translate.py` script. For example:
-
-```shell
--translatorPath $HOME/planners/paladinus.git/translator-fond/translate.py
-```
-
-This will allow Paladinus to find the translator to use when PDDL files are provided.
-
-## Examples
-
-To run plain Iterative DFS:
+For example, to run plain Iterative DFS with HMAX heuristics and print the policy:
 
 ```shell
 $ # Using SAS inputs
-$ java -jar ./target/paladinus-1.1-jar-with-dependencies.jar \
-    -search ITERATIVE_DFS -heuristic HMAX -printPolicy \
+$ ./paladinus -search ITERATIVE_DFS -heuristic HMAX -printPolicy \
     benchmarks/blocksworld-sas/blocksworld_p2.sas
 
-$ # Using PDDL inputs (and calling the main class explicitly)
-$ java -cp ./target/paladinus-1.1-jar-with-dependencies.jar \
-    paladinus.PaladinusPlanner \
-    -search ITERATIVE_DFS -heuristic HMAX -printPolicy \
+$ # Using PDDL inputs
+$ ./paladinus -search ITERATIVE_DFS -heuristic HMAX -printPolicy \
     benchmarks/blocksworld-original/domain.pddl \
-    benchmarks/blocksworld-original/p10.pddl
-
-
-$ # Using PDDL inputs and using the compiled classes
-$ java -cp ./target/classes::lib/commons-io-2.11.0.jar \
-    paladinus.PaladinusPlanner \
-    -search ITERATIVE_DFS -heuristic HMAX -printPolicy \
-    benchmarks/blocksworld-original/domain.pddl \
-    benchmarks/blocksworld-original/p10.pddl
+    benchmarks/blocksworld-original/p2.pddl
 ```
 
-Note `-printPolicy` to print the policy in standard output.
-
-To run IDFS Pruning, use `-search ITERATIVE_DFS_PRUNING` and `-heuristic HADD`:
+To run IDFS Pruning, use `-search ITERATIVE_DFS_PRUNING` and `-heuristic HADD`.
 
 ```shell
-$ java -cp ./target/paladinus-1.1-jar-with-dependencies.jar \
-    paladinus.PaladinusPlanner \
-    -search ITERATIVE_DFS_PRUNING -heuristic HADD -printPolicy \
+$ ./paladinus -search ITERATIVE_DFS_PRUNING -heuristic HADD -printPolicy \
     benchmarks/blocksworld-original/domain.pddl \
     benchmarks/blocksworld-original/p10.pddl
 ```
 
-To run it from a directory different than that from the planner (see use of `-translatorPath`):
-
-```shell
-java -cp <path/to/paladinus>/target/paladinus-1.1-jar-with-dependencies.jar \
-    -search ITERATIVE_DFS -heuristic HMAX -printPolicy \
-    -translatorPath paladinus.git/translator-fond/translate.py \
-    paladinus.git/benchmarks/blocksworld-original/domain.pddl  \
-    paladinus.git/benchmarks/blocksworld-original/p10.pddl
-```
-
+**Note:** By using the provided script, the planner can be called from any directory, not just the root of the planner. See below under for more details when developing.
 
 ## Policy Output and Visualization
 
@@ -145,31 +114,55 @@ For more details, check [POLICY.md](POLICY.md).
 
 ## Developing and Debugging
 
-When developing in a Maven aware IDE (e.g., VSCODE) it may be convenient to run the planner from `target/classes` (instead of the JAR file) since
-these will be automatically re-generated by the IDE when there is a change in source code, so
+When developing in a Maven aware IDE (e.g., VSCODE) it may be convenient to run the planner using the compiled classes in `target/classes` (instead of the JAR file) and the main class `paladinus.PaladinusPlanner` , as these will be automatically re-generated by the IDE when there is a change in source code:
 
+```shell
+$ java [java_options] -cp ./target/classes/:lib/commons-io-2.11.0.jar:lib/args4j-2.33.jar  paladinus.PaladinusPlanner \
+    [planner_options] \
+    (<domain.pddl> <problem.pddl> OR <problem.sas>)
 ```
-$ java [java_options] -cp ./target/classes/:lib/commons-io-2.11.0.jar:lib/args4j-2.33.jar  \
-    paladinus.PaladinusPlanner [planner_options] <domain.pddl> <problem.pddl>
+
+We can also run the system directly from the Maven produced JAR file (which includes all dependencies):
+
+```shell
+$ # using the packaged JAR (includes all dependencies)
+$ java [java_options] -jar target/paladinus-1.1-jar-with-dependencies.jar \
+    [planner_options] \
+    (<domain.pddl> <problem.pddl> OR <problem.sas>)
 ```
+
+Useful Java Options are:
+
+* `-Xmx4g`: to set the maximum heap space to 4 GB.
+* `-ea`: to enable assertions.
+
+Note that these commands need to be run from the system root folder when the input are PDDL files. This is because the planner uses the Python FOND translator under  [translator-fond/](translator-fond/) and it will assume it is in the "current" dir.
+
+To run it from a directory different than that of the planner, we can use option `-translatorPath` to specify the location of the Python translator:
+
+```shell
+-translatorPath $HOME/planners/paladinus.git/translator-fond/translate.py
+```
+
+However, the shell scripts provided already have that built-in so they can be run from anywhere. A script  [`./paladinus-dev`](./paladinus-dev) is provided for development that uses the generated classes under `target/classes` (often re-generated by an IDE after a change in source code) rather than the JAR file.
+
+### Debugger
 
 Paladinus provides a **state-space debugger** that shows the expanded states for every iteration of our algorithms. The state-space debugger outputs a [DOT file](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) for every state expansion during the search. For more details, have a look at [DEBUG.md](DEBUG.md).
 
-## Contributors
+## Contributors & Citation
 
 - Ramon Fraga Pereira
 - Frederico Messa
 - André Grahl Pereira
 - Giuseppe De Giacomo
 
-## Reference and Citation
-
-Please, use the following reference when citing Paladinus.
+Please, use the following reference when citing Paladinus:
 
 - [Iterative Depth-First Search for FOND Planning](https://ojs.aaai.org/index.php/ICAPS/article/view/19789/19548), Ramon Fraga Pereira, André Grahl Pereira, Frederico Messa, and Giuseppe De Giacomo. [The 32nd International Conference on Automated Planning and Scheduling (ICAPS), 2022](http://icaps22.icaps-conference.org). 
   - You can find the BibTex [here](idfs-paladinus-icaps22.bib)!
 
-## Acknowledgements
+### Acknowledgements
 
 This work has been partially funded by the [ERC Advanced Grant "WhiteMech"](whitemech.github.io/)
 (No. 834228) and by the [TAILOR research network](https://tailor-network.eu/) (No. 952215).
