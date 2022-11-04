@@ -7,10 +7,10 @@
 
 ## Requirements
 
-* Java JDK 16.0.1+ with the following libraries (all obtained via Maven):
-  * [Commons-IO](https://commons.apache.org/proper/commons-io/) 2.11.  Obtained via Maven but also available under `lib/` (for manual compile).
-  * [junit 4](https://junit.org/junit4/). Obtained via Maven but also available under `lib/` (for manual compile).
-  * [args4j](https://args4j.kohsuke.org/). Obtained via Maven but also available under `lib/` (for manual compile).
+* Java JDK 16.0.1+ with the following libraries (obtained via Maven, but available under `lib/`for manual compile):
+  * [Commons-IO](https://commons.apache.org/proper/commons-io/).
+  * [junit 4](https://junit.org/junit4/).
+  * [args4j](https://args4j.kohsuke.org/).
 * Python 3.6+ for [translator-fond](/translator-fond/) tool to translate FOND PDDL files to SAS.
 * [GraphViz](https://graphviz.readthedocs.io/) for visualizing the state-space and the output policy.
 * [Maven](https://maven.apache.org/) for building the system (and further development, if needed).
