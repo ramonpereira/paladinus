@@ -1,0 +1,11 @@
+#!/bin/bash
+
+DIR=$(dirname "$0")
+DEP=$DIR/lib/commons-io-2.11.0.jar:$DIR/lib/args4j-2.33.jar
+
+SEARCH="ITERATIVE_DFS_PRUNING"
+HEURISTIC="FF"
+
+java -cp $DIR/target/classes:$DEP paladinus.PaladinusPlanner \
+    -search $SEARCH -heuristic $HEURISTIC \
+    -translatorPath $DIR/translator-fond/translate.py "$@"

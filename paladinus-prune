@@ -1,0 +1,16 @@
+#!/bin/bash
+
+DIR=$(dirname "$0")
+
+JAR=$DIR/target/paladinus-1.1-jar-with-dependencies.jar
+
+SEARCH="ITERATIVE_DFS_PRUNING"
+HEURISTIC="HADD"
+ACTION_SEL="MIN_MAX_H"
+EVAL_FUN="MAX"
+
+java -jar $JAR \
+    -search $SEARCH -heuristic $HEURISTIC \
+    -actionSelectionCriterion $ACTION_SEL \
+    -evaluationFunctionCriterion $EVAL_FUN \
+    -translatorPath $DIR/translator-fond/translate.py "$@"

@@ -680,9 +680,10 @@ def parse_args():
 
 def main():
     args = parse_args()
+    print(args)
 
     timer = timers.Timer()
-    with timers.timing("Parsing", True):
+    with timers.timing("Parsing...", True):
         task = pddl.open(task_filename=args.task, domain_filename=args.domain)
 
     with timers.timing("Normalizing task"):
