@@ -1,9 +1,10 @@
 package paladinus.search.dfs;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -163,12 +164,13 @@ public class DepthFirstSearch extends HeuristicSearch {
 		for(Operator op: applicableOps) {
 			Set<State> successorStates = node.state.apply(op);
 			assert !successorStates.isEmpty();
-			Set<SearchNode> children = new LinkedHashSet<SearchNode>();
+			List<SearchNode> children = new ArrayList<SearchNode>();
 			for (State successor : successorStates) {
 				SearchNode newNode = this.lookupAndInsertNode(successor, (int) (node.getDepth() + op.getCost()));
 				newNode.setParent(node);
 				children.add(newNode);
 			}
+			Collections.sort(children);
 			SearchConnector connector = new SearchConnector(node, children, op, this.evaluationFunctionCriterion);
 			if(connector.getAverageChildEstimate() == Double.POSITIVE_INFINITY)
 				continue;

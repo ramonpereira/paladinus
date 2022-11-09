@@ -1,6 +1,7 @@
 package paladinus.search;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import paladinus.state.Operator;
@@ -29,7 +30,7 @@ public class SearchConnector {
 	/**
 	 * Child nodes
 	 */
-	Set<SearchNode> children;
+	List<SearchNode> children;
 
 	/**
 	 * Operator which corresponds to this connector.
@@ -68,7 +69,7 @@ public class SearchConnector {
 	 * @param children Child nodes
 	 * @param operator Name of operator inducing this connector
 	 */
-	public SearchConnector(SearchNode parent, Set<SearchNode> children, Operator operator) {
+	public SearchConnector(SearchNode parent, List<SearchNode> children, Operator operator) {
 		this.parent = parent;
 		this.children = children;
 		this.operator = operator;
@@ -90,7 +91,7 @@ public class SearchConnector {
 	 * @param operator Name of operator inducing this connector
 	 * @param criterion Child criterion
 	 */
-	public SearchConnector(SearchNode parent, Set<SearchNode> children, Operator operator, EvaluationFunctionCriterion criterion) {
+	public SearchConnector(SearchNode parent, List<SearchNode> children, Operator operator, EvaluationFunctionCriterion criterion) {
 		this(parent, children, operator);
 		this.evaluationFunctionCriterion = criterion;
 	}
@@ -182,11 +183,11 @@ public class SearchConnector {
 	 *
 	 * @return children
 	 */
-	public Set<SearchNode> getChildren() {
+	public List<SearchNode> getChildren() {
 		return children;
 	}
 
-	public void setChildren(Set<SearchNode> children) {
+	public void setChildren(List<SearchNode> children) {
 		this.children = children;
 	}
 

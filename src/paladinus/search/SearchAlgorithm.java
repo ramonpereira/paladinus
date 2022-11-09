@@ -11,5 +11,7 @@ public enum SearchAlgorithm {
 	ITERATIVE_DFS,	
 	ITERATIVE_DFS_PRUNING,
 	
-	DFS
+	DFS,
+	
+	ITERATIVE_DFS_LEARNING
 }
