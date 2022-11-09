@@ -1,0 +1,6 @@
+#!/bin/bash
+
+DIR=$(dirname "$0")
+JAR=$DIR/target/paladinus-1.1-jar-with-dependencies.jar
+
+java -jar $JAR -translatorPath $DIR/translator-fond/translate.py "$@"
