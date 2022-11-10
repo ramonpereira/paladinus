@@ -1,4 +1,4 @@
-package paladinus.symbolic;
+package main.java.paladinus.symbolic;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -10,19 +10,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javabdd.BDD;
-import javabdd.BDD.BDDIterator;
-import javabdd.BDDDomain;
-import javabdd.BDDException;
-import javabdd.BDDFactory;
-import javabdd.BDDPairing;
-import javabdd.JFactory;
-import paladinus.explicit.ExplicitEffect;
-import paladinus.explicit.ExplicitOperator;
-import paladinus.explicit.ExplicitState;
-import paladinus.heuristic.pdb.Abstraction;
-import paladinus.problem.Problem;
-import paladinus.state.Operator;
+import main.java.javabdd.BDD;
+import main.java.javabdd.BDD.BDDIterator;
+import main.java.javabdd.BDDDomain;
+import main.java.javabdd.BDDException;
+import main.java.javabdd.BDDFactory;
+import main.java.javabdd.BDDPairing;
+import main.java.javabdd.JFactory;
+import main.java.paladinus.explicit.ExplicitEffect;
+import main.java.paladinus.explicit.ExplicitOperator;
+import main.java.paladinus.explicit.ExplicitState;
+import main.java.paladinus.heuristic.pdb.Abstraction;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.state.Operator;
 
 /**
  * @author Manuela Ortlieb

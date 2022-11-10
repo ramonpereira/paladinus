@@ -1,14 +1,14 @@
-package paladinus.symbolic;
+package main.java.paladinus.symbolic;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javabdd.BDD;
-import paladinus.explicit.ExplicitOperator.OperatorRule;
-import paladinus.problem.Problem;
-import paladinus.util.Pair;
+import main.java.javabdd.BDD;
+import main.java.paladinus.explicit.ExplicitOperator.OperatorRule;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.util.Pair;
 
 /**
  * Symbolic axiom evaluator to apply axiom rules in case of partial

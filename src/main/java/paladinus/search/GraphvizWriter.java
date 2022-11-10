@@ -1,4 +1,4 @@
-package paladinus.search;
+package main.java.paladinus.search;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,8 +10,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import paladinus.explicit.ExplicitState;
-import paladinus.problem.Problem;
+import main.java.paladinus.explicit.ExplicitState;
+import main.java.paladinus.problem.Problem;
 
 /**
  * Generate an output of the whole search graph in GraphViz (dot) format.

@@ -1,4 +1,4 @@
-package paladinus.heuristic.pdb;
+package main.java.paladinus.heuristic.pdb;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,13 +17,13 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-import paladinus.Global;
-import paladinus.heuristic.graph.Connector;
-import paladinus.heuristic.graph.Node;
-import paladinus.problem.Problem;
-import paladinus.state.Operator;
-import paladinus.state.State;
-import paladinus.util.Pair;
+import main.java.paladinus.Global;
+import main.java.paladinus.heuristic.graph.Connector;
+import main.java.paladinus.heuristic.graph.Node;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.state.Operator;
+import main.java.paladinus.state.State;
+import main.java.paladinus.util.Pair;
 
 /**
  *

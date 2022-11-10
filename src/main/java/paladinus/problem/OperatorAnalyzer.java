@@ -1,4 +1,4 @@
-package paladinus.problem;
+package main.java.paladinus.problem;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -6,10 +6,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import paladinus.explicit.ExplicitCondition;
-import paladinus.explicit.ExplicitOperator;
-import paladinus.state.Operator;
-import paladinus.util.Pair;
+import main.java.paladinus.explicit.ExplicitCondition;
+import main.java.paladinus.explicit.ExplicitOperator;
+import main.java.paladinus.state.Operator;
+import main.java.paladinus.util.Pair;
 
 public class OperatorAnalyzer {
 

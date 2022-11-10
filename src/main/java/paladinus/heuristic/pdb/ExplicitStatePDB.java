@@ -1,15 +1,15 @@
-package paladinus.heuristic.pdb;
+package main.java.paladinus.heuristic.pdb;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
 
-import paladinus.explicit.ExplicitCondition;
-import paladinus.explicit.ExplicitState;
-import paladinus.heuristic.graph.Node;
-import paladinus.problem.Problem;
-import paladinus.state.State;
+import main.java.paladinus.explicit.ExplicitCondition;
+import main.java.paladinus.explicit.ExplicitState;
+import main.java.paladinus.heuristic.graph.Node;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.state.State;
 
 /**
  * Pattern database.

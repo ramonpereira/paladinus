@@ -1,12 +1,12 @@
-package paladinus.heuristic.graph;
+package main.java.paladinus.heuristic.graph;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import paladinus.heuristic.Heuristic;
-import paladinus.state.State;
+import main.java.paladinus.heuristic.Heuristic;
+import main.java.paladinus.state.State;
 
 /**
  *
@@ -32,6 +32,8 @@ public class Node {
 	public boolean isGoalNode;
 	boolean alreadyBucketed = false;
 	public int index;
+
+	public Integer stateVariable;
 
 	public Node(State state) {
 		this.state = state;

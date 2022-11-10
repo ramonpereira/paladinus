@@ -1,4 +1,4 @@
-package paladinus.search;
+package main.java.paladinus.search;
 
 public enum ExpansionRules {
 	

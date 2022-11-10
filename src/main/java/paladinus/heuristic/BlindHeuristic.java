@@ -1,8 +1,8 @@
-package paladinus.heuristic;
+package main.java.paladinus.heuristic;
 
-import paladinus.problem.Problem;
-import paladinus.state.Condition;
-import paladinus.state.State;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.state.Condition;
+import main.java.paladinus.state.State;
 
 /**
  *

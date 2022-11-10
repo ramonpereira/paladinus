@@ -1,7 +1,7 @@
 /**
  * Interface to use both types of states (e.g. belief and explicit states) into the Node class.
  */
-package paladinus.state;
+package main.java.paladinus.state;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -10,9 +10,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import paladinus.explicit.ExplicitState;
-import paladinus.heuristic.pdb.Abstraction;
-import paladinus.problem.Problem;
+import main.java.paladinus.explicit.ExplicitState;
+import main.java.paladinus.heuristic.pdb.Abstraction;
+import main.java.paladinus.problem.Problem;
 
 /**
  * @author Manuela Ortlieb

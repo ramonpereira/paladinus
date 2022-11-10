@@ -1,4 +1,4 @@
-package paladinus.problem;
+package main.java.paladinus.problem;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import paladinus.explicit.ExplicitAxiomEvaluator;
-import paladinus.explicit.ExplicitCondition;
-import paladinus.explicit.ExplicitState;
-import paladinus.explicit.ExplicitOperator.OperatorRule;
-import paladinus.heuristic.pdb.Abstraction;
-import paladinus.state.Condition;
-import paladinus.state.Operator;
-import paladinus.state.State;
+import main.java.paladinus.explicit.ExplicitAxiomEvaluator;
+import main.java.paladinus.explicit.ExplicitCondition;
+import main.java.paladinus.explicit.ExplicitOperator.OperatorRule;
+import main.java.paladinus.explicit.ExplicitState;
+import main.java.paladinus.heuristic.pdb.Abstraction;
+import main.java.paladinus.state.Condition;
+import main.java.paladinus.state.Operator;
+import main.java.paladinus.state.State;
 
 /**
  *

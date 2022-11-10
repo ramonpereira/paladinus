@@ -1,4 +1,4 @@
-package paladinus.util;
+package main.java.paladinus.util;
 
 public enum ActionSelectionRule {
 	NONE,

@@ -1,9 +1,9 @@
-package paladinus.heuristic.pdb;
+package main.java.paladinus.heuristic.pdb;
 
 import java.util.Set;
 
-import paladinus.problem.Problem;
-import paladinus.state.State;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.state.State;
 
 /**
  * @author Manuela Ortlieb

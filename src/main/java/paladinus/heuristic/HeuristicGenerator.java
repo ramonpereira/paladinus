@@ -1,11 +1,11 @@
-package paladinus.heuristic;
+package main.java.paladinus.heuristic;
 
 import java.util.List;
 
-import paladinus.Global;
-import paladinus.heuristic.FFHeuristic.RPGStrategy;
-import paladinus.heuristic.pdb.PatternCollectionSearch;
-import paladinus.problem.Problem;
+import main.java.paladinus.Global;
+import main.java.paladinus.heuristic.FFHeuristic.RPGStrategy;
+import main.java.paladinus.heuristic.pdb.PatternCollectionSearch;
+import main.java.paladinus.problem.Problem;
 
 public abstract class HeuristicGenerator {
 

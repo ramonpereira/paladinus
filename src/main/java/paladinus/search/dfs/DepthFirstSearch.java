@@ -1,4 +1,4 @@
-package paladinus.search.dfs;
+package main.java.paladinus.search.dfs;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -10,20 +10,20 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-import paladinus.Global;
-import paladinus.heuristic.Heuristic;
-import paladinus.problem.Problem;
-import paladinus.search.HeuristicSearch;
-import paladinus.search.SearchConnector;
-import paladinus.search.SearchConnector.EvaluationFunctionCriterion;
-import paladinus.search.SearchConnectorComparator;
-import paladinus.search.SearchFlag;
-import paladinus.search.SearchNode;
-import paladinus.search.policy.Policy;
-import paladinus.state.Operator;
-import paladinus.state.State;
-import paladinus.util.ActionSelectionRule;
-import paladinus.util.Pair;
+import main.java.paladinus.Global;
+import main.java.paladinus.heuristic.Heuristic;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.search.HeuristicSearch;
+import main.java.paladinus.search.SearchConnector;
+import main.java.paladinus.search.SearchConnector.EvaluationFunctionCriterion;
+import main.java.paladinus.search.SearchConnectorComparator;
+import main.java.paladinus.search.SearchFlag;
+import main.java.paladinus.search.SearchNode;
+import main.java.paladinus.search.policy.Policy;
+import main.java.paladinus.state.Operator;
+import main.java.paladinus.state.State;
+import main.java.paladinus.util.ActionSelectionRule;
+import main.java.paladinus.util.Pair;
 
 /**
  * 

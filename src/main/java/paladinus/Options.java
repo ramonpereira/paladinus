@@ -1,29 +1,22 @@
-package paladinus;
+package main.java.paladinus;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
-import org.kohsuke.args4j.OptionHandlerFilter;
-import org.kohsuke.args4j.spi.OptionHandler;
 
-
-
-
-import paladinus.heuristic.HeuristicEstimator;
-import paladinus.heuristic.pdb.PDB;
-import paladinus.heuristic.pdb.PatternCollectionSearch.PatternSearch;
-import paladinus.parser.SasParser;
-import paladinus.search.AbstractSearch;
-import paladinus.search.SearchAlgorithm;
+import main.java.paladinus.heuristic.HeuristicEstimator;
+import main.java.paladinus.heuristic.pdb.PDB;
+import main.java.paladinus.heuristic.pdb.PatternCollectionSearch.PatternSearch;
+import main.java.paladinus.parser.SasParser;
+import main.java.paladinus.search.AbstractSearch;
+import main.java.paladinus.search.SearchAlgorithm;
 
 /**
  *
@@ -275,11 +268,12 @@ public class Options {
 	public String getTranslatorPath() {
 		return translatorPath;
 	}
+	@SuppressWarnings("unused")
 	private void checkTranslatorPath() throws CmdLineException {
 		if (translatorPath != null) {
 			File f = new File(translatorPath);
 			if (!f.exists())
-				throw new CmdLineException(parser, new Exception("Cannot find translator script"));
+				throw new CmdLineException(parser, new Exception("Cannot find translator script."));
 		}
 	}
 

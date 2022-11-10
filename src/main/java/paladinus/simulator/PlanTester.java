@@ -1,4 +1,4 @@
-package paladinus.simulator;
+package main.java.paladinus.simulator;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package paladinus.explicit;
+package main.java.paladinus.explicit;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import paladinus.heuristic.pdb.Abstraction;
-import paladinus.problem.Problem;
-import paladinus.state.Condition;
-import paladinus.state.Operator;
-import paladinus.state.State;
-import paladinus.util.Pair;
+import main.java.paladinus.heuristic.pdb.Abstraction;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.state.Condition;
+import main.java.paladinus.state.Operator;
+import main.java.paladinus.state.State;
+import main.java.paladinus.util.Pair;
 
 /**
  * A state is a function mapping state variables to values from their respective

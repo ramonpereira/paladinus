@@ -1,10 +1,10 @@
-package paladinus.heuristic.graph;
+package main.java.paladinus.heuristic.graph;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import paladinus.state.Operator;
+import main.java.paladinus.state.Operator;
 
 /**
  *
@@ -26,6 +26,7 @@ public class Connector {
 	double cost;
 
 	public boolean isSafe = false;
+	public String label;
 
 	public Connector(Node parent, Set<Node> children, Operator op) {
 		this.parent = parent;

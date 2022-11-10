@@ -1,4 +1,4 @@
-package paladinus.util;
+package main.java.paladinus.util;
 
 /**
  * Pair parameterized by the types of the two elements.

@@ -1,12 +1,12 @@
-package paladinus;
+package main.java.paladinus;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import paladinus.explicit.ExplicitEffect;
-import paladinus.explicit.ExplicitOperator;
-import paladinus.state.Operator;
+import main.java.paladinus.explicit.ExplicitEffect;
+import main.java.paladinus.explicit.ExplicitOperator;
+import main.java.paladinus.state.Operator;
 
 /**
  *

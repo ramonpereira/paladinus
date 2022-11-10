@@ -1,18 +1,19 @@
-package paladinus.heuristic.pdb;
+package main.java.paladinus.heuristic.pdb;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import paladinus.Global;
-import paladinus.explicit.ExplicitCondition;
-import paladinus.heuristic.Heuristic;
-import paladinus.heuristic.pdb.PatternCollectionSearch.PatternSearch;
-import paladinus.problem.Problem;
-import paladinus.state.Condition;
-import paladinus.state.State;
-import paladinus.symbolic.SymbolicCondition;
+import main.java.paladinus.Global;
+import main.java.paladinus.explicit.ExplicitCondition;
+import main.java.paladinus.heuristic.Heuristic;
+import main.java.paladinus.heuristic.pdb.PatternCollectionSearch.PatternSearch;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.state.Condition;
+import main.java.paladinus.state.State;
+import main.java.paladinus.symbolic.SymbolicCondition;
+
 
 /**
  *

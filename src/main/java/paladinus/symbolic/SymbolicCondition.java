@@ -1,4 +1,4 @@
-package paladinus.symbolic;
+package main.java.paladinus.symbolic;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -7,10 +7,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javabdd.BDD;
-import paladinus.explicit.ExplicitState;
-import paladinus.state.Condition;
-import paladinus.state.State;
+import main.java.javabdd.BDD;
+import main.java.paladinus.explicit.ExplicitState;
+import main.java.paladinus.state.Condition;
+import main.java.paladinus.state.State;
 
 /**
  * A condition is a formula represented by a BDD.

@@ -1,4 +1,4 @@
-package paladinus.heuristic;
+package main.java.paladinus.heuristic;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,14 +12,14 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Stack;
 
-import paladinus.explicit.ExplicitCondition;
-import paladinus.explicit.ExplicitOperator;
-import paladinus.explicit.ExplicitState;
-import paladinus.heuristic.FFHeuristic.RPGStrategy;
-import paladinus.problem.Problem;
-import paladinus.state.Operator;
-import paladinus.state.State;
-import paladinus.util.Pair;
+import main.java.paladinus.explicit.ExplicitCondition;
+import main.java.paladinus.explicit.ExplicitOperator;
+import main.java.paladinus.explicit.ExplicitState;
+import main.java.paladinus.heuristic.FFHeuristic.RPGStrategy;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.state.Operator;
+import main.java.paladinus.state.State;
+import main.java.paladinus.util.Pair;
 
 /**
  * LM-Cut Heuristic

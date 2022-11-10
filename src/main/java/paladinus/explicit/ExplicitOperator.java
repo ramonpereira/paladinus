@@ -1,4 +1,4 @@
-package paladinus.explicit;
+package main.java.paladinus.explicit;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -7,9 +7,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import paladinus.state.Condition;
-import paladinus.state.Operator;
-import paladinus.util.Pair;
+import main.java.paladinus.state.Condition;
+import main.java.paladinus.state.Operator;
+import main.java.paladinus.util.Pair;
 
 /**
  * An operator consists of a precondition, which is a list of variable-value

@@ -1,4 +1,4 @@
-package paladinus.state;
+package main.java.paladinus.state;
 
 public interface Condition {
 

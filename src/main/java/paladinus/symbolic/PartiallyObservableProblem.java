@@ -1,4 +1,4 @@
-package paladinus.symbolic;
+package main.java.paladinus.symbolic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,20 +12,20 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javabdd.BDD;
-import paladinus.Global.ExitCode;
-import paladinus.explicit.ExplicitAxiomEvaluator;
-import paladinus.explicit.ExplicitCondition;
-import paladinus.explicit.ExplicitOperator;
-import paladinus.explicit.ExplicitState;
-import paladinus.explicit.ExplicitOperator.OperatorRule;
-import paladinus.heuristic.pdb.Abstraction;
-import paladinus.heuristic.pdb.PDB;
-import paladinus.problem.Problem;
-import paladinus.state.Condition;
-import paladinus.state.Operator;
-import paladinus.state.State;
-import paladinus.util.Pair;
+import main.java.javabdd.BDD;
+import main.java.paladinus.Global.ExitCode;
+import main.java.paladinus.explicit.ExplicitAxiomEvaluator;
+import main.java.paladinus.explicit.ExplicitCondition;
+import main.java.paladinus.explicit.ExplicitOperator;
+import main.java.paladinus.explicit.ExplicitOperator.OperatorRule;
+import main.java.paladinus.explicit.ExplicitState;
+import main.java.paladinus.heuristic.pdb.Abstraction;
+import main.java.paladinus.heuristic.pdb.PDB;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.state.Condition;
+import main.java.paladinus.state.Operator;
+import main.java.paladinus.state.State;
+import main.java.paladinus.util.Pair;
 
 /**
  * A partially observable planning problem is a planning task where parts of the

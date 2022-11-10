@@ -1,10 +1,10 @@
-package paladinus.search;
+package main.java.paladinus.search;
 
 import java.util.concurrent.Callable;
 
-import paladinus.problem.Problem;
-import paladinus.search.policy.Policy;
-import paladinus.simulator.PlanSimulator;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.search.policy.Policy;
+import main.java.paladinus.simulator.PlanSimulator;
 
 /**
  * An abstract search engine.

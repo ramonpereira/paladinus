@@ -1,4 +1,4 @@
-package paladinus.heuristic.pdb;
+package main.java.paladinus.heuristic.pdb;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,17 +9,17 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 
-import javabdd.BDD;
-import paladinus.explicit.ExplicitAxiomEvaluator;
-import paladinus.explicit.ExplicitCondition;
-import paladinus.explicit.ExplicitOperator.OperatorRule;
-import paladinus.problem.Problem;
-import paladinus.state.Condition;
-import paladinus.state.Operator;
-import paladinus.state.State;
-import paladinus.symbolic.BDDManager;
-import paladinus.symbolic.PartiallyObservableProblem;
-import paladinus.symbolic.SymbolicAxiomEvaluator;
+import main.java.javabdd.BDD;
+import main.java.paladinus.explicit.ExplicitAxiomEvaluator;
+import main.java.paladinus.explicit.ExplicitCondition;
+import main.java.paladinus.explicit.ExplicitOperator.OperatorRule;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.state.Condition;
+import main.java.paladinus.state.Operator;
+import main.java.paladinus.state.State;
+import main.java.paladinus.symbolic.BDDManager;
+import main.java.paladinus.symbolic.PartiallyObservableProblem;
+import main.java.paladinus.symbolic.SymbolicAxiomEvaluator;
 
 /**
  *

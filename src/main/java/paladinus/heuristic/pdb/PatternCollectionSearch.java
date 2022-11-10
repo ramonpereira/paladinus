@@ -1,4 +1,4 @@
-package paladinus.heuristic.pdb;
+package main.java.paladinus.heuristic.pdb;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -12,20 +12,20 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import paladinus.Global;
-import paladinus.PaladinusPlanner;
-import paladinus.explicit.ExplicitEffect;
-import paladinus.explicit.ExplicitOperator;
-import paladinus.explicit.ExplicitOperator.OperatorRule;
-import paladinus.problem.OperatorAnalyzer;
-import paladinus.problem.OperatorAnalyzer.Connector;
-import paladinus.problem.OperatorAnalyzer.DependencyGraph;
-import paladinus.problem.OperatorAnalyzer.Node;
-import paladinus.problem.Problem;
-import paladinus.state.Operator;
-import paladinus.state.State;
-import paladinus.symbolic.PartiallyObservableProblem;
-import paladinus.util.Pair;
+import main.java.paladinus.Global;
+import main.java.paladinus.PaladinusPlanner;
+import main.java.paladinus.explicit.ExplicitEffect;
+import main.java.paladinus.explicit.ExplicitOperator;
+import main.java.paladinus.explicit.ExplicitOperator.OperatorRule;
+import main.java.paladinus.problem.OperatorAnalyzer;
+import main.java.paladinus.problem.OperatorAnalyzer.Connector;
+import main.java.paladinus.problem.OperatorAnalyzer.DependencyGraph;
+import main.java.paladinus.problem.OperatorAnalyzer.Node;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.state.Operator;
+import main.java.paladinus.state.State;
+import main.java.paladinus.symbolic.PartiallyObservableProblem;
+import main.java.paladinus.util.Pair;
 
 /**
  * This class does a hill climbing search to find a pattern selection. 1.

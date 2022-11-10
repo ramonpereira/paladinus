@@ -1,10 +1,10 @@
-package paladinus.search;
+package main.java.paladinus.search;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import paladinus.state.Operator;
+import main.java.paladinus.state.Operator;
 
 /**
  * A connector associates with a node <tt>node</tt> a set of successor nodes

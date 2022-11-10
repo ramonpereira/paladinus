@@ -1,13 +1,13 @@
-package paladinus.search.policy;
+package main.java.paladinus.search.policy;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 
-import paladinus.problem.Problem;
-import paladinus.state.Operator;
-import paladinus.state.State;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.state.Operator;
+import main.java.paladinus.state.State;
 
 public class WeakPlan extends Policy {
 

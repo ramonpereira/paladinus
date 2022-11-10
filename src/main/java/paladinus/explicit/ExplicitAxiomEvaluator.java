@@ -1,4 +1,4 @@
-package paladinus.explicit;
+package main.java.paladinus.explicit;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-import paladinus.explicit.ExplicitOperator.OperatorRule;
-import paladinus.problem.Problem;
-import paladinus.util.Pair;
+import main.java.paladinus.explicit.ExplicitOperator.OperatorRule;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.util.Pair;
 
 /**
  * Axiom evaluator in the fully observable case. Reimplementation of Fast

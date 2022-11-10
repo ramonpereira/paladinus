@@ -1,4 +1,4 @@
-package paladinus.heuristic.pdb;
+package main.java.paladinus.heuristic.pdb;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import paladinus.problem.Problem;
-import paladinus.state.Operator;
+import main.java.paladinus.problem.Problem;
+import main.java.paladinus.state.Operator;
 
 /**
  * @author Manuela Ortlieb

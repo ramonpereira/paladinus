@@ -1,4 +1,4 @@
-package paladinus.explicit;
+package main.java.paladinus.explicit;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import paladinus.heuristic.pdb.Abstraction;
-import paladinus.state.Condition;
-import paladinus.state.State;
-import paladinus.util.Pair;
+import main.java.paladinus.heuristic.pdb.Abstraction;
+import main.java.paladinus.state.Condition;
+import main.java.paladinus.state.State;
+import main.java.paladinus.util.Pair;
 
 /**
  * A condition is a set (conjunction) of variable-value pairs.

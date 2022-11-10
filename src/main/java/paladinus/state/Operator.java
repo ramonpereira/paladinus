@@ -1,4 +1,4 @@
-package paladinus.state;
+package main.java.paladinus.state;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import paladinus.explicit.ExplicitOperator;
-import paladinus.util.Pair;
+import main.java.paladinus.explicit.ExplicitOperator;
+import main.java.paladinus.util.Pair;
 
 /**
  * @author Manuela Ortlieb
