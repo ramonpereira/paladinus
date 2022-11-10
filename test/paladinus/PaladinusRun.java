@@ -10,7 +10,7 @@ import main.java.paladinus.util.TranslateFONDUtils;
 public class PaladinusRun {
 
 	@Test
-	public void run() {
+	public void runTest() {
 		String[] args = new String[] {
 
 //				"-search", "DFS",
