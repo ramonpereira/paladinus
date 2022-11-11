@@ -33,19 +33,27 @@ $ ./paladinus -h
 
 Paladinus: An Iterative Depth-First Search FOND Planner
 
- -h (--help)                            : print this message (default: true)
- -debug [ON | OFF]                      : use debug option (default: OFF)
- -t (-type) [FOND]                      : use fond translate (Example: -t FOND
-                                          <domain_file> <problem_file>)
-                                          (default: FOND)
- -printPolicy                           : print policy to stdout (default:
-                                          false)
-...
-...
-...
- -useDependencyGraph [ON | OFF]         : use dependency graph for
-                                          preconditions of sensing actions
-                                          (POND only) (default: ON)
+Help:
+ -h (-help)                             : print this message
+ 
+Debug:
+ -debug [ON | OFF]                      : use debug option [default: OFF]
+
+Paladinus options:
+ -printPolicy                           : print policy to stdout
+ -exportPolicy FILENAME                 : export policy to file
+ -exportDot FILENAME                    : export policy as DOT graph (GraphViz)
+ -timeout N                             : set timeout in seconds
+
+Search algorithms:
+ -s (-search) [ITERATIVE_DFS | ITERATIVE_DFS_PRUNING | DFS]  : set search algorithm [default: ITERATIVE_DFS]
+
+Heuristics:
+ -heuristic [HMAX | HADD | FF | PDBS | LMCUT | BLIND | BLIND_DEADEND] : set heuristic [default: FF]            
+
+Action Selection and Evaluation Function Criteria:
+ -as (-actionSelectionCriterion) [MIN_H | MIN_MAX_H | MEAN_H | MIN_SUM_H]  : set actionSelectionCriterion [default: MIN_MAX_H]
+ -ef (-evaluationFunctionCriterion) [MAX | MIN]                            : set evaluationFunctionCriterion [default: MAX]
 ```
 
 Check below for running the system directly via the JAR file or compiled classes (mostly when developing further the system).
@@ -154,12 +162,15 @@ Note that the shell scripts provided already have that built-in so they can be r
 
 Paladinus provides a **state-space debugger** that shows the expanded states for every iteration of our algorithms. The state-space debugger outputs a [DOT file](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) for every state expansion during the search. For more details, have a look at [DEBUG.md](DEBUG.md).
 
-## Contributors & Citation
+## Contributors
 
 - Ramon Fraga Pereira
 - Frederico Messa
 - André Grahl Pereira
 - Giuseppe De Giacomo
+- Sebastian Sardiña
+
+## Citation
 
 Please, use the following reference when citing Paladinus:
 
