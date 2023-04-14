@@ -1,9 +1,9 @@
-package main.java.paladinus.explicit;
+package paladinus.explicit;
 
 import java.util.List;
 import java.util.Map;
 
-import main.java.paladinus.util.Pair;
+import paladinus.util.Pair;
 
 /**
  * An effect consists of a condition <tt>cond</tt>, which is a list of

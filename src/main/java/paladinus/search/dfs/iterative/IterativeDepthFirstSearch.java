@@ -1,16 +1,16 @@
-package main.java.paladinus.search.dfs.iterative;
+package paladinus.search.dfs.iterative;
 
 import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-import main.java.paladinus.heuristic.Heuristic;
-import main.java.paladinus.problem.Problem;
-import main.java.paladinus.search.SearchConnector;
-import main.java.paladinus.search.SearchFlag;
-import main.java.paladinus.search.SearchNode;
-import main.java.paladinus.search.dfs.DepthFirstSearch;
-import main.java.paladinus.util.Pair;
+import paladinus.heuristic.Heuristic;
+import paladinus.problem.Problem;
+import paladinus.search.SearchConnector;
+import paladinus.search.SearchFlag;
+import paladinus.search.SearchNode;
+import paladinus.search.dfs.DepthFirstSearch;
+import paladinus.util.Pair;
 
 /**
  * 

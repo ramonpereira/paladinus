@@ -1,14 +1,14 @@
-package main.java.paladinus.symbolic;
+package paladinus.symbolic;
 
 import java.util.Collections;
 import java.util.Set;
 
-import main.java.javabdd.BDD;
-import main.java.paladinus.explicit.ExplicitOperator;
-import main.java.paladinus.problem.Problem;
-import main.java.paladinus.state.Condition;
-import main.java.paladinus.state.Operator;
-import main.java.paladinus.util.Pair;
+import javabdd.BDD;
+import paladinus.explicit.ExplicitOperator;
+import paladinus.problem.Problem;
+import paladinus.state.Condition;
+import paladinus.state.Operator;
+import paladinus.util.Pair;
 
 /**
  *

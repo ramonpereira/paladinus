@@ -1,10 +1,10 @@
-package main.java.paladinus.search;
+package paladinus.search;
 
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
-import main.java.paladinus.util.ActionSelectionRule;
+import paladinus.util.ActionSelectionRule;
 
 /**
  *

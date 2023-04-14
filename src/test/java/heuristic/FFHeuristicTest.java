@@ -7,12 +7,12 @@ import java.io.InputStream;
 
 import org.junit.Test;
 
-import main.java.paladinus.Global;
-import main.java.paladinus.Options;
-import main.java.paladinus.heuristic.FFHeuristic;
-import main.java.paladinus.heuristic.FFHeuristic.RPGStrategy;
-import main.java.paladinus.parser.SasParser;
-import main.java.paladinus.problem.Problem;
+import paladinus.Global;
+import paladinus.Options;
+import paladinus.heuristic.FFHeuristic;
+import paladinus.heuristic.FFHeuristic.RPGStrategy;
+import paladinus.parser.SasParser;
+import paladinus.problem.Problem;
 
 /**
  *

@@ -1,8 +1,8 @@
-package main.java.paladinus.heuristic;
+package paladinus.heuristic;
 
-import main.java.paladinus.heuristic.FFHeuristic.RPGStrategy;
-import main.java.paladinus.problem.Problem;
-import main.java.paladinus.state.State;
+import paladinus.heuristic.FFHeuristic.RPGStrategy;
+import paladinus.problem.Problem;
+import paladinus.state.State;
 
 public class AdditiveHeuristic extends Heuristic {
 

@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import main.java.paladinus.PaladinusPlanner;
-import main.java.paladinus.util.TranslateFONDUtils;
+import paladinus.PaladinusPlanner;
+import paladinus.util.TranslateFONDUtils;
 
 public class PaladinusRun {
 

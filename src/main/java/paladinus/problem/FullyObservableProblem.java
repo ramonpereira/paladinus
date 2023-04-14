@@ -1,4 +1,4 @@
-package main.java.paladinus.problem;
+package paladinus.problem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,18 +12,18 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import main.java.paladinus.Global;
-import main.java.paladinus.Preprocessor;
-import main.java.paladinus.explicit.ExplicitAxiomEvaluator;
-import main.java.paladinus.explicit.ExplicitCondition;
-import main.java.paladinus.explicit.ExplicitOperator;
-import main.java.paladinus.explicit.ExplicitOperator.OperatorRule;
-import main.java.paladinus.explicit.ExplicitState;
-import main.java.paladinus.heuristic.pdb.Abstraction;
-import main.java.paladinus.state.Condition;
-import main.java.paladinus.state.Operator;
-import main.java.paladinus.state.State;
-import main.java.paladinus.util.Pair;
+import paladinus.Global;
+import paladinus.Preprocessor;
+import paladinus.explicit.ExplicitAxiomEvaluator;
+import paladinus.explicit.ExplicitCondition;
+import paladinus.explicit.ExplicitOperator;
+import paladinus.explicit.ExplicitOperator.OperatorRule;
+import paladinus.explicit.ExplicitState;
+import paladinus.heuristic.pdb.Abstraction;
+import paladinus.state.Condition;
+import paladinus.state.Operator;
+import paladinus.state.State;
+import paladinus.util.Pair;
 
 /**
  * A fully observable problem consists of a set of multi-valued state variables,

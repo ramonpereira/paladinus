@@ -1,16 +1,16 @@
-package main.java.paladinus.search;
+package paladinus.search;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import main.java.paladinus.explicit.ExplicitOperator;
-import main.java.paladinus.explicit.ExplicitState;
-import main.java.paladinus.problem.Problem;
-import main.java.paladinus.state.Operator;
-import main.java.paladinus.state.State;
-import main.java.paladinus.util.Pair;
+import paladinus.explicit.ExplicitOperator;
+import paladinus.explicit.ExplicitState;
+import paladinus.problem.Problem;
+import paladinus.state.Operator;
+import paladinus.state.State;
+import paladinus.util.Pair;
 
 /**
  * 

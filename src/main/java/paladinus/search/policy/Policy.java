@@ -1,4 +1,4 @@
-package main.java.paladinus.search.policy;
+package paladinus.search.policy;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import main.java.paladinus.Global;
-import main.java.paladinus.PaladinusPlanner;
-import main.java.paladinus.explicit.ExplicitState;
-import main.java.paladinus.problem.Problem;
-import main.java.paladinus.state.Operator;
-import main.java.paladinus.state.State;
-import main.java.paladinus.util.Pair;
+import paladinus.Global;
+import paladinus.PaladinusPlanner;
+import paladinus.explicit.ExplicitState;
+import paladinus.problem.Problem;
+import paladinus.state.Operator;
+import paladinus.state.State;
+import paladinus.util.Pair;
 
 /**
  * A policy is a mapping from states to actions, aka. plan.

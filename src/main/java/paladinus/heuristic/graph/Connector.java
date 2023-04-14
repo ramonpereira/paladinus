@@ -1,10 +1,10 @@
-package main.java.paladinus.heuristic.graph;
+package paladinus.heuristic.graph;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import main.java.paladinus.state.Operator;
+import paladinus.state.Operator;
 
 /**
  *

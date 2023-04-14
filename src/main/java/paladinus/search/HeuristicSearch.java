@@ -1,4 +1,4 @@
-package main.java.paladinus.search;
+package paladinus.search;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,10 +11,10 @@ import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 
-import main.java.paladinus.Global;
-import main.java.paladinus.heuristic.Heuristic;
-import main.java.paladinus.problem.Problem;
-import main.java.paladinus.simulator.PlanSimulator;
+import paladinus.Global;
+import paladinus.heuristic.Heuristic;
+import paladinus.problem.Problem;
+import paladinus.simulator.PlanSimulator;
 
 /**
  * A heuristic search algorithm is an explicit state search algorithm guided by

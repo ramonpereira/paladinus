@@ -1,4 +1,4 @@
-package main.java.paladinus.parser;
+package paladinus.parser;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -15,18 +15,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import main.java.javabdd.BDD;
-import main.java.paladinus.Global;
-import main.java.paladinus.explicit.ExplicitCondition;
-import main.java.paladinus.explicit.ExplicitEffect;
-import main.java.paladinus.explicit.ExplicitOperator;
-import main.java.paladinus.explicit.ExplicitOperator.OperatorRule;
-import main.java.paladinus.problem.FullyObservableProblem;
-import main.java.paladinus.problem.Problem;
-import main.java.paladinus.state.Operator;
-import main.java.paladinus.symbolic.BDDManager;
-import main.java.paladinus.symbolic.PartiallyObservableProblem;
-import main.java.paladinus.util.Pair;
+import javabdd.BDD;
+import paladinus.Global;
+import paladinus.explicit.ExplicitCondition;
+import paladinus.explicit.ExplicitEffect;
+import paladinus.explicit.ExplicitOperator;
+import paladinus.explicit.ExplicitOperator.OperatorRule;
+import paladinus.problem.FullyObservableProblem;
+import paladinus.problem.Problem;
+import paladinus.state.Operator;
+import paladinus.symbolic.BDDManager;
+import paladinus.symbolic.PartiallyObservableProblem;
+import paladinus.util.Pair;
 
 /**
  * Parser for modified SAS+ format. The format differs from the one used as

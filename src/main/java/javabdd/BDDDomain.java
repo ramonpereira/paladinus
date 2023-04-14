@@ -1,7 +1,7 @@
 // BDDDomain.java, created Jan 29, 2003 9:50:57 PM by jwhaley
 // Copyright (C) 2003 John Whaley
 // Licensed under the terms of the GNU LGPL; see COPYING for details.
-package main.java.javabdd;
+package javabdd;
 
 import java.math.BigInteger;
 import java.util.Iterator;

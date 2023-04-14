@@ -1,4 +1,4 @@
-package main.java.paladinus.simulator;
+package paladinus.simulator;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,13 +13,13 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-import main.java.paladinus.PaladinusPlanner;
-import main.java.paladinus.explicit.ExplicitState;
-import main.java.paladinus.problem.Problem;
-import main.java.paladinus.search.policy.Policy;
-import main.java.paladinus.state.Operator;
-import main.java.paladinus.state.State;
-import main.java.paladinus.symbolic.BeliefState;
+import paladinus.PaladinusPlanner;
+import paladinus.explicit.ExplicitState;
+import paladinus.problem.Problem;
+import paladinus.search.policy.Policy;
+import paladinus.state.Operator;
+import paladinus.state.State;
+import paladinus.symbolic.BeliefState;
 
 /**
  *

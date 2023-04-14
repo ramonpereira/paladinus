@@ -1,4 +1,4 @@
-package main.java.paladinus.search;
+package paladinus.search;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package main.java.paladinus;
+package paladinus;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,12 +11,12 @@ import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
-import main.java.paladinus.heuristic.HeuristicEstimator;
-import main.java.paladinus.heuristic.pdb.PDB;
-import main.java.paladinus.heuristic.pdb.PatternCollectionSearch.PatternSearch;
-import main.java.paladinus.parser.SasParser;
-import main.java.paladinus.search.AbstractSearch;
-import main.java.paladinus.search.SearchAlgorithm;
+import paladinus.heuristic.HeuristicEstimator;
+import paladinus.heuristic.pdb.PDB;
+import paladinus.heuristic.pdb.PatternCollectionSearch.PatternSearch;
+import paladinus.parser.SasParser;
+import paladinus.search.AbstractSearch;
+import paladinus.search.SearchAlgorithm;
 
 /**
  *

@@ -1,9 +1,9 @@
-package main.java.paladinus.util;
+package paladinus.util;
 
 import java.util.Collection;
 
-import main.java.paladinus.explicit.ExplicitState;
-import main.java.paladinus.heuristic.Heuristic;
+import paladinus.explicit.ExplicitState;
+import paladinus.heuristic.Heuristic;
 
 /**
  *

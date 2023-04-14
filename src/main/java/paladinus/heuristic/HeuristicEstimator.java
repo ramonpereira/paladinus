@@ -1,4 +1,4 @@
-package main.java.paladinus.heuristic;
+package paladinus.heuristic;
 
 /**
  * 
