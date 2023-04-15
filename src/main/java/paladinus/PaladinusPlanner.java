@@ -129,6 +129,24 @@ public class PaladinusPlanner {
 	/**
 	 * Print some Garbage Collector stats.
 	 */
+	public void printMEMStats() {
+		// Print memory usage
+		// https://stackoverflow.com/questions/3571203/what-are-runtime-getruntime-totalmemory-and-freememory
+		// https://docs.oracle.com/javase/6/docs/api/java/lang/Runtime.html
+
+		// System.gc();	// call GC explicitly to get more accurate memory usage
+		// Runtime.getRuntime().gc();
+		// System.out.println("\nGarbage collection called before memory consumtion check");
+
+
+		long memUsedOverall = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+		System.out.println("\nTotal Memory (GB) = " + memUsedOverall / Math.pow(1024, 3) + "\n");
+	}
+
+
+	/**
+	 * Print some Garbage Collector stats.
+	 */
 	public void printGCStats() {
 		long totalGarbageCollections = 0;
 		long garbageCollectionTime = 0;
@@ -267,10 +285,10 @@ public class PaladinusPlanner {
 			System.out.println("\nResult: No policy found. Undecided.");
 		} else {
 			assert planFound == Result.EXPANDED_ALL;
-			System.out.println("\nResult: Search-space exapanded.");
+			System.out.println("\nResult: Search-space expanded.");
 		}
 		System.out.println();
-		System.out.println("Time needed for preprocess (Parsing, PDBs, ...):    " + timeUsedForPreprocessing / 1000.0 + " seconds.");
+		System.out.println("Time needed for preprocessing (parsing, PDBs, ...): " + timeUsedForPreprocessing / 1000.0 + " seconds.");
 		System.out.println("Time needed for search:                             " + (timeUsedOverall - timeUsedForPreprocessing) / 1000.0 + " seconds.");
 		System.out.println("Time needed:                                        " + timeUsedOverall / 1000.0 + " seconds.");
 		printGCStats();
@@ -339,7 +357,7 @@ public class PaladinusPlanner {
 					if(heuristic != null)
 						search = new IterativeDepthFirstSearchPruning(problem, heuristic, Global.options.actionSelectionCriterion, Global.options.evaluationFunctionCriterion, Global.options.checkSolvedStates);
 					break;
-					
+
 				case ITERATIVE_DFS_LEARNING:
 					System.out.println("Algorithm: Iterative Depth-First Search Learning for FOND Planning");
 					if(heuristic != null)
@@ -362,6 +380,10 @@ public class PaladinusPlanner {
 			}
 			search.setTimeout(Global.options.timeout - timeUsedForPreprocessing);
 
+			printMEMStats();
+			printGCStats();
+
+			// submit the search job to the thread pool
 			ExecutorService service = Executors.newFixedThreadPool(1);
 		    Future<Result> futureResult = service.submit(search);
 		    try{
@@ -372,7 +394,8 @@ public class PaladinusPlanner {
 		    } catch (InterruptedException e) {
 		    	planFound = Result.TIMEOUT;
 				e.printStackTrace();
-			} catch (ExecutionException e) {
+			} catch (ExecutionException e) {	// https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ExecutionException.html
+				// #TODO: shouldn't this go last?
 				planFound = Result.OUT_OF_MEMORY;
 				if(e.getCause() instanceof NullPointerException)
 					planFound = Result.TIMEOUT;
@@ -384,7 +407,9 @@ public class PaladinusPlanner {
 		}
 		/* Stop measuring search time. */
 		timeUsedOverall = System.currentTimeMillis() - startTime;
-		System.out.println("\nTotal Memory (GB) = " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())/ (1024.0 * 1024.0 * 1024.0)) + "\n");
+
+		printMEMStats();
+
 		assert planFound != null;
 		return planFound;
 	}
