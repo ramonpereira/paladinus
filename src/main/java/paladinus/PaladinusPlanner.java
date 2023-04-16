@@ -380,9 +380,6 @@ public class PaladinusPlanner {
 			}
 			search.setTimeout(Global.options.timeout - timeUsedForPreprocessing);
 
-			printMEMStats();
-			printGCStats();
-
 			// submit the search job to the thread pool
 			ExecutorService service = Executors.newFixedThreadPool(1);
 		    Future<Result> futureResult = service.submit(search);

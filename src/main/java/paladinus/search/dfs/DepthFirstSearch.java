@@ -54,6 +54,10 @@ public class DepthFirstSearch extends HeuristicSearch {
 	protected double estimatedValueBestConnectorFromInitialState = 0;
 	
 	protected int NUMBER_ITERATIONS = 0;
+
+	// to track memory usage
+	protected float memoryUsed = 0;
+	protected long lastMemTaken;
 	
 	protected Map<BigInteger, Double> stateNodeMapHValue = new HashMap<BigInteger, Double>();
 	
@@ -73,6 +77,14 @@ public class DepthFirstSearch extends HeuristicSearch {
 	
 	public DepthFirstSearch(Problem problem, Heuristic heuristic) {
 		super(problem, heuristic);
+	}
+
+	protected void updateMem() {
+		if (System.currentTimeMillis() - lastMemTaken > 1000) {
+			System.out.println("Memory check");
+			this.memoryUsed = Math.max(this.memoryUsed, Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+			lastMemTaken = System.currentTimeMillis();
+		}
 	}
 
 	@Override
