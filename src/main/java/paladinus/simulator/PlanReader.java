@@ -1,4 +1,4 @@
-package main.java.paladinus.simulator;
+package paladinus.simulator;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -19,14 +19,14 @@ import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
-import main.java.paladinus.Global.ExitCode;
-import main.java.paladinus.explicit.ExplicitAxiomEvaluator;
-import main.java.paladinus.explicit.ExplicitState;
-import main.java.paladinus.parser.SasParser;
-import main.java.paladinus.problem.Problem;
-import main.java.paladinus.search.policy.Policy;
-import main.java.paladinus.state.Operator;
-import main.java.paladinus.util.Pair;
+import paladinus.Global.ExitCode;
+import paladinus.explicit.ExplicitAxiomEvaluator;
+import paladinus.explicit.ExplicitState;
+import paladinus.parser.SasParser;
+import paladinus.problem.Problem;
+import paladinus.search.policy.Policy;
+import paladinus.state.Operator;
+import paladinus.util.Pair;
 
 /**
  *

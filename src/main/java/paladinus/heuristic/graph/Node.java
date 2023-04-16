@@ -1,12 +1,12 @@
-package main.java.paladinus.heuristic.graph;
+package paladinus.heuristic.graph;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import main.java.paladinus.heuristic.Heuristic;
-import main.java.paladinus.state.State;
+import paladinus.heuristic.Heuristic;
+import paladinus.state.State;
 
 /**
  *

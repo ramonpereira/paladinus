@@ -1,9 +1,9 @@
-package main.java.paladinus.search;
+package paladinus.search;
 
 import java.math.BigInteger;
 
-import main.java.paladinus.Global;
-import main.java.paladinus.state.State;
+import paladinus.Global;
+import paladinus.state.State;
 
 /**
  * Node in the search space.

@@ -1,4 +1,4 @@
-package main.java.paladinus.heuristic.pdb;
+package paladinus.heuristic.pdb;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import main.java.paladinus.Global;
-import main.java.paladinus.explicit.ExplicitState;
-import main.java.paladinus.heuristic.Heuristic;
-import main.java.paladinus.problem.Problem;
-import main.java.paladinus.state.Operator;
-import main.java.paladinus.state.State;
-import main.java.paladinus.symbolic.BeliefState;
+import paladinus.Global;
+import paladinus.explicit.ExplicitState;
+import paladinus.heuristic.Heuristic;
+import paladinus.problem.Problem;
+import paladinus.state.Operator;
+import paladinus.state.State;
+import paladinus.symbolic.BeliefState;
 
 /**
  * Performs random walks in the state space in order to obtain representative

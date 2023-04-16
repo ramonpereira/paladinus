@@ -1,10 +1,10 @@
-package main.java.paladinus.heuristic.pdb;
+package paladinus.heuristic.pdb;
 
 import java.util.Collection;
 import java.util.Collections;
 
-import main.java.paladinus.heuristic.graph.Connector;
-import main.java.paladinus.heuristic.graph.Node;
+import paladinus.heuristic.graph.Connector;
+import paladinus.heuristic.graph.Node;
 
 /**
  *

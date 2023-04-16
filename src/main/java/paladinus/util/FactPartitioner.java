@@ -1,4 +1,4 @@
-package main.java.paladinus.util;
+package paladinus.util;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import main.java.paladinus.explicit.ExplicitCondition;
-import main.java.paladinus.explicit.ExplicitEffect;
-import main.java.paladinus.explicit.ExplicitOperator;
-import main.java.paladinus.explicit.ExplicitState;
-import main.java.paladinus.problem.Problem;
-import main.java.paladinus.state.Operator;
-import main.java.paladinus.state.State;
+import paladinus.explicit.ExplicitCondition;
+import paladinus.explicit.ExplicitEffect;
+import paladinus.explicit.ExplicitOperator;
+import paladinus.explicit.ExplicitState;
+import paladinus.problem.Problem;
+import paladinus.state.Operator;
+import paladinus.state.State;
 
 /**
  * 

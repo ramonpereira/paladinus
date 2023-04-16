@@ -17,10 +17,10 @@
 
 ## Build (and test)
 
-The planner is set-up as a Java Maven project. So, the easiest way to build and test is as follows:
+The planner is set-up as a Java Maven project. So, the easiest way to build and test is as follows (to skip the tests add `-Dmaven.test.skip.exec`):
 
 ```shell
-$ mvn clean package -Dmaven.test.skip.exec
+$ mvn clean package
 ```
 
 This will generate a JAR files (with and without dependencies) under `target/` and all classes under `target/classes`.
@@ -33,27 +33,23 @@ $ ./paladinus -h
 
 Paladinus: An Iterative Depth-First Search FOND Planner
 
-Help:
- -h (-help)                             : print this message
- 
-Debug:
- -debug [ON | OFF]                      : use debug option [default: OFF]
-
-Paladinus options:
- -printPolicy                           : print policy to stdout
+ -h (--help)                            : print this message (default: true)
+ -debug [ON | OFF]                      : use debug option (default: OFF)
+ -t (-type) [FOND]                      : use fond translate (Example: -t FOND
+                                          <domain_file> <problem_file>)
+                                          (default: FOND)
+ -printPolicy                           : print policy to stdout (default:
+                                          false)
  -exportPolicy FILENAME                 : export policy to file
  -exportDot FILENAME                    : export policy as DOT graph (GraphViz)
+ -translatorPath DIRNAME                : path to SAS translator script
+                                          (default: ./translator-fond/translate.
+                                          py)
  -timeout N                             : set timeout in seconds
-
-Search algorithms:
- -s (-search) [ITERATIVE_DFS | ITERATIVE_DFS_PRUNING | DFS]  : set search algorithm [default: ITERATIVE_DFS]
-
-Heuristics:
- -heuristic [HMAX | HADD | FF | PDBS | LMCUT | BLIND | BLIND_DEADEND] : set heuristic [default: FF]            
-
-Action Selection and Evaluation Function Criteria:
- -as (-actionSelectionCriterion) [MIN_H | MIN_MAX_H | MEAN_H | MIN_SUM_H]  : set actionSelectionCriterion [default: MIN_MAX_H]
- -ef (-evaluationFunctionCriterion) [MAX | MIN]                            : set evaluationFunctionCriterion [default: MAX]
+ -as (-actionSelectionCriterion) VAL    : set actionSelectionCriterion
+                                          (default: MIN_MAX_H)
+...
+...
 ```
 
 Check below for running the system directly via the JAR file or compiled classes (mostly when developing further the system).
@@ -77,7 +73,7 @@ There are two main planner options:
 * `-search`: algorithm to use (default is `ITERATIVE_DFS`).
 * `-heuristic`: heuristic to use (default is `FF`).
 
-Other options, including those for reporting the policy solution, can be found via help option `-h`.
+Other options, including those for reporting the solution policy, can be found via help option `-h`.
 
 For example, to run plain Iterative DFS with HMAX heuristics and print the policy:
 

@@ -1,10 +1,10 @@
-package main.java.paladinus;
+package paladinus;
 
 import java.util.Random;
 
-import main.java.paladinus.heuristic.pdb.PDB;
-import main.java.paladinus.heuristic.pdb.RandomWalk;
-import main.java.paladinus.search.AbstractNode;
+import paladinus.heuristic.pdb.PDB;
+import paladinus.heuristic.pdb.RandomWalk;
+import paladinus.search.AbstractNode;
 
 /**
  * Class used to hold static global settings.

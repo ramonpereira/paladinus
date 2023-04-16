@@ -1,4 +1,4 @@
-package main.java.paladinus.util;
+package paladinus.util;
 
 import java.io.File;
 import java.io.IOException;

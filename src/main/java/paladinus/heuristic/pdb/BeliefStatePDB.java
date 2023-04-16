@@ -1,17 +1,17 @@
-package main.java.paladinus.heuristic.pdb;
+package paladinus.heuristic.pdb;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import main.java.paladinus.heuristic.Heuristic;
-import main.java.paladinus.heuristic.graph.Node;
-import main.java.paladinus.problem.Problem;
-import main.java.paladinus.state.State;
-import main.java.paladinus.symbolic.BeliefState;
-import main.java.paladinus.symbolic.PartiallyObservableProblem;
-import main.java.paladinus.symbolic.SymbolicCondition;
+import paladinus.heuristic.Heuristic;
+import paladinus.heuristic.graph.Node;
+import paladinus.problem.Problem;
+import paladinus.state.State;
+import paladinus.symbolic.BeliefState;
+import paladinus.symbolic.PartiallyObservableProblem;
+import paladinus.symbolic.SymbolicCondition;
 
 /**
  * Pattern database.

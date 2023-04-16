@@ -1,4 +1,4 @@
-package main.java.paladinus;
+package paladinus;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,19 +21,19 @@ import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.ParserProperties;
 
-import main.java.paladinus.Global.ExitCode;
-import main.java.paladinus.heuristic.Heuristic;
-import main.java.paladinus.heuristic.HeuristicGenerator;
-import main.java.paladinus.parser.SasParser;
-import main.java.paladinus.problem.Problem;
-import main.java.paladinus.search.AbstractSearch;
-import main.java.paladinus.search.AbstractSearch.Result;
-import main.java.paladinus.search.dfs.DepthFirstSearch;
-import main.java.paladinus.search.dfs.iterative.IterativeDepthFirstSearch;
-import main.java.paladinus.search.dfs.iterative.IterativeDepthFirstSearchLearning;
-import main.java.paladinus.search.dfs.iterative.IterativeDepthFirstSearchPruning;
-import main.java.paladinus.simulator.PlanSimulator;
-import main.java.paladinus.util.OsUtils;
+import paladinus.Global.ExitCode;
+import paladinus.heuristic.Heuristic;
+import paladinus.heuristic.HeuristicGenerator;
+import paladinus.parser.SasParser;
+import paladinus.problem.Problem;
+import paladinus.search.AbstractSearch;
+import paladinus.search.AbstractSearch.Result;
+import paladinus.search.dfs.DepthFirstSearch;
+import paladinus.search.dfs.iterative.IterativeDepthFirstSearch;
+import paladinus.search.dfs.iterative.IterativeDepthFirstSearchLearning;
+import paladinus.search.dfs.iterative.IterativeDepthFirstSearchPruning;
+import paladinus.simulator.PlanSimulator;
+import paladinus.util.OsUtils;
 
 /**
  * Paladinus is a FOND planner based myND planner.

@@ -1,7 +1,7 @@
 // JFactory.java, created Aug 1, 2003 7:06:47 PM by joewhaley
 // Copyright (C) 2003 John Whaley <jwhaley@alum.mit.edu>
 // Licensed under the terms of the GNU LGPL; see COPYING for details.
-package main.java.javabdd;
+package javabdd;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,7 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import main.java.paladinus.Global;
+import paladinus.Global;
 
 /**
  * <p>

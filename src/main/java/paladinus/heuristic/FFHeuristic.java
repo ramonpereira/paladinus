@@ -1,4 +1,4 @@
-package main.java.paladinus.heuristic;
+package paladinus.heuristic;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,15 +11,15 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-import main.java.paladinus.Global;
-import main.java.paladinus.explicit.ExplicitCondition;
-import main.java.paladinus.explicit.ExplicitOperator;
-import main.java.paladinus.explicit.ExplicitOperator.OperatorRule;
-import main.java.paladinus.explicit.ExplicitState;
-import main.java.paladinus.problem.Problem;
-import main.java.paladinus.state.Operator;
-import main.java.paladinus.state.State;
-import main.java.paladinus.util.Pair;
+import paladinus.Global;
+import paladinus.explicit.ExplicitCondition;
+import paladinus.explicit.ExplicitOperator;
+import paladinus.explicit.ExplicitOperator.OperatorRule;
+import paladinus.explicit.ExplicitState;
+import paladinus.problem.Problem;
+import paladinus.state.Operator;
+import paladinus.state.State;
+import paladinus.util.Pair;
 
 /**
  * Relaxed planning graph heuristic as implemented in the FF planning system by

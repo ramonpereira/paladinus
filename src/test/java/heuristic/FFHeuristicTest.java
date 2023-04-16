@@ -7,23 +7,24 @@ import java.io.InputStream;
 
 import org.junit.Test;
 
-import main.java.paladinus.Global;
-import main.java.paladinus.Options;
-import main.java.paladinus.heuristic.HMaxHeuristic;
-import main.java.paladinus.parser.SasParser;
-import main.java.paladinus.problem.Problem;
+import paladinus.Global;
+import paladinus.Options;
+import paladinus.heuristic.FFHeuristic;
+import paladinus.heuristic.FFHeuristic.RPGStrategy;
+import paladinus.parser.SasParser;
+import paladinus.problem.Problem;
 
 /**
-*
-* @author Ramon Fraga Pereira
-*
-*/
-public class HMaxHeuristicTest {
+ *
+ * @author Ramon Fraga Pereira
+ *
+ */
+public class FFHeuristicTest {
 
 	@Test
-	public void testMaxHeuristicFaults1() throws IOException, InterruptedException {
-		String domainFile = "benchmarks/faults/d1.pddl";
-		String instanceFile = "benchmarks/faults/p1.pddl";
+	public void testFFHeuristicAcrobatics1() throws IOException, InterruptedException {
+		String domainFile = "benchmarks/acrobatics/domain.pddl";
+		String instanceFile = "benchmarks/acrobatics/p1.pddl";
 
 		this.translateFOND(domainFile, instanceFile);
 
@@ -36,9 +37,10 @@ public class HMaxHeuristicTest {
 
 		problem.finishInitializationAndPreprocessing();
 		
-		HMaxHeuristic hmax = new HMaxHeuristic(problem);
-		System.out.println("> MAX Heuristic ");
-		System.out.println("$> h-value = " + hmax.getHeuristic(problem.getSingleInitialState()));
+		FFHeuristic ff = new FFHeuristic(problem, RPGStrategy.FF);
+		System.out.println("> FF Heuristic ");
+		System.out.println("$> h-value = " + ff.getHeuristic(problem.getSingleInitialState()));
+		System.out.println(ff.getRelaxedPlan());
 	}
 
 	private String toAbsolute(String resFile) {
@@ -51,5 +53,4 @@ public class HMaxHeuristicTest {
 		Process p = Runtime.getRuntime().exec(cmd);
 		p.waitFor();
 	}
-
 }
