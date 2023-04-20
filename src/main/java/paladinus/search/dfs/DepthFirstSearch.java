@@ -79,9 +79,9 @@ public class DepthFirstSearch extends HeuristicSearch {
 		super(problem, heuristic);
 	}
 
+	// probes current memory consumption and stores it if greater than previous probe
 	protected void updateMem() {
 		if (System.currentTimeMillis() - lastMemTaken > 1000) {
-			System.out.println("Memory check");
 			this.memoryUsed = Math.max(this.memoryUsed, Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 			lastMemTaken = System.currentTimeMillis();
 		}
