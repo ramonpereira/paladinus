@@ -59,6 +59,8 @@ public class IterativeDepthFirstSearch extends DepthFirstSearch {
 	}
 	
 	protected SearchFlag doIterativeSearch(Boolean unitaryBound, SearchNode node) {
+		long memUsed = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+
 		if(unitaryBound) {
 			this.POLICY_BOUND = 0;			
 		} else {
@@ -90,13 +92,22 @@ public class IterativeDepthFirstSearch extends DepthFirstSearch {
 			} else this.POLICY_BOUND = this.NEW_POLICY_BOUND;
 			
 			this.NEW_POLICY_BOUND = Double.POSITIVE_INFINITY;
+
+
+			memUsed = Math.max(memUsed, Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+
 		} while (flag != SearchFlag.GOAL && this.POLICY_BOUND < Double.POSITIVE_INFINITY && flag != SearchFlag.TIMEOUT);
+
+		System.out.println("\nMax total Memory (GB) = " + memUsed / Math.pow(1024, 3) + "\n");
+
 		return flag;
 	}
 	
 	protected Pair<SearchFlag, Set<SearchNode>> doIterativeSearch(SearchNode node, Set<SearchNode> closedSolved, double policySize, double policyBound) {
-		if (DEBUG)
+		if (DEBUG) {
 			dumpStateSpace(this.NUMBER_ITERATIONS);
+			this.updateMem();	// probe memory consumption
+		}
 		
 		if(timeout())
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.TIMEOUT, null);

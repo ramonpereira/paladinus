@@ -13,17 +13,17 @@ import paladinus.search.dfs.DepthFirstSearch;
 import paladinus.util.Pair;
 
 /**
- * 
+ *
  * An iterative (pruning) depth-first search algorithm for FOND Planning.
- * 
+ *
  * @author Ramon Fraga Pereira
  *
  */
 public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
-	
+
 	protected double POLICY_SIZE = 0;
 	protected double NEW_POLICY_BOUND = 0;
-	
+
 	private boolean checkSolvedStates = false;
 
 	public IterativeDepthFirstSearchPruning(Problem problem, Heuristic heuristic, String strategies, String criterion, String checkSolved) {
@@ -33,7 +33,7 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 			System.out.println("Check Solveds: TRUE");
 		}
 	}
-	
+
 	@Override
 	public Result run() {
 		/* Start measuring search time. */
@@ -48,73 +48,81 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 
 		/* Finish measuring search time. */
 		endtime = System.currentTimeMillis();
-		
+
 		System.out.println("\n# Closed-Solved Nodes        = " + this.closedSolvedNodes.size());
 		System.out.println("\n# Closed-Non-Promising Nodes = " + this.closedDeadEndsNodes.size());
-		
-		if (DEBUG)
+
+		if (DEBUG) {
+			System.out.println("\nMax total Memory probed (GB) = " + this.memoryUsed / Math.pow(1024, 3) + "\n");
 			dumpStateSpace(this.NUMBER_ITERATIONS);
+		}
 
 		if(timeout())
 			return Result.TIMEOUT;
-		
+
 		if (flag == SearchFlag.GOAL) {
 			return Result.PROVEN;
 		} else if (flag == SearchFlag.DEAD_END || flag == SearchFlag.NO_POLICY) {
 			return Result.DISPROVEN;
 		} else return Result.TIMEOUT;
 	}
-	
+
 	protected SearchFlag doIterativeSearch(Boolean unitaryBound, SearchNode node) {
 		if(unitaryBound) {
-			this.POLICY_BOUND = 0;			
+			this.POLICY_BOUND = 0;
 		} else {
 			this.POLICY_BOUND = node.getHeuristic();
 			if(this.POLICY_BOUND == Double.POSITIVE_INFINITY)
 				return SearchFlag.NO_POLICY;
 		}
 		SearchFlag flag = SearchFlag.NO_POLICY;
-		
+
 		this.NEW_POLICY_BOUND = Double.POSITIVE_INFINITY;
-		
+
 		System.out.println("\n> Bound Initial: " + this.POLICY_BOUND);
 		System.out.println();
 		do {
-			System.out.println("> Bound: " + this.POLICY_BOUND);
+			System.out.println("> Bounds: " + this.POLICY_BOUND);
 			this.POLICY_SIZE = 0d;
-			
+
 			this.dumpingCounterStateSpace = 0;
 			this.NUMBER_ITERATIONS++;
 
 			Set<SearchNode> closedSolved = new HashSet<>();
 			this.closedVisitedNodes.clear();
 			this.closedDeadEndsNodes.clear();
-			
+
 			Pair<SearchFlag, Set<SearchNode>> resultSearch = doIterativeSearch(node, closedSolved, this.POLICY_SIZE, this.POLICY_BOUND);
 			flag = resultSearch.first;
 			this.closedSolvedNodes = resultSearch.second;
-			
+
 			if(unitaryBound) {
-				this.POLICY_BOUND++;				
+				this.POLICY_BOUND++;
 			} else this.POLICY_BOUND = this.NEW_POLICY_BOUND;
-			
+
 			this.NEW_POLICY_BOUND = Double.POSITIVE_INFINITY;
+
 		} while (flag != SearchFlag.GOAL && this.POLICY_BOUND < Double.POSITIVE_INFINITY && flag != SearchFlag.TIMEOUT);
+
 		return flag;
 	}
-	
+
 	protected Pair<SearchFlag, Set<SearchNode>> doIterativeSearch(SearchNode node, Set<SearchNode> closedSolved, double policySize, double policyBound) {
-		if (DEBUG)
+		if (DEBUG) {
 			dumpStateSpace(this.NUMBER_ITERATIONS);
-		
+			this.updateMem();	// probe memory consumption
+		}
+
+	
+
 		if(RECURSION_COUNTER >= Integer.MAX_VALUE)
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.DEAD_END, closedSolved);
-		
+
 		if(timeout())
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.TIMEOUT, null);
 
 		RECURSION_COUNTER++;
-		
+
 		if(node.isGoalNode() || closedSolved.contains(node)) {
 			closedSolved.addAll(this.closedVisitedNodes);
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.GOAL, closedSolved);
@@ -122,44 +130,46 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.DEAD_END, closedSolved);
 		} else if (this.closedVisitedNodes.contains(node))
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.VISITED, closedSolved);
-		
+
 		this.closedVisitedNodes.add(node);
-		
+
 		PriorityQueue<SearchConnector> connectors = this.getNodeConnectors(node);
 		NODE_EXPANSIONS++;
-		
+
 		boolean allConnectorsDeadEnds = true;
 		while(!connectors.isEmpty()) {
 			SearchConnector c = connectors.poll();
-			
+
 			if(policySize + 1 + c.getEvaluationFunctionAccordingToCriterion() > policyBound && closedSolved.size() == 0) {
 				if(policySize + 1 + c.getEvaluationFunctionAccordingToCriterion() < this.NEW_POLICY_BOUND )
-					this.NEW_POLICY_BOUND = policySize + 1 + c.getEvaluationFunctionAccordingToCriterion();				
+					this.NEW_POLICY_BOUND = policySize + 1 + c.getEvaluationFunctionAccordingToCriterion();
 			} else if(policySize + 1 > policyBound) {
 				if(policySize + 1 < this.NEW_POLICY_BOUND)
 					this.NEW_POLICY_BOUND = policySize + 1;
-			} else { 
+			} else {
 				Set<SearchNode> pathsFound = new HashSet<>();
-				
+
 				boolean newGoalPathFound = true;
-				
+
 				boolean connectorDeadEnd = false;
-				
+
 				Set<SearchNode> copyClosedSolved = new HashSet<>(closedSolved);
-				
+
 				while(newGoalPathFound == true) {
+
 					newGoalPathFound = false;
 					Set<SearchNode> findingGoalPath = new HashSet<>();
-					
+
 					for(SearchNode s: c.getChildren()) {
 						if(!pathsFound.contains(s))
 							findingGoalPath.add(s);
 					}
 					for(SearchNode s: findingGoalPath) {
+						// recursive call!
 						Pair<SearchFlag, Set<SearchNode>> resultSearch = doIterativeSearch(s, copyClosedSolved, policySize+1, policyBound);
 						SearchFlag flag = resultSearch.first;
 						copyClosedSolved = new HashSet<SearchNode>(resultSearch.second);
-						
+
 						if(flag == SearchFlag.DEAD_END) {
 							newGoalPathFound = false;
 							connectorDeadEnd = true;
@@ -185,11 +195,11 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 			this.closedDeadEndsNodes.add(node);
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.DEAD_END, closedSolved);
 		}
-		
+
 		this.closedVisitedNodes.remove(node);
 		return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.VISITED, closedSolved);
 	}
-	
+
 	@Override
 	public void printStats(boolean simulatePlan) {
 		System.out.println("# Number Iterations         = " + this.NUMBER_ITERATIONS);
