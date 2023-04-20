@@ -52,11 +52,10 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 		System.out.println("\n# Closed-Solved Nodes        = " + this.closedSolvedNodes.size());
 		System.out.println("\n# Closed-Non-Promising Nodes = " + this.closedDeadEndsNodes.size());
 
-		System.out.println("\nMax total Memory (GB) = " + this.memoryUsed / Math.pow(1024, 3) + "\n");
-
-
-		if (DEBUG)
+		if (DEBUG) {
+			System.out.println("\nMax total Memory probed (GB) = " + this.memoryUsed / Math.pow(1024, 3) + "\n");
 			dumpStateSpace(this.NUMBER_ITERATIONS);
+		}
 
 		if(timeout())
 			return Result.TIMEOUT;
@@ -103,19 +102,18 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 
 			this.NEW_POLICY_BOUND = Double.POSITIVE_INFINITY;
 
-			this.updateMem();
-
 		} while (flag != SearchFlag.GOAL && this.POLICY_BOUND < Double.POSITIVE_INFINITY && flag != SearchFlag.TIMEOUT);
 
 		return flag;
 	}
 
 	protected Pair<SearchFlag, Set<SearchNode>> doIterativeSearch(SearchNode node, Set<SearchNode> closedSolved, double policySize, double policyBound) {
-		if (DEBUG)
+		if (DEBUG) {
 			dumpStateSpace(this.NUMBER_ITERATIONS);
+			this.updateMem();	// probe memory consumption
+		}
 
-		this.updateMem();
-
+	
 
 		if(RECURSION_COUNTER >= Integer.MAX_VALUE)
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.DEAD_END, closedSolved);
@@ -167,6 +165,7 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 							findingGoalPath.add(s);
 					}
 					for(SearchNode s: findingGoalPath) {
+						// recursive call!
 						Pair<SearchFlag, Set<SearchNode>> resultSearch = doIterativeSearch(s, copyClosedSolved, policySize+1, policyBound);
 						SearchFlag flag = resultSearch.first;
 						copyClosedSolved = new HashSet<SearchNode>(resultSearch.second);

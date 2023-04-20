@@ -104,8 +104,10 @@ public class IterativeDepthFirstSearch extends DepthFirstSearch {
 	}
 	
 	protected Pair<SearchFlag, Set<SearchNode>> doIterativeSearch(SearchNode node, Set<SearchNode> closedSolved, double policySize, double policyBound) {
-		if (DEBUG)
+		if (DEBUG) {
 			dumpStateSpace(this.NUMBER_ITERATIONS);
+			this.updateMem();	// probe memory consumption
+		}
 		
 		if(timeout())
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.TIMEOUT, null);
