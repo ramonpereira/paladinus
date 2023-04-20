@@ -3,4 +3,12 @@
 DIR=$(dirname "$0")
 JAR=$DIR/target/paladinus-1.1-jar-with-dependencies.jar
 
-java -jar $JAR -translatorPath $DIR/translator-fond/translate.py "$@"
+#  restrict the max heap size that can be used by the JVM
+# MAX_HEAP=-Xmx512m
+MAX_HEAP=""
+
+# if one wants to use JCMD https://www.baeldung.com/running-jvm-diagnose
+JCMD="-XX:NativeMemoryTracking=summary"
+JCMD=""
+
+java $MAX_HEAP $JCMD -jar $JAR -translatorPath $DIR/translator-fond/translate.py "$@"
