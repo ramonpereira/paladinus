@@ -94,6 +94,9 @@ public class PaladinusPlanner {
 	public PaladinusPlanner(String[] args) throws FileNotFoundException, IOException {
 		new Global().initialize();
 		initialize(args);
+
+		// do a frist memory report
+		printMEMStats();
 	}
 
 	// public PaladinusPlanner() {}
@@ -139,8 +142,22 @@ public class PaladinusPlanner {
 		// System.out.println("\nGarbage collection called before memory consumtion check");
 
 
-		long memUsedOverall = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-		System.out.println("\nTotal Memory (GB) = " + memUsedOverall / Math.pow(1024, 3) + "\n");
+        Runtime r = Runtime.getRuntime();
+		double gb = Math.pow(1024, 3);
+
+		double maxMemory = r.maxMemory() / gb;	// max memory it can ever use, limit
+		double totalMemory = r.totalMemory() / gb;	// current reserved memory (less than max)
+		double freeMemory = r.freeMemory() / gb;	// free memory that can be allocated (less than total)
+		double usedMemory = totalMemory - freeMemory;	// current memory been used (from totalMemory)
+ 
+        System.out.println("==============================");
+        System.out.println("MEMORY REPORTING  (all in GB)");
+        System.out.println("==============================");
+        System.out.println("Max memory: " + maxMemory);
+        System.out.println("Total reserved memory: " + totalMemory);
+        System.out.println("Free memory: " + freeMemory);
+        System.out.println("Used memory: " + usedMemory);
+        System.out.println("==============================");
 	}
 
 
