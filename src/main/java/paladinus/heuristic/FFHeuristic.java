@@ -385,7 +385,16 @@ public class FFHeuristic extends Heuristic {
 			System.out.println("FF: getHeuristic called");
 		}
 		if (state instanceof ExplicitState) {
-			return getRPGHeuristic((ExplicitState) state);
+			double hvalue = getRPGHeuristic((ExplicitState) state);
+			/*
+			double nonDeterministicHvalue = 0; 
+			for(ExplicitOperator o: this.getRelaxedPlan())
+				if(!o.getName().contains("goalRule"))
+					nonDeterministicHvalue += o.getCost() * o.getNondeterministicEffect().size();
+			
+			return nonDeterministicHvalue;
+			*/
+			return hvalue;
 		}
 		return Double.POSITIVE_INFINITY;
 	}

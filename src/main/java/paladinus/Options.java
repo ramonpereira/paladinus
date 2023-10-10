@@ -361,6 +361,27 @@ public class Options {
 		return validatePolicyPRP == Bool.ON;
 	}
 	
+	@Option(name = "-heuristicTieBreak", hidden = true, usage = "A secondary heuristic for tie-breaking when selection connectors.")
+	String heuristicTieBreak = "HMAX";
+	
+	public String getHeuristicTieBreak() {
+		return heuristicTieBreak;
+	}
+	
+	@Option(name = "-tieBreakConnectors", hidden = true, usage = "Tie break technique to order the explored connectors.")
+	String tieBreakConnectors = "OUTCOMESMAX";
+	
+	public String getTieBreakConnectors() {
+		return tieBreakConnectors;
+	}
+	
+	@Option(name = "-successorsExploration", hidden = true, usage = "Successor states exploration during the Fixed Point. Options: SORT by h-value, REVERSE by h-value, FIFO (i.e., old states first).")
+	String successorsExploration = "FIFO";
+	
+	public String getSuccessorsExploration() {
+		return successorsExploration;
+	}
+	
 	@Option(name = "-useClosedVistedNodes", hidden = true, usage = "use the closed-set of visited nodes when estimating the policy size.")
 	Bool useClosedVistedNodes = Bool.OFF;
 	

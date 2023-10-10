@@ -54,6 +54,7 @@ public class DepthFirstSearch extends HeuristicSearch {
 	protected double estimatedValueBestConnectorFromInitialState = 0;
 	
 	protected int NUMBER_ITERATIONS = 0;
+	protected int FIXED_POINT_COUNTER = 0;
 	
 	protected Map<BigInteger, Double> stateNodeMapHValue = new HashMap<BigInteger, Double>();
 	
@@ -170,7 +171,11 @@ public class DepthFirstSearch extends HeuristicSearch {
 				newNode.setParent(node);
 				children.add(newNode);
 			}
-			Collections.sort(children);
+			if(Global.options.getSuccessorsExploration().equals("SORT")) {
+				Collections.sort(children);
+			} else if(Global.options.getSuccessorsExploration().equals("REVERSE")) {
+				Collections.sort(children, Collections.reverseOrder());
+			}
 			SearchConnector connector = new SearchConnector(node, children, op, this.evaluationFunctionCriterion);
 			if(connector.getAverageChildEstimate() == Double.POSITIVE_INFINITY)
 				continue;
@@ -375,6 +380,10 @@ public class DepthFirstSearch extends HeuristicSearch {
 	
 	public int getNumberIterations() {
 		return NUMBER_ITERATIONS;
+	}
+	
+	public int getFixedPointCounter() {
+		return FIXED_POINT_COUNTER;
 	}
 	
 	protected void fillStateActionTable(SearchNode node) {

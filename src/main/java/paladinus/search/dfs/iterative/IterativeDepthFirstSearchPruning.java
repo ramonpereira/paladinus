@@ -1,6 +1,8 @@
 package paladinus.search.dfs.iterative;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -135,9 +137,9 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 			if(policySize + 1 + c.getEvaluationFunctionAccordingToCriterion() > policyBound && closedSolved.size() == 0) {
 				if(policySize + 1 + c.getEvaluationFunctionAccordingToCriterion() < this.NEW_POLICY_BOUND )
 					this.NEW_POLICY_BOUND = policySize + 1 + c.getEvaluationFunctionAccordingToCriterion();				
-			} else if(policySize + 1 > policyBound) {
-				if(policySize + 1 < this.NEW_POLICY_BOUND)
-					this.NEW_POLICY_BOUND = policySize + 1;
+//			} else if(policySize + 1 > policyBound) {
+//				if(policySize + 1 < this.NEW_POLICY_BOUND)
+//					this.NEW_POLICY_BOUND = policySize + 1;
 			} else { 
 				Set<SearchNode> pathsFound = new HashSet<>();
 				
@@ -149,14 +151,18 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 				
 				while(newGoalPathFound == true) {
 					newGoalPathFound = false;
-					Set<SearchNode> findingGoalPath = new HashSet<>();
+					List<SearchNode> findingGoalPath = new ArrayList<>();
 					
 					for(SearchNode s: c.getChildren()) {
 						if(!pathsFound.contains(s))
 							findingGoalPath.add(s);
 					}
+
 					for(SearchNode s: findingGoalPath) {
+						FIXED_POINT_COUNTER++;
+						
 						Pair<SearchFlag, Set<SearchNode>> resultSearch = doIterativeSearch(s, copyClosedSolved, policySize+1, policyBound);
+						
 						SearchFlag flag = resultSearch.first;
 						copyClosedSolved = new HashSet<SearchNode>(resultSearch.second);
 						
@@ -192,6 +198,7 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 	
 	@Override
 	public void printStats(boolean simulatePlan) {
+		System.out.println("# Fixed Point Counter       = " + this.FIXED_POINT_COUNTER);
 		System.out.println("# Number Iterations         = " + this.NUMBER_ITERATIONS);
 		super.printStats(simulatePlan);
 	}

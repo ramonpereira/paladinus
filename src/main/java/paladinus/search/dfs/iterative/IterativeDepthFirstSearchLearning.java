@@ -144,7 +144,10 @@ public class IterativeDepthFirstSearchLearning extends DepthFirstSearch {
 						if(!pathsFound.contains(s))
 							findingGoalPath.add(s);
 					}
+					
 					for(SearchNode s: findingGoalPath) {
+						FIXED_POINT_COUNTER++;
+						
 						Pair<SearchFlag, Set<SearchNode>> resultSearch = doIterativeSearch(s, copyClosedSolved, policySize+1, policyBound);
 						
 						SearchFlag flag = resultSearch.first;
@@ -173,5 +176,12 @@ public class IterativeDepthFirstSearchLearning extends DepthFirstSearch {
 		
 		this.closedVisitedNodes.remove(node);
 		return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.VISITED, closedSolved);
+	}
+	
+	@Override
+	public void printStats(boolean simulatePlan) {
+		System.out.println("# Fixed Point Counter       = " + this.FIXED_POINT_COUNTER);
+		System.out.println("# Number Iterations         = " + this.NUMBER_ITERATIONS);
+		super.printStats(simulatePlan);
 	}
 }

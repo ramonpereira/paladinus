@@ -32,6 +32,7 @@ import paladinus.search.dfs.DepthFirstSearch;
 import paladinus.search.dfs.iterative.IterativeDepthFirstSearch;
 import paladinus.search.dfs.iterative.IterativeDepthFirstSearchLearning;
 import paladinus.search.dfs.iterative.IterativeDepthFirstSearchPruning;
+import paladinus.search.dfs.iterative.IterativeDepthFirstSearchPruningLearning;
 import paladinus.simulator.PlanSimulator;
 import paladinus.util.OsUtils;
 
@@ -344,7 +345,13 @@ public class PaladinusPlanner {
 					System.out.println("Algorithm: Iterative Depth-First Search Learning for FOND Planning");
 					if(heuristic != null)
 						search = new IterativeDepthFirstSearchLearning(problem, heuristic, Global.options.actionSelectionCriterion, Global.options.evaluationFunctionCriterion);
-					break;					
+					break;	
+					
+				case ITERATIVE_DFS_PRUNING_LEARNING:
+					System.out.println("Algorithm: Iterative Depth-First Search Pruning Learning for FOND Planning");
+					if(heuristic != null)
+						search = new IterativeDepthFirstSearchPruningLearning(problem, heuristic, Global.options.actionSelectionCriterion, Global.options.evaluationFunctionCriterion, Global.options.checkSolvedStates);
+					break;						
 
 				default:
 					new Exception("Unknown Search Algorithm.").printStackTrace();

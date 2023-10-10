@@ -30,6 +30,8 @@ public abstract class HeuristicSearch extends AbstractSearch {
 	 * Heuristic estimator for the initialization of leaf nodes
 	 */
 	protected Heuristic heuristic;
+	
+	protected Heuristic heuristicTieBreak;
 
 	public static ExpansionRules[][] expansionRules;
 	
@@ -52,6 +54,10 @@ public abstract class HeuristicSearch extends AbstractSearch {
 	public HeuristicSearch(Problem problem, Heuristic heuristic) {
 		super(problem);
 		this.heuristic = heuristic;
+		
+		/*
+		this.heuristicTieBreak = HeuristicGenerator.getHeuristic(problem, Global.options.getHeuristicTieBreak().toString());
+		*/
 	}
 
 	/**
@@ -152,5 +158,9 @@ public abstract class HeuristicSearch extends AbstractSearch {
 	
 	public Heuristic getHeuristic() {
 		return heuristic;
+	}
+	
+	public Heuristic getHeuristicTieBreak() {
+		return heuristicTieBreak;
 	}
 }

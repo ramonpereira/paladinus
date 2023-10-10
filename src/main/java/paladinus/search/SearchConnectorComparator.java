@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
+import paladinus.Global;
 import paladinus.util.ActionSelectionRule;
 
 /**
@@ -26,6 +27,26 @@ public class SearchConnectorComparator implements Comparator<SearchConnector> {
 	public SearchConnectorComparator(ActionSelectionRule rule, Set<SearchNode> closedVisited) {
 		this.rule = rule;
 		this.closedVisited = closedVisited;
+	}
+	
+	private int tieBreakerNumberOfOutcomesMinFirst(SearchConnector o1, SearchConnector o2) {
+		return o1.getChildren().size() - o2.getChildren().size();
+		
+	}
+	
+	private int tieBreakerNumberOfOutcomesMaxFirst(SearchConnector o1, SearchConnector o2) {
+		return o2.getChildren().size() - o1.getChildren().size();
+		
+	}
+	
+	private int tieBreakerMinSumFirst(SearchConnector o1, SearchConnector o2) {
+		return (int) (o1.getSumChildEstimate() - o2.getSumChildEstimate());
+		
+	}
+	
+	private int tieBreakerMaxSumFirst(SearchConnector o1, SearchConnector o2) {
+		return (int) (o2.getSumChildEstimate() - o1.getSumChildEstimate());
+		
 	}
 
 	@Override
@@ -99,6 +120,18 @@ public class SearchConnectorComparator implements Comparator<SearchConnector> {
 			default:
 				assert false;
 				break;
+		}
+		
+		if(result == 0) {
+			if(Global.options.getTieBreakConnectors().equals("OUTCOMESMIN")) {
+				result = tieBreakerNumberOfOutcomesMinFirst(o1, o2);
+			} else if(Global.options.getTieBreakConnectors().equals("OUTCOMESMAX")) {
+				result = tieBreakerNumberOfOutcomesMaxFirst(o1, o2);
+			} else if(Global.options.getTieBreakConnectors().equals("MINSUM")) {
+				result = tieBreakerMinSumFirst(o1, o2);
+			} else if(Global.options.getTieBreakConnectors().equals("MAXSUM")) {
+				result = tieBreakerMaxSumFirst(o1, o2);
+			}
 		}
 		return result;
 	}

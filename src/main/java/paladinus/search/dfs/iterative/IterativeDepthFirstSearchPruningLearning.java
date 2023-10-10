@@ -1,6 +1,8 @@
 package paladinus.search.dfs.iterative;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -14,18 +16,24 @@ import paladinus.util.Pair;
 
 /**
  * 
- * An iterative depth-first search algorithm for FOND Planning.
+ * An iterative (pruning) depth-first search algorithm for FOND Planning.
  * 
  * @author Ramon Fraga Pereira
  *
  */
-public class IterativeDepthFirstSearch extends DepthFirstSearch {
+public class IterativeDepthFirstSearchPruningLearning extends DepthFirstSearch {
 	
 	protected double POLICY_SIZE = 0;
 	protected double NEW_POLICY_BOUND = 0;
+	
+	private boolean checkSolvedStates = false;
 
-	public IterativeDepthFirstSearch(Problem problem, Heuristic heuristic, String strategies, String criterion) {
+	public IterativeDepthFirstSearchPruningLearning(Problem problem, Heuristic heuristic, String strategies, String criterion, String checkSolved) {
 		super(problem, heuristic, strategies, criterion);
+		if(this.checkSolvedStates || (checkSolved != null && checkSolved.contains("ON"))) {
+			this.checkSolvedStates = true;
+			System.out.println("Check Solveds: TRUE");
+		}
 	}
 	
 	@Override
@@ -43,7 +51,8 @@ public class IterativeDepthFirstSearch extends DepthFirstSearch {
 		/* Finish measuring search time. */
 		endtime = System.currentTimeMillis();
 		
-		System.out.println("\n# Closed-Solved Nodes = " + closedSolvedNodes.size());
+		System.out.println("\n# Closed-Solved Nodes        = " + this.closedSolvedNodes.size());
+		System.out.println("\n# Closed-Non-Promising Nodes = " + this.closedDeadEndsNodes.size());
 		
 		if (DEBUG)
 			dumpStateSpace(this.NUMBER_ITERATIONS);
@@ -69,6 +78,7 @@ public class IterativeDepthFirstSearch extends DepthFirstSearch {
 		SearchFlag flag = SearchFlag.NO_POLICY;
 		
 		this.NEW_POLICY_BOUND = Double.POSITIVE_INFINITY;
+		
 		System.out.println("\n> Bound Initial: " + this.POLICY_BOUND);
 		System.out.println();
 		do {
@@ -80,6 +90,7 @@ public class IterativeDepthFirstSearch extends DepthFirstSearch {
 
 			Set<SearchNode> closedSolved = new HashSet<>();
 			this.closedVisitedNodes.clear();
+			this.closedDeadEndsNodes.clear();
 			
 			Pair<SearchFlag, Set<SearchNode>> resultSearch = doIterativeSearch(node, closedSolved, this.POLICY_SIZE, this.POLICY_BOUND);
 			flag = resultSearch.first;
@@ -98,6 +109,9 @@ public class IterativeDepthFirstSearch extends DepthFirstSearch {
 		if (DEBUG)
 			dumpStateSpace(this.NUMBER_ITERATIONS);
 		
+		if(RECURSION_COUNTER >= Integer.MAX_VALUE)
+			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.DEAD_END, closedSolved);
+		
 		if(timeout())
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.TIMEOUT, null);
 
@@ -106,39 +120,48 @@ public class IterativeDepthFirstSearch extends DepthFirstSearch {
 		if(node.isGoalNode() || closedSolved.contains(node)) {
 			closedSolved.addAll(this.closedVisitedNodes);
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.GOAL, closedSolved);
+		} else if (node.isDeadEndNode() || this.closedDeadEndsNodes.contains(node)) {
+			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.DEAD_END, closedSolved);
 		} else if (this.closedVisitedNodes.contains(node))
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.VISITED, closedSolved);
 		
 		this.closedVisitedNodes.add(node);
 		
 		PriorityQueue<SearchConnector> connectors = this.getNodeConnectors(node);
+		SearchConnector minConnector = connectors.peek();
 		
 		NODE_EXPANSIONS++;
+		
+		boolean allConnectorsDeadEnds = true;
+		boolean updateHeuristicValue =  true;
 		
 		while(!connectors.isEmpty()) {
 			SearchConnector c = connectors.poll();
 			
 			if(policySize + 1 + c.getEvaluationFunctionAccordingToCriterion() > policyBound && closedSolved.size() == 0) {
 				if(policySize + 1 + c.getEvaluationFunctionAccordingToCriterion() < this.NEW_POLICY_BOUND )
-					this.NEW_POLICY_BOUND = policySize + 1 + c.getEvaluationFunctionAccordingToCriterion();
-			} else if(policySize + 1 > policyBound) {
-				if(policySize + 1 < this.NEW_POLICY_BOUND)
-					this.NEW_POLICY_BOUND = policySize + 1;
-			} else {
+					this.NEW_POLICY_BOUND = policySize + 1 + c.getEvaluationFunctionAccordingToCriterion();				
+//			} else if(policySize + 1 > policyBound) {
+//				if(policySize + 1 < this.NEW_POLICY_BOUND)
+//					this.NEW_POLICY_BOUND = policySize + 1;
+			} else { 
 				Set<SearchNode> pathsFound = new HashSet<>();
 				
 				boolean newGoalPathFound = true;
+				
+				boolean connectorDeadEnd = false;
 				
 				Set<SearchNode> copyClosedSolved = new HashSet<>(closedSolved);
 				
 				while(newGoalPathFound == true) {
 					newGoalPathFound = false;
-					Set<SearchNode> findingGoalPath = new HashSet<>();
+					List<SearchNode> findingGoalPath = new ArrayList<>();
 					
 					for(SearchNode s: c.getChildren()) {
 						if(!pathsFound.contains(s))
 							findingGoalPath.add(s);
 					}
+
 					for(SearchNode s: findingGoalPath) {
 						FIXED_POINT_COUNTER++;
 						
@@ -147,19 +170,39 @@ public class IterativeDepthFirstSearch extends DepthFirstSearch {
 						SearchFlag flag = resultSearch.first;
 						copyClosedSolved = new HashSet<SearchNode>(resultSearch.second);
 						
+						if(flag == SearchFlag.DEAD_END) {
+							newGoalPathFound = false;
+							connectorDeadEnd = true;
+							break;
+						}
 						if(flag == SearchFlag.GOAL){
 							newGoalPathFound = true;
 							pathsFound.add(s);
 						}
 					}
 					if(pathsFound.size() == c.getChildren().size()) {
+						node.setHeuristic(c.getEvaluationFunctionAccordingToCriterion() + 1);
 						this.closedVisitedNodes.remove(node);
 						node.setMarkedConnector(c);
 						return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.GOAL, copyClosedSolved);
 					}
+					if(!connectorDeadEnd)
+						allConnectorsDeadEnds = false;
 				}
 			}
 		}
+		if(updateHeuristicValue) {
+			node.setHeuristic(Double.POSITIVE_INFINITY);
+			if(minConnector != null) {
+				node.setHeuristic(minConnector.getEvaluationFunctionAccordingToCriterion() + 1);
+			}
+		}
+		if(allConnectorsDeadEnds) {
+			this.closedVisitedNodes.remove(node);
+			this.closedDeadEndsNodes.add(node);
+			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.DEAD_END, closedSolved);
+		}
+		
 		this.closedVisitedNodes.remove(node);
 		return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.VISITED, closedSolved);
 	}

@@ -20,6 +20,8 @@ import paladinus.util.Pair;
 public class SearchNode extends AbstractNode implements Comparable<SearchNode> {
 	
 	protected double heuristic;
+	
+	protected double heuristicTieBreak;
 
 	protected SearchNode parent;
 
@@ -59,8 +61,14 @@ public class SearchNode extends AbstractNode implements Comparable<SearchNode> {
 		
 		this.depth = depth;
 		
-		if(searchManager.getHeuristic() != null)
+		if(searchManager.getHeuristic() != null) {
 			this.heuristic = searchManager.getHeuristic().getHeuristic(state);
+			
+			/*
+			if(searchManager.getHeuristicTieBreak() != null)
+				this.heuristicTieBreak = searchManager.getHeuristicTieBreak().getHeuristic(state);
+			*/
+		}
 		
 		if (this.state.isGoalState()) {
 			this.setGoalNode(true);
@@ -133,7 +141,7 @@ public class SearchNode extends AbstractNode implements Comparable<SearchNode> {
 
 	@Override
 	public int compareTo(SearchNode o) {
-		return (int) (o.heuristic - heuristic);
+		return (int) (heuristic - o.heuristic);
 	}
 	
 	public boolean isDeadEndNode() {
@@ -214,7 +222,7 @@ public class SearchNode extends AbstractNode implements Comparable<SearchNode> {
 	
 	@Override
 	public String toString() {
-		return "Index = " + this.index + ": " + super.toString();
+		return "Index = " + this.index + ": h-value = " + getHeuristic();
 	}
 
 	public void setNumberStateVariables(int numStateVars) {
