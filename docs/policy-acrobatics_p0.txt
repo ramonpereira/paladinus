@@ -1,0 +1,9 @@
+If holds: (position p0), (up)
+Execute: walk-on-beam p0 p1
+
+If holds: (position p0), (not (up))
+Execute: climb p0
+
+If holds: (position p1), (not (up))
+Execute: walk-left p1 p0
+
