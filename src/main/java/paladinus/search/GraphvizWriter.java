@@ -116,8 +116,10 @@ public class GraphvizWriter {
 			buffer.append("depth: " + node.getDepth() + "\\n");
 			buffer.append("h-Value: " + node.heuristic + "\\n");
 			buffer.append("branching factor: " + node.getBranchingFactor() + "\\n");
+			/*
 			buffer.append("novelty: " + node.getBinaryNovelty() + "\\n");
 			buffer.append("quantified novel: " + node.getQuantifiedNovel() + "\\n");
+			*/
 			if (problem.isFullObservable) {
 				for (int i = 0; i < ((ExplicitState) node.state).size - 1; i++) {
 					String tmp = problem.propositionNames.get(i)

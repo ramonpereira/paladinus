@@ -175,6 +175,8 @@ public class DepthFirstSearch extends HeuristicSearch {
 				Collections.sort(children);
 			} else if(Global.options.getSuccessorsExploration().equals("REVERSE")) {
 				Collections.sort(children, Collections.reverseOrder());
+			} else if(Global.options.getSuccessorsExploration().equals("RANDOM")) {
+				Collections.shuffle(children, Global.generator);
 			}
 			SearchConnector connector = new SearchConnector(node, children, op, this.evaluationFunctionCriterion);
 			if(connector.getAverageChildEstimate() == Double.POSITIVE_INFINITY)
@@ -204,6 +206,14 @@ public class DepthFirstSearch extends HeuristicSearch {
 		if(Global.options.useClosedVistedNodes())
 			return new PriorityQueue<>(new SearchConnectorComparator(this.actionSelectionCriterion, this.closedVisitedNodes));
 		else return new PriorityQueue<>(new SearchConnectorComparator(this.actionSelectionCriterion));
+	}
+	
+	protected double getMinEstimateFromSetOfNodes(Set<SearchNode> setNodes) {
+		double min = Double.POSITIVE_INFINITY;
+		for (SearchNode n: setNodes)
+			if (n.getHeuristic() < min)
+				min = n.getHeuristic();
+		return min;
 	}
 
 	@Override

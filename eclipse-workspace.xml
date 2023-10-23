@@ -6,7 +6,7 @@
     <property name="dir.buildfile" value="."/>
     <property name="dir.jarfile" value="."/>
     <target name="create_run_jar">
-        <jar destfile="${dir.jarfile}/paladinus2.1.jar" filesetmanifest="mergewithoutmain">
+        <jar destfile="${dir.jarfile}/paladinus4.1.jar" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Main-Class" value="paladinus.PaladinusPlanner"/>
                 <attribute name="Class-Path" value="."/>

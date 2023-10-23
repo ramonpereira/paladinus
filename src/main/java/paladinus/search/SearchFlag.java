@@ -1,5 +1,5 @@
 package paladinus.search;
 
 public enum SearchFlag {
-	GOAL, DEAD_END, NO_POLICY, VISITED, TIMEOUT
+	GOAL, DEAD_END, NON_PROMISING, NO_POLICY, VISITED, TIMEOUT
 }

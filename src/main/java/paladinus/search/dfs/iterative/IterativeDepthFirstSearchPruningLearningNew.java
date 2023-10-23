@@ -1,8 +1,10 @@
 package paladinus.search.dfs.iterative;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -21,14 +23,16 @@ import paladinus.util.Pair;
  * @author Ramon Fraga Pereira
  *
  */
-public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
+public class IterativeDepthFirstSearchPruningLearningNew extends DepthFirstSearch {
 	
 	protected double POLICY_SIZE = 0;
 	protected double NEW_POLICY_BOUND = 0;
 	
 	private boolean checkSolvedStates = false;
+	
+	private Map<SearchNode, Double> nonPromisingNodes = new HashMap<>();
 
-	public IterativeDepthFirstSearchPruning(Problem problem, Heuristic heuristic, String strategies, String criterion, String checkSolved) {
+	public IterativeDepthFirstSearchPruningLearningNew(Problem problem, Heuristic heuristic, String strategies, String criterion, String checkSolved) {
 		super(problem, heuristic, strategies, criterion);
 		if(this.checkSolvedStates || (checkSolved != null && checkSolved.contains("ON"))) {
 			this.checkSolvedStates = true;
@@ -52,7 +56,7 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 		endtime = System.currentTimeMillis();
 		
 		System.out.println("\n# Closed-Solved Nodes        = " + this.closedSolvedNodes.size());
-		System.out.println("\n# Closed-Non-Promising Nodes = " + this.closedDeadEndsNodes.size());
+		System.out.println("\n# Closed-Non-Promising Nodes = " + this.nonPromisingNodes.size());
 		
 		if (DEBUG)
 			dumpStateSpace(this.NUMBER_ITERATIONS);
@@ -62,7 +66,7 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 		
 		if (flag == SearchFlag.GOAL) {
 			return Result.PROVEN;
-		} else if (flag == SearchFlag.DEAD_END || flag == SearchFlag.NO_POLICY) {
+		} else if (flag == SearchFlag.NON_PROMISING || flag == SearchFlag.NO_POLICY) {
 			return Result.DISPROVEN;
 		} else return Result.TIMEOUT;
 	}
@@ -90,7 +94,7 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 
 			Set<SearchNode> closedSolved = new HashSet<>();
 			this.closedVisitedNodes.clear();
-			this.closedDeadEndsNodes.clear();
+			this.nonPromisingNodes.clear();
 			
 			Pair<SearchFlag, Set<SearchNode>> resultSearch = doIterativeSearch(node, closedSolved, this.POLICY_SIZE, this.POLICY_BOUND);
 			flag = resultSearch.first;
@@ -110,7 +114,7 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 			dumpStateSpace(this.NUMBER_ITERATIONS);
 		
 		if(RECURSION_COUNTER >= Integer.MAX_VALUE)
-			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.DEAD_END, closedSolved);
+			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.NON_PROMISING, closedSolved);
 		
 		if(timeout())
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.TIMEOUT, null);
@@ -120,8 +124,8 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 		if(node.isGoalNode() || closedSolved.contains(node)) {
 			closedSolved.addAll(this.closedVisitedNodes);
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.GOAL, closedSolved);
-		} else if (node.isDeadEndNode() || this.closedDeadEndsNodes.contains(node)) {
-			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.DEAD_END, closedSolved);
+		} else if (this.nonPromisingNodes.containsKey(node) && (policySize >= this.nonPromisingNodes.get(node))) {
+			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.NON_PROMISING, closedSolved);
 		} else if (this.closedVisitedNodes.contains(node))
 			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.VISITED, closedSolved);
 		
@@ -130,7 +134,17 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 		PriorityQueue<SearchConnector> connectors = this.getNodeConnectors(node);
 		NODE_EXPANSIONS++;
 		
-		boolean allConnectorsDeadEnds = true;
+		/* Gather all successors of n.
+		 */
+		Set<SearchNode> successorStatesOfNode = new HashSet<>(); 		
+		for(SearchConnector c: connectors) {
+			successorStatesOfNode.addAll(c.getChildren());
+		}
+		/* Try to improve h(n) with a 1-step look-ahead.
+		 */
+		node.setHeuristic(1 + this.getMinEstimateFromSetOfNodes(successorStatesOfNode));
+		
+		boolean allConnectorsNonPromising = true;
 		while(!connectors.isEmpty()) {
 			SearchConnector c = connectors.poll();
 			
@@ -145,7 +159,7 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 				
 				boolean newGoalPathFound = true;
 				
-				boolean connectorDeadEnd = false;
+				boolean connectorNonPromising = false;
 				
 				Set<SearchNode> copyClosedSolved = new HashSet<>(closedSolved);
 				
@@ -166,9 +180,11 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 						SearchFlag flag = resultSearch.first;
 						copyClosedSolved = new HashSet<SearchNode>(resultSearch.second);
 						
-						if(flag == SearchFlag.DEAD_END) {
+						node.setHeuristic(1 + this.getMinEstimateFromSetOfNodes(successorStatesOfNode));
+						
+						if(flag == SearchFlag.NON_PROMISING) {
 							newGoalPathFound = false;
-							connectorDeadEnd = true;
+							connectorNonPromising = true;
 							break;
 						}
 						if(flag == SearchFlag.GOAL){
@@ -181,17 +197,20 @@ public class IterativeDepthFirstSearchPruning extends DepthFirstSearch {
 						node.setMarkedConnector(c);
 						return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.GOAL, copyClosedSolved);
 					}
-					if(!connectorDeadEnd)
-						allConnectorsDeadEnds = false;
+					if(!connectorNonPromising)
+						allConnectorsNonPromising = false;
 				}
 			}
 		}
-		if(allConnectorsDeadEnds) {
+		if(allConnectorsNonPromising) {
 			this.closedVisitedNodes.remove(node);
-			this.closedDeadEndsNodes.add(node);
-			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.DEAD_END, closedSolved);
+			if(this.nonPromisingNodes.containsKey(node)) {
+				this.nonPromisingNodes.replace(node, policySize);
+			} else {
+				this.nonPromisingNodes.put(node, policySize);	
+			}
+			return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.NON_PROMISING, closedSolved);
 		}
-		
 		this.closedVisitedNodes.remove(node);
 		return new Pair<SearchFlag, Set<SearchNode>>(SearchFlag.VISITED, closedSolved);
 	}

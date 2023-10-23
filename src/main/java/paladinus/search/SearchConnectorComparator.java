@@ -31,22 +31,30 @@ public class SearchConnectorComparator implements Comparator<SearchConnector> {
 	
 	private int tieBreakerNumberOfOutcomesMinFirst(SearchConnector o1, SearchConnector o2) {
 		return o1.getChildren().size() - o2.getChildren().size();
-		
 	}
 	
 	private int tieBreakerNumberOfOutcomesMaxFirst(SearchConnector o1, SearchConnector o2) {
 		return o2.getChildren().size() - o1.getChildren().size();
-		
 	}
 	
 	private int tieBreakerMinSumFirst(SearchConnector o1, SearchConnector o2) {
 		return (int) (o1.getSumChildEstimate() - o2.getSumChildEstimate());
-		
 	}
 	
 	private int tieBreakerMaxSumFirst(SearchConnector o1, SearchConnector o2) {
 		return (int) (o2.getSumChildEstimate() - o1.getSumChildEstimate());
-		
+	}
+	
+	private int tieBreakerMinHTimesOutcomeSizeFirst(SearchConnector o1, SearchConnector o2) {
+		return (int) (o1.getMinChildEstimateTimesChildrenSize() - o2.getMinChildEstimateTimesChildrenSize());
+	}
+	
+	private int tieBreakerMaxHTimesOutcomeSizeFirst(SearchConnector o1, SearchConnector o2) {
+		return (int) (o2.getMaxChildEstimateTimesChildrenSize() - o1.getMaxChildEstimateTimesChildrenSize());
+	}
+	
+	private int tieBreakerMinMaxHTimesOutcomeSizeFirst(SearchConnector o1, SearchConnector o2) {
+		return (int) (o1.getMaxChildEstimateTimesChildrenSize() - o2.getMaxChildEstimateTimesChildrenSize());
 	}
 
 	@Override
@@ -123,14 +131,20 @@ public class SearchConnectorComparator implements Comparator<SearchConnector> {
 		}
 		
 		if(result == 0) {
-			if(Global.options.getTieBreakConnectors().equals("OUTCOMESMIN")) {
+			if(Global.options.getTieBreakConnectors().equals("MIN_OUTCOMES_SIZE")) {
 				result = tieBreakerNumberOfOutcomesMinFirst(o1, o2);
-			} else if(Global.options.getTieBreakConnectors().equals("OUTCOMESMAX")) {
+			} else if(Global.options.getTieBreakConnectors().equals("MAX_OUTCOMES_SIZE")) {
 				result = tieBreakerNumberOfOutcomesMaxFirst(o1, o2);
-			} else if(Global.options.getTieBreakConnectors().equals("MINSUM")) {
+			} else if(Global.options.getTieBreakConnectors().equals("MIN_SUM")) {
 				result = tieBreakerMinSumFirst(o1, o2);
-			} else if(Global.options.getTieBreakConnectors().equals("MAXSUM")) {
+			} else if(Global.options.getTieBreakConnectors().equals("MAX_SUM")) {
 				result = tieBreakerMaxSumFirst(o1, o2);
+			} else if(Global.options.getTieBreakConnectors().equals("MIN_MAX_H_TIMES_OUTCOMES_SIZE")) {
+				result = tieBreakerMinMaxHTimesOutcomeSizeFirst(o1, o2);
+			} else if(Global.options.getTieBreakConnectors().equals("MIN_H_TIMES_OUTCOMES_SIZE")) {
+				result = tieBreakerMinHTimesOutcomeSizeFirst(o1, o2);
+			} else if(Global.options.getTieBreakConnectors().equals("MAX_H_TIMES_OUTCOMES_SIZE")) {
+				result = tieBreakerMaxHTimesOutcomeSizeFirst(o1, o2);
 			}
 		}
 		return result;

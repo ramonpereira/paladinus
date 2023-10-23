@@ -31,8 +31,11 @@ import paladinus.search.AbstractSearch.Result;
 import paladinus.search.dfs.DepthFirstSearch;
 import paladinus.search.dfs.iterative.IterativeDepthFirstSearch;
 import paladinus.search.dfs.iterative.IterativeDepthFirstSearchLearning;
+import paladinus.search.dfs.iterative.IterativeDepthFirstSearchLearningNew;
 import paladinus.search.dfs.iterative.IterativeDepthFirstSearchPruning;
 import paladinus.search.dfs.iterative.IterativeDepthFirstSearchPruningLearning;
+import paladinus.search.dfs.iterative.IterativeDepthFirstSearchPruningLearningNew;
+import paladinus.search.dfs.iterative.IterativeDepthFirstSearchPruningNew;
 import paladinus.simulator.PlanSimulator;
 import paladinus.util.OsUtils;
 
@@ -341,17 +344,35 @@ public class PaladinusPlanner {
 						search = new IterativeDepthFirstSearchPruning(problem, heuristic, Global.options.actionSelectionCriterion, Global.options.evaluationFunctionCriterion, Global.options.checkSolvedStates);
 					break;
 					
+				case ITERATIVE_DFS_PRUNING_NEW:
+					System.out.println("Algorithm: Iterative Depth-First Search Pruning (Checking g-value) for FOND Planning");
+					if(heuristic != null)
+						search = new IterativeDepthFirstSearchPruningNew(problem, heuristic, Global.options.actionSelectionCriterion, Global.options.evaluationFunctionCriterion, Global.options.checkSolvedStates);
+					break;					
+					
 				case ITERATIVE_DFS_LEARNING:
 					System.out.println("Algorithm: Iterative Depth-First Search Learning for FOND Planning");
 					if(heuristic != null)
 						search = new IterativeDepthFirstSearchLearning(problem, heuristic, Global.options.actionSelectionCriterion, Global.options.evaluationFunctionCriterion);
-					break;	
+					break;
+					
+				case ITERATIVE_DFS_LEARNING_NEW:
+					System.out.println("Algorithm: Iterative Depth-First Search Learning (NEW!) for FOND Planning");
+					if(heuristic != null)
+						search = new IterativeDepthFirstSearchLearningNew(problem, heuristic, Global.options.actionSelectionCriterion, Global.options.evaluationFunctionCriterion);
+					break;					
+
+				case ITERATIVE_DFS_PRUNING_LEARNING_NEW:
+					System.out.println("Algorithm: Iterative Depth-First Search Pruning Learning (NEW!) for FOND Planning");
+					if(heuristic != null)
+						search = new IterativeDepthFirstSearchPruningLearningNew(problem, heuristic, Global.options.actionSelectionCriterion, Global.options.evaluationFunctionCriterion, Global.options.checkSolvedStates);
+					break;					
 					
 				case ITERATIVE_DFS_PRUNING_LEARNING:
 					System.out.println("Algorithm: Iterative Depth-First Search Pruning Learning for FOND Planning");
 					if(heuristic != null)
 						search = new IterativeDepthFirstSearchPruningLearning(problem, heuristic, Global.options.actionSelectionCriterion, Global.options.evaluationFunctionCriterion, Global.options.checkSolvedStates);
-					break;						
+					break;
 
 				default:
 					new Exception("Unknown Search Algorithm.").printStackTrace();
